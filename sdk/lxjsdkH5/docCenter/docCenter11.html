@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <!--<iframe id="iframeId" src="docCenter1.html" onload="changeFrameHeight()" frameborder="0"></iframe>-->
+        <div class="profile">
+            <div class="normal_index headline_h2" style="font-weight:600;">三、SDK使用</div>
+            <div class="text_index profile_h2 normal_index">3.1 初始化</div>
+            <p class="text_index normal_index">在Application方法onCreate()添加以下代码：</p>
+            <pre class="normal_index">
+
+                //初始化
+                HoriLxjClient.init(application, url, port);
+                //debug设置
+                HoriLxjClient.setIsDebug(isDebug);
+
+            </pre>
+            <div class="text_index profile_h2 normal_index">3.2 鉴权登录</div>
+            <p class="normal_index text_index">调用HoriLxjClient中方法：startLogin(String userId, String userName, String userPhone, HttpRequstCallBack requestCallBack)
+            </p>
+            <pre class="normal_index">
+                userId：用户ID（必传）
+                userName： 用户姓名（可传）
+                userPhone：电话号码（可传）
+                requestCallBack：回调参数
+
+                HoriLxjClient.startLogin(userId, userName, userPhone, new HttpRequstCallBack() {
+                @Override
+                public void onSuccess() {
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                        Toast.makeText(LoginActivity.this, "登录失败：" + errorMsg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            </pre>
+            <div class="normal_index headline_h2" style="font-weight:600;">3.3界面启动</div>
+            <div class="text_index profile_h2 normal_index">3.3.1 Activity界面</div>
+            <p class="normal_index text_index">Activity界面启动统一使用ViewController类的方法：startActivity(Context context, ViewController.ViewType viewType)</p>
+            <pre class="normal_index">
+                Context：上下文
+                viewType：界面类型（限定ViewType提供的类型）
+
+                /*开门*/
+                ViewController.getInstance().startActivity(this, ViewController.ViewType.OPEN_DOOR);
+
+                ViewType {
+    	        /**开门界面*/
+                OPEN_DOOR,
+                        /**选择小区*/
+                        SELECT_AREA,
+                        /**实时监控*/
+                        MONITORING,
+                        /**勿扰设置*/
+                        FORBIDEN_SETTINGS,
+                        /**住房管理*/
+                        HOUSING_MANAGER,
+                        /**住户管理*/
+                        HOUSEHOLD_MANAGER,
+                        /**备用电话*/
+                        ALTERNATE_PHONE,
+                        /**对讲记录*/
+                        TALKBACK_RECORD,
+                        /**家庭机绑定*/
+                        FAMILY_MACHINE
+                    }
+
+            </pre>
+            <div class="text_index profile_h2 normal_index">3.3.1 Fragment界面加载</div>
+            <p class="normal_index text_index">Fragment的提供主要是考虑到自带Activity界面不能满足需求时使用。
+                Fragment加载统一使用ViewController类的方法：createFragment(ViewType viewType)，viewType同样由ViewController.ViewType提供。
+                具体实现可参照提供的Demo：MyOpenDoorActivity。
+            </p>
+            <pre class="normal_index">
+
+                //开门界面Fragment获取
+                BaseFragment fragment = ViewController.getInstance().createFragment(ViewController.ViewType.OPEN_DOOR);
+
+            </pre>
+            <div class="text_index profile_h2 normal_index">3.4 UI设置</div>
+            <p class="normal_index text_index">ViewController：UI修改控制工具</p>
+            <div class="text_index profile_h2 normal_index">3.4.1 Notification Icon</div>
+            <p class="normal_index text_index">对讲（来电、视频通话、语音通话、监控）时按Home键返回桌面时显示。</p>
+            <pre class="normal_index">
+                /**
+                 * 设置通知栏图标：smallIcon和LargeIcon相同
+                 * @param iconId
+                 */
+                public void setNotifiCationIcon(int iconId)
+
+                /**
+                 * 设置通知栏图标
+                 * @param smallIconId
+                 * @param largeIconId
+                 */
+                public void setNotifiCationIcon(int smallIconId, int largeIconId)</pre>
+            <div class="text_index profile_h2 normal_index">3.4.2 Toolbar（标题栏）</div>
+            <pre class="normal_index">
+
+                /**
+                 * 设置标题颜色
+                 * @param titleTextColor
+                 */
+                public void setTitleTextColor(@ColorInt int titleTextColor)
+
+                /**
+                 * 设置标题大小：默认单位sp
+                 * @param titleTextSize
+                 */
+                public void setTitleTextSize(float titleTextSize)
+
+                /**
+                 * 设置返回按钮
+                 * @param toolbarBackIcon
+                 */
+                public void setToolbarBackIcon(int toolbarBackIcon)
+
+                /**
+                 * 设置标题栏背景颜色
+                 * @param toolbarColor
+                 */
+                public void setToolbarColor(@ColorInt int toolbarColor)
+
+                /**
+                 * 设置标题栏高度
+                 * @param toolbarHeight
+                 */
+                public void setToolbarHeight(int toolbarHeight)</pre>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/duidui.png" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">3.4.3 主颜色</div>
+            <pre class="normal_index">
+
+                /**
+                 * 主色设置
+                 * @param colorId
+                 */
+                public void setMainColor(@ColorInt int colorId)
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/feell.png" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">3.4.4 开门按钮</div>
+            <pre class="normal_index">
+                /**
+                 * 开门(分组)图标设置
+                 * @param resid
+                 */
+                public void setDoubleDoorIcon(@DrawableRes int resid)
+
+                /**
+                 * 开门(无分组)图标设置
+                 * @param resid
+                 */
+                public void setSingleDoorIcon(@DrawableRes int resid)
+
+                /**
+                 * 弹出框开门图标设置
+                 * @param enterId   进（双通道：进）
+                 * @param outId    出（双通道：出）
+                 * @param openId    开门（单通道）
+                 */
+                public void setDialogDoorIcon(@DrawableRes int enterId, @DrawableRes int outId, @DrawableRes int openId)
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/open.png" alt=""/>
+            </div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/openid.png" alt=""/>
+            </div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/openaccess.png" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">3.4.5 实时监控图标</div>
+            <pre class="normal_index">
+
+                /**
+                 * 监视图标设置（实时监控）
+                 * @param resid
+                 */
+                public void setMonitorIcon(@DrawableRes int resid)
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/opentv.png" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">3.4.6 Switch（勿扰设置）</div>
+            <pre class="normal_index">
+
+                /**
+                 * 开关按钮设置（勿扰设置）
+                 * @param swithcIconSelector
+                 */
+                public void setSwithcIconSelector(int swithcIconSelector)
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/openfalse.png" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">3.4.6 底部按钮</div>
+            <pre class="normal_index">
+                /**
+                 * 底部提交按钮背景颜色设置
+                 * @param submitBtnBackgroud
+                 */
+                public void setSubmitBtnBackgroud(int submitBtnBackgroud)
+
+                /**
+                 * 底部提交按钮字体颜色设置：支持颜色选择器
+                 * @param submitBtnTextColor
+                 */
+                public void setSubmitBtnTextColor(ColorStateList submitBtnTextColor)
+
+                /**
+                 * 底部提交按钮字体颜色设置
+                 * @param submitBtnTextColor
+                 */
+                public void setSubmitBtnTextColor(int submitBtnTextColor)
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/openadd.png.png" alt=""/>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>
+

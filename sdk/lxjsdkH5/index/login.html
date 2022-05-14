@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>联享家开放平台</title>
+		<link rel="stylesheet" href="css/login.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="login">
+			<div class="login-link">
+				<div>
+					<img src="../common/img/logo.png" width="32" alt="">
+					<span>联享家开放平台</span>
+					<div class="login-link-a">
+						<a href="../index/index.html" class="apply-index">首页</a>
+						<a href="../docCenter/docCenter.html">文档中心</a>
+						<!-- <a href="../docCenter/docCenter7.html">联系我们</a> -->
+					</div>
+				</div>
+			</div>
+			<div class="login-container">
+				<div class="login-wrap">
+					<div class="login-pic">
+						<img src="img/appp44.jpg" alt="">
+					</div>
+					<div class="login-content">
+						<div class="login-content-pic">
+							<span>联享家账号登录</span>
+						</div>
+						<div class="login-content-main login-content-top">
+							<p v-if="noHasFlag" v-text="noHasFlagWord"></p> 
+							<div class="login-content-item">
+								<div class="login-word">
+									<i class="login-word-user"></i>
+									<input type="text" v-model="userAccount" placeholder="请输入用户名">
+								</div>	
+								<p v-if="userFlag" v-text="userFlagWord"></p>
+							</div>
+							<div class="login-content-item">
+								<div class="login-word">
+									<i class="login-word-psw"></i>
+									<input type="password" v-model="password" placeholder="请输入登录密码">
+								</div>
+								<p v-if="pswFlag" v-text="pswFlagWord"></p>
+							</div>				
+							
+							<div class="login-submit" @click="loginSubmit()" @keyup.enter="loginSubmitMouse">登录</div>
+						</div>
+						<div class="login-other">
+							<a href="retrievePassword.html">忘记密码</a>
+							<a href="register.html">立即注册</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/login.js"></script>
+	</body>
+</html>

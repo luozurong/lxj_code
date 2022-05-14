@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--框架必需start-->
+<script type="text/javascript" src="../js/jquery-1.4.js"></script>
+<script type="text/javascript" src="../js/framework.js"></script>
+<link href="../css/import_basic.css" rel="stylesheet" type="text/css"/>
+<link  rel="stylesheet" type="text/css" id="skin"/>
+<!--框架必需end-->
+
+<script>
+	$(function(){
+		top.Dialog.close()
+	})
+	function handler1(){
+		top.Dialog.alert("点击了确定")
+	}
+	function open1(){
+		var diag = new top.Dialog();
+		diag.Title = "取消按钮点击事件";
+		diag.CancelEvent = function(){
+			top.Dialog.alert("点击了取消")
+			diag.close();
+			};
+		diag.URL = "lesson/chapter3-2-content1.html";
+		diag.ShowButtonRow=true;
+		diag.show();
+	}
+	function open2(){
+		var diag = new top.Dialog();
+		diag.Title = "得到输入值";
+		diag.URL = "lesson/chapter3-2-content2.html";
+		diag.OKEvent = function(){
+			var inputValue = diag.innerFrame.contentWindow.document.getElementById('a').value;
+			top.Dialog.alert(inputValue)
+			diag.close();
+			};
+		diag.show();
+		var doc=diag.innerFrame.contentWindow.document;
+		doc.open();
+		doc.write('<html><body><input id="a" type="text"/>请在文本框里输入一些值</body></html>') ;
+		doc.close();
+	}
+	function open3(){
+		var diag = new top.Dialog();
+		diag.Title = "更改按钮";
+		diag.URL = "lesson/chapter3-2-content2.html";
+		diag.ShowButtonRow=true;
+		diag.OkButtonText=" 提 交 ";
+		diag.show();
+	}
+	function open4(){
+		var diag = new top.Dialog();
+		diag.Title = "创建其它按钮";
+		diag.URL = "lesson/chapter3-2-content2.html";
+		diag.show();
+		diag.addButton("next"," 按 钮 ",function(){
+			var doc=diag.innerFrame.contentWindow.document;
+			doc.open();
+			doc.write('<html><body>进入了下一步</body></html>') ;
+			doc.close();
+		})
+	}
+	function open5(){
+		var diag = new top.Dialog();
+		diag.Title = "提交表单并刷新父页";
+		diag.URL = "lesson/chapter3-2-content4.html";
+		diag.show();
+	}
+	function open6(){
+		var diag = new top.Dialog();
+		diag.Title = "手动关闭窗口并刷新页面";
+		diag.URL = "javascript:void(document.write('点击确定按钮'))";
+		diag.ShowButtonRow=true;
+		diag.OkButtonText=" 确 定 ";
+		diag.OKEvent = function(){
+			top.Dialog.alert("成功提交",function(){window.location.reload()})
+			diag.close();
+		};
+		diag.show();
+	}
+	function open7(){
+		var diag = new top.Dialog();
+		diag.Title = "手动关闭窗口";
+		diag.URL = "lesson/chapter3-2-content3.html";
+		diag.ShowButtonRow=true;
+		diag.ShowOkButton=false;
+		diag.CancelButtonText=" 关 闭 ";
+		diag.show();
+	}
+</script>
+<body>
+<div id="scrollContent">
+	<div style="display:none" id="content">这是内容。</div>
+		
+		<div class="box2" panelTitle="使用方法">
+		1.只要最外层框架引入窗口脚本和css就可以，内页不必引入。因为内页是调用最外层框架的方法来生成窗口。代码见框架主页源码。<br />
+		2.使用调用方法在主页或其任意内页中调用。如果是内页调用时前面要加top。注意弹窗内页的路径，主页或内页调用一律是从根目录来寻找该内页。<br />
+		3.如果是通过链接来弹出窗口，注意最好不要使用“#”号。例如最好不要用下面的代码：
+<textarea class="code">
+<a href="#" onclick="openWin()">链接文字</a>
+</textarea>
+<pre></pre>	
+正确的做法是用下面的代码：
+<textarea class="code">
+<a href="javascript:openWin()">链接文字</a>
+</textarea>
+<pre></pre>			
+		</div>
+		
+	<div class="box2"  panelTitle="弹窗提示">		
+	<input type="button" value="提示信息" onclick='top.Dialog.alert("这里是提示信息");'/>
+	<br />Dialog.alert(msg, func, w, h)第二个参数为点击“确定”按钮后执行的函数。
+<textarea class="code">
+<input type="button" value="提示信息" onclick='top.Dialog.alert("这里是提示信息");'/>
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="询问信息" onclick='top.Dialog.confirm("这里是询问信息",function(){top.Dialog.alert("点击了确定")});'/> 
+	<br />Dialog.confirm(msg, funcOK, funcCal, w, h)第二个参数为点击“确定”按钮后执行的函数，第三个参数为点击“取消”按钮后执行的函数。 
+<textarea class="code">
+<input type="button" value="询问信息" 
+onclick='top.Dialog.confirm("这里是询问信息",function(){top.Dialog.alert("点击了确定")});'/> 
+</textarea>
+<pre></pre>		
+	</div>
+	
+	<div class="box2"  panelTitle="基本弹窗">		
+	<input type="button" value="普通窗口" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"普通窗口"});'/> <br />
+	参数见下方的参数表 
+<textarea class="code">
+<input type="button" value="普通窗口" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"普通窗口"});'/>
+</textarea>
+<pre></pre>		
+
+<input type="button" value="自定义宽高 " onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"自定义宽高 ",Width:800,Height:600});'/> <br /> 
+<textarea class="code">
+<input type="button" value="自定义宽高 " 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"自定义宽高 ",Width:800,Height:600});'/>
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="带说明栏的窗口" onclick='top.Dialog.open({MessageTitle:"这是标题",Message:"这是标题说明文字",Title:"带说明栏窗口",URL:"lesson/chapter3-2-content1.html"});'/> 
+<textarea class="code">
+<input type="button" value="带说明栏的窗口" 
+onclick='top.Dialog.open({MessageTitle:"这是标题",Message:"这是标题说明文字",Title:"带说明栏窗口",URL:"lesson/chapter3-2-content1.html"});'/> 
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="无遮罩窗口" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"无遮罩窗口",Modal:false});'/>
+<textarea class="code">
+<input type="button" value="无遮罩窗口" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Title:"无遮罩窗口",Modal:false});'/>
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="全屏窗口" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Width:"100",Height:"100",Title:"全屏窗口"});'/> 
+	注意：全屏窗口宽高的100要加引号，否则就会变成宽高为100像素的窗口了。
+<textarea class="code">
+<input type="button" value="全屏窗口" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Width:"100",Height:"100",Title:"全屏窗口"});'/> 
+</textarea>
+<pre></pre>	
+
+	</div>
+
+
+	<div class="box2"  panelTitle="额外功能">	
+	<input type="button" value="内容为文本或html" onclick='top.Dialog.open({InnerHtml:"<div style=\"text-align:center;color:red;font-size:14px;\">直接输出html，使用 <b>InnerHtml</b> 属性。</div>",Title:"普通窗口"});'/> 
+<textarea class="code">
+<input type="button" value="内容为文本或html" 
+onclick='top.Dialog.open({InnerHtml:"<div style=\"text-align:center;color:red;font-size:14px;\">直接输出html，使用 <b>InnerHtml</b> 属性。</div>",
+Title:"普通窗口"});'/>
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="指定弹出位置" 
+	onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Top:"100%",Left:"100%",Modal:false,Width:240,Height:120,Title:"指定弹出位置"});'/> 
+	<br/>
+	可使用数字或百分比（带百分比符号的字符串）来定义相对于当前窗口的位置，换算效果同css中用百分比定义背景图位置，如Left:"0%",Top:"0%"为左上，Left:"50%",Top:"50%"为居中，Left:"100%",Top:"100%"为右下。 
+
+<textarea class="code">
+<input type="button" value="指定弹出位置" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content1.html",Top:"100%",Left:"100%",Modal:false,Width:200,Height:120,Title:"指定弹出位置"});'/> 
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="自动关闭" 
+	onclick='top.Dialog.open({InnerHtml:"5秒后自动关闭",AutoClose:5,Title:"自动关闭"});'/> 
+<textarea class="code">
+<input type="button" value="自动关闭" 
+	onclick='top.Dialog.open({InnerHtml:"5秒后自动关闭",AutoClose:5,Title:"自动关闭"});'/> 
+</textarea>
+<pre></pre>	
+	</div>
+	
+	<div class="box2" panelTitle="事件与方法">	
+	<input type="button" value="确定按钮事件" 
+	onclick='top.Dialog.open({InnerHtml:"监听确定按钮点击事件",Title:"确定按钮事件",OKEvent:handler1});'/> 
+<textarea class="code">
+<input type="button" value="确定按钮事件" 
+	onclick='top.Dialog.open({InnerHtml:"监听确定按钮点击事件",Title:"确定按钮事件",OKEvent:handler1});'/> 
+</textarea>
+<pre></pre>	
+
+handler1代码如下
+<textarea class="code">
+function handler1(){
+	top.Dialog.alert("点击了确定")
+}
+</textarea>
+<pre></pre>	
+	
+	<input type="button" value="取消按钮事件" onclick='open1()'/> <br />
+	点击取消按钮，触发事件后要关闭窗口的话，那就不能直接使用top.Dialog打开窗口了，而要使用函数将打开的窗口赋给一个变量。
+<textarea class="code">
+<input type="button" value="取消按钮事件" onclick='open1()'/> 
+</textarea>
+<pre></pre>	
+
+函数open1()代码如下：
+<textarea class="code">
+function open1(){
+	var diag = new top.Dialog();
+	diag.Title = "取消按钮点击事件";
+	diag.CancelEvent = function(){
+		top.Dialog.alert("点击了取消")
+		diag.close();
+		};
+	diag.URL = "lesson/chapter3-2-content1.html";
+	diag.ShowButtonRow=true;
+	diag.show();
+}
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="父页面操作窗口中的子页面" onclick="open2()"/> 
+<textarea class="code">
+<input type="button" value="父页面操作窗口中的子页面" onclick="open2()"/> 
+</textarea>
+<pre></pre>	
+
+在open2()中，通过diag.innerFrame.contentWindow.document得到子，对其写了一些html，并得到里面文本框的value值
+<textarea class="code">
+function open2(){
+	var diag = new top.Dialog();
+	diag.Title = "得到输入值";
+	diag.URL = "chapter3-2-content2.html";
+	diag.OKEvent = function(){
+		var inputValue = diag.innerFrame.contentWindow.document.getElementById('a').value;
+		top.Dialog.alert(inputValue)
+		diag.close();
+		};
+	diag.show();
+	var doc=diag.innerFrame.contentWindow.document;
+	doc.open();
+	doc.write('<html><body><input id="a" type="text"/>请在文本框里输入一些值</body></html>') ;
+	doc.close();
+}
+</textarea>
+<pre></pre>	
+
+	<input type="button" value="更改按钮" onclick="open3()"/> 
+<textarea class="code">
+<input type="button" value="更改按钮" onclick="open3()"/> 
+</textarea>
+<pre></pre>	
+
+open3()代码：
+<textarea class="code">
+function open3(){
+	var diag = new top.Dialog();
+	diag.Title = "更改按钮";
+	diag.URL = "lesson/chapter3-2-content2.html";
+	diag.ShowButtonRow=true;
+	diag.OkButtonText=" 提 交 ";
+	diag.show();
+}
+</textarea>
+<pre></pre>	
+
+
+	<input type="button" value="创建新按钮" onclick="open4()"/> 
+<textarea class="code">
+<input type="button" value="创建新按钮" onclick="open4()"/> 
+</textarea>
+<pre></pre>	
+
+	open4()代码：
+<textarea class="code">
+function open4(){
+	var diag = new top.Dialog();
+	diag.Title = "创建其它按钮";
+	diag.URL = "lesson/chapter3-2-content2.html";
+	diag.show();
+	diag.addButton("next"," 按 钮 ",function(){
+		var doc=diag.innerFrame.contentWindow.document;
+		doc.open();
+		doc.write('<html><body>进入了下一步</body></html>') ;
+		doc.close();
+	})
+}
+</textarea>
+<pre></pre>	
+<span class="red">注意：当更改按钮文字或创建新按钮时，如果是两个文字，为了与其他按钮大小保持一致，则要在文字的两边和中间各加一个空格。如上面代码所示。否则按钮会比较小。</span>
+	</div>
+	
+	<div class="box2" panelTitle="父页面刷新">	
+	<input type="button" value="提交表单并刷新父页" onclick="open5()"/> 
+<textarea class="code">
+<input type="button" value="提交并刷新页面" onclick="open5()"/> 
+</textarea>
+<pre></pre>	
+
+	open5()代码：
+<textarea class="code">
+function open5(){
+	var diag = new top.Dialog();
+	diag.Title = "提交表单并刷新父页";
+	diag.URL = "lesson/chapter3-2-content4.html";
+	diag.show();
+}
+</textarea>
+<pre></pre>
+	关键在于窗口中子页的form设置target="frmright"。窗口子页代码：
+<textarea class="code">
+<form action="chapter3-2.html" target="frmright">
+		表单内容。。。
+		<tr>
+			<td colspan="2">
+				<input type="submit" value=" 提 交 "/>
+				<input type="reset" value=" 重 置 "/>
+			</td>
+		</tr>
+	</table>
+	</form>		
+</textarea>
+<pre></pre>		
+	提交表单后页面重定向父页，页面刷新。但此时并不能关闭窗口。所以在初始函数中调用方法关闭窗口。
+<textarea class="code">
+$(function(){
+	top.Dialog.close()
+})	
+</textarea>
+<pre></pre>		
+<br /><br />
+如果不是提交表单的情况让父窗口刷新，有下面两种做法：<br />
+	使用按钮栏：<input type="button" value="手动关闭窗口并刷新页面1" onclick="open6()"/> 
+	
+<textarea class="code">
+<input type="button" value="手动关闭窗口并刷新页面1" onclick="open6()"/> 
+</textarea>
+<pre></pre>	
+
+	open6()代码：
+<textarea class="code">
+function open6(){
+	var diag = new top.Dialog();
+	diag.Title = "手动关闭窗口并刷新页面";
+	diag.URL = "javascript:void(document.write('点击确定按钮'))";
+	diag.ShowButtonRow=true;
+	diag.OkButtonText=" 确 定 ";
+	diag.OKEvent = function(){
+		top.Dialog.alert("成功提交",function(){window.location.reload()})
+		diag.close();
+	};
+	diag.show();
+}
+</textarea>
+<pre></pre>	
+不使用按钮栏：<input type="button" value="手动关闭窗口并刷新页面2" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content5.html",Title:"父窗口刷新"});'/> 
+<textarea class="code">
+<input type="button" value="手动关闭窗口并刷新页面2" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content5.html",Title:"父窗口刷新"});'/>
+</textarea>
+<pre></pre>	
+
+	chapter3-2-content5.html代码：
+<textarea class="code">
+这是内容页面<br />
+<input type="button" value="点击刷新父页面" onclick='top.frmright.window.location.reload()'/>
+</textarea>
+<pre></pre>
+注意依然需要在父页面使用
+<textarea class="code">
+$(function(){
+	top.Dialog.close()
+})	
+</textarea>
+<pre></pre>		
+	</div>
+	
+	<div class="box2" panelTitle="手动关闭窗口">
+		方法1：弹出窗口时显示按钮栏，可以根据需要只显示需要的按钮并更改按钮文字。（推荐）<br />
+<input type="button" value="手动关闭窗口方法1" onclick="open7()"/> 	
+<textarea class="code">
+<input type="button" value="手动关闭窗口方法1" onclick="open7()"/> 
+</textarea>
+<pre></pre>	
+
+	open7()代码：
+<textarea class="code">
+function open7(){
+	var diag = new top.Dialog();
+	diag.Title = "手动关闭窗口";
+	diag.URL = "lesson/chapter3-2-content3.html";
+	diag.ShowButtonRow=true;
+	diag.ShowOkButton=false;
+	diag.CancelButtonText=" 关 闭 ";
+	diag.show();
+}
+</textarea>
+<pre></pre>	
+<br /><br />
+	方法2：按钮在弹窗的页面里面，点击时调用方法关闭窗口。适合需要按钮在页面内的情况。<br />
+<input type="button" value="手动关闭窗口方法2" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content6.html",Title:"手动关闭窗口方法2"});'/> 	
+<textarea class="code">
+<input type="button" value="手动关闭窗口方法2" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content6.html",Title:"手动关闭窗口方法2"});'/> 
+</textarea>
+<pre></pre>	
+chapter3-2-content5.html的代码如下：
+<textarea class="code">
+这是内容页面<br />
+<input type="button" value="关闭窗口" onclick='top.Dialog.close()'/>
+</textarea>
+<pre></pre>	
+<br /><br />
+	方法3：在父页面初始时就调用top.Dialog.close()。 按钮在弹窗的页面里面，点击时刷新父页面。这时父页面重新调用初始时的top.Dialog.close()。适合需要刷新父页面的情况。<br />
+	参见上面的“父页面刷新”部分。<br />
+	</div>
+	
+	<div class="box2" panelTitle="多层窗口之间相互调用">
+		<input type="button" value="弹出第一个窗口" onclick='top.Dialog.open({URL:"lesson/chapter3-2-content7.html",ID:"a1",Width:400,Height:300,Title:"第一个窗口"});'/>
+<br /><br /><br />做法：
+<br />在弹出第一个窗口时加上ID参数，如下
+<textarea class="code">
+<input type="button" value="弹出第一个窗口" 
+onclick='top.Dialog.open({URL:"lesson/chapter3-2-content7.html",ID:"a1",Width:400,Height:300,Title:"第一个窗口"});'/>
+</textarea>
+<pre></pre>	
+上面代码将ID设为a1，这样第一个窗口就可以通过标识：_DialogFrame_a1 来获取。
+<br />第二个窗口回填数据到第一个窗口的代码如下：
+<textarea class="code">
+function btnClick(){
+	top.document.getElementById("_DialogFrame_a1").contentWindow.document.getElementById('input1').value
+	=document.getElementById("input2").value;
+	top.Dialog.close();
+}
+</textarea>
+<pre></pre>	
+第三个窗口要调用第一个窗口的window1Func()方法，代码如下
+<textarea class="code">
+function btnClick(){
+	top.document.getElementById("_DialogFrame_a1").contentWindow.window1Func();
+	top.Dialog.close();
+}
+</textarea>
+<pre></pre>	
+	</div>
+	
+	<div class="box2" panelWidth="600" panelTitle="参数表">	
+	<table class="tableStyle">
+		<tr>
+			<th>参数名</th><th>参数说明</th>
+		</tr>
+		<tr>
+			<td>ID</td><td>窗口id号，可省略。每个窗口的id必须是唯一的不能重复</td>
+		</tr>
+		<tr>
+			<td>Title</td><td>窗口标题。如不写此项默认值为""</td>
+		</tr>
+		<tr>
+			<td>URL</td><td> 窗口内容页地址，或使用相对路径或绝对路径，注意如果使用http://www.host.com形式的绝对地址，则http://不能省略</td>
+		</tr>
+		<tr>
+			<td>InnerHtml</td><td>窗口内容html代码，用于直接输出html内容</td>
+		</tr>
+		<tr>
+			<td>InvokeElementId</td><td>本页面内隐藏的元素的id，用于显示页面内隐藏的元素中的html内容</td>
+		</tr>
+		<tr>
+			<td>Width</td><td>窗口宽度（dialog内容区宽度），值为数值型，默认值为窗口可见宽的40%</td>
+		</tr>
+		<tr>
+			<td>Height</td><td>窗口高度（dialog内容区高度），值为数值型，默认值为Dialog宽的50%</td>
+		</tr>
+		<tr>
+			<td>Left</td><td>窗口距浏览器左边距离，值为数值型或字符串型（当使用百分比时为字符串型），如Left:"0%",Top:"0%"为左上，Left:"50%",Top:"50%"为居中，Left:"100%",Top:"100%"为右下</td>
+		</tr>
+		<tr>
+			<td>Top</td><td>窗口距浏览器顶端距离，值为数值型或字符串型（百分比）</td>
+		</tr>
+		<tr>
+			<td>Drag</td><td>是否允许拖动窗口，值为布尔型(true|false)，默认值为true，注意需要页面引用了Drag.js</td>
+		</tr>
+		<tr>
+			<td>OKEvent</td><td>点击确定按钮后执行的函数</td>
+		</tr>
+		<tr>
+			<td>CancelEvent</td><td>男点击取消按钮或点击关闭按钮后执行的函数，默认为关闭本Dialog/td>
+		</tr>
+		<tr>
+			<td>OkButtonText</td><td>默认的确定按钮上的文字，值为字符串型，默认值为"确 定"</td>
+		</tr>
+		<tr>
+			<td>CancelButtonText</td><td>默认的取消按钮上的文字，值为字符串型，默认值为"取 消"</td>
+		</tr>
+		<tr>
+			<td>ShowButtonRow</td><td>是否不显示按钮栏，值为布尔型(true|false)，默认值为false，当定义了OKEvent或调用了addButton时自动设为true</td>
+		</tr>
+		<tr>
+			<td>ShowOkButton</td><td>是否显示确定按钮，值为布尔型(true|false)，默认值为true（当ShowButtonRow为true时有效）</td>
+		</tr>
+		<tr>
+			<td>ShowCancelButton</td><td>是否显示取消按钮，值为布尔型(true|false)，默认值为true（当ShowButtonRow为true时有效）</td>
+		</tr>
+		<tr>
+			<td>MessageTitle,Message</td><td>自定义的窗口说明栏中的小标题和说明</td>
+		</tr>
+		<tr>
+			<td>ShowMessageRow</td><td>是否显示窗口说明栏，值为布尔型(true|false)，默认值为false，当定义了MessageTitle或Message时自动设为true</td>
+		</tr>
+		<tr>
+			<td>AutoClose</td><td>是否自行关闭，值为数值型，默认值为false</td>
+		</tr>
+		<tr>
+			<td>ShowCloseButton</td><td>是否显示关闭按钮，值为布尔型(true|false)，默认值为true</td>
+		</tr>
+		<tr>
+			<td>OnLoad</td><td>窗口内容载入完成后执行的程序，值为函数型</td>
+		</tr>
+	</table>
+	</div>
+
+
+
+</div>				
+</body>
+<!--代码高亮start-->
+<script type="text/javascript" src="../js/jquery.appendDom.js"></script>
+<script>
+	$(function(){
+			$('head').appendDom([{tagName  :'script',type : 'text/javascript',src : '../js/hl/highlight.js'}]);
+			$('head').appendDom([{tagName  :'script',type : 'text/javascript',src : '../js/hl/lang-xml.js'}]);
+			$('head').appendDom([{tagName  :'script',type : 'text/javascript',src : '../js/hl/lang-html.js'}]);
+			$('head').appendDom([{tagName  :'link', rel : 'stylesheet',type:'text/css',src : '../js/hl/style.css'}]);
+			setTimeout(showCode,1000)
+	})
+	function showCode(){
+		$(".code").each(function(){
+			var code =$(this).val()
+			var hl = new DlHighlight({lang: "html",lineNumbers :false });
+			var formatted = hl.doItNow(code);
+			$(this).next().addClass("DlHighlight").html("<pre>" + formatted + "</pre>")
+		})
+	}
+</script>
+<!--代码高亮end-->
+</html>

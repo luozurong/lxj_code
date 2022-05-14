@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>div上下居中 与 缩略图</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 42px;
+            color: #222;
+        }
+        .test{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            display: table-cell;
+            vertical-align: middle; 
+        }
+        .test>div{
+            display: block;
+            max-width: 100px;
+            min-height: 200px;
+            border: 1px solid red; 
+            /* vertical-align: middle; */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test">
+        <div></div>
+    </div>
+</body>
+</html>

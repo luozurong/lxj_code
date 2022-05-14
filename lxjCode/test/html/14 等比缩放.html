@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=0.3333, maximum-scale=0.3333, user-scalable=no" name="viewport">
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            font-size: 42px;
+            color: #222;
+        }
+    </style>
+
+    <script>
+        function resize(){
+            var deviceWidth = document.documentElement.clientWidth;
+            if(deviceWidth > 1242) deviceWidth = 1242;
+            document.documentElement.style.fontSize = deviceWidth / 1.242 + 'px';
+        }
+        window.onresize=resize;
+        resize();
+    </script>
+</head>
+<body>
+快乐就是考虑到家里空间大垃圾
+</body>
+</html>

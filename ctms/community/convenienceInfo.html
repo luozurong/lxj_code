@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>便民资讯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="css/swiper.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="../common/vue/vue.min.js"></script>
+  <script src="../common/vue/vue-resource.min.js"></script>
+  <script src="../common/plugin/vue-scroller/vue-scroller.min.js"></script>
+  <script src="../common/interface.js"></script>
+  <script src="../common/interfaceParameters.js"></script>
+  <script type="text/javascript">
+  	//	百度统计代码
+  	
+			var idBaiduT = GetURLParameter('id');		
+			var clientType = GetURLParameter('clientType');
+			var from = GetURLParameter('from');
+			if(clientType != 'android') {
+				clientType = 'ios'
+			};
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAutoPageview', false]);
+			var baiDuId='7005';
+			if(idBaiduT) {
+				if(idBaiduT=='1'&&from=='push'){
+					baiDuId = '7005';
+					_hmt.push(['_trackPageview', '/client=' + clientType + '-资讯-资讯ID=' + baiDuId]);
+				}				
+			}
+			(function() {
+				var hm = document.createElement("script");
+				//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+				hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7"; //正式
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+			
+    (function(doc, win) {
+      var docEl = doc.documentElement,
+        isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+        scale = 1 / dpr,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+      docEl.dataset.dpr = dpr;
+      var recalc = function() {
+        var width = docEl.clientWidth;
+        if(width / dpr > 768) {
+          width = 768 * dpr;
+        }
+        docEl.style.fontSize = 100 * (width / 414) + 'px';
+      };
+      recalc();
+      if(!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+<div id="top" v-cloak>
+  <div class="swiper-container" id="nav">
+    <div class="swiper-wrapper swiper-wrapper1">
+       <div class="swiper-slide" v-for="item in navList" v-if="navList.length > 0">
+        <span class="swiper-span" v-text="item.name"></span>
+        <div class="swiper-div"></div>
+      </div>
+      <div class="bar">
+        <div class="color"></div>
+      </div>
+    </div>
+  </div>
+  <div class="info-empty" v-if="emptyFlag">
+    <img src="images/infoEmpty.png">
+    <div class="word">暂无相关文章</div>
+  </div>
+</div>
+<div class="swiper-container"  class="page" id="page"  v-cloak>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide slidepage" v-for="(item,i) in info" v-key="i">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">
+            <div class="info-margin"></div>
+            <div v-for="(items,index) in item.list" v-key="index" :class="{'click-active': items.clickFlag}" @click="goSpecialDetail(i,index,items.id,items.authorName)">
+              <div class="info-floor1-wrap" v-if="items.coverImgType == 3">
+                <div class="info-floor1-name" v-text="items.title"></div>
+                <div class="info-floor1-pic">
+                <div v-for="n in items.coverList" :style="{'backgroundImage': 'url('+n.imgUrl+')'}"></div>
+                </div>
+                <div class="info-floor1-msg">
+                  <span v-text="items.authorName">猫命不同</span>
+                  <span>{{items.plNum}}条评论</span>
+                  <span>{{items.thumbsUpNum}}点赞</span>
+                  <span>{{items.watchNum}}阅读</span>
+                </div>
+                <div class="info-floor-line"></div>
+              </div>
+              <div class="info-floor1-wrap" v-if="items.coverImgType == 0">
+                <div class="info-floor1-name" v-text="items.title"></div>
+                <div class="info-floor1-pic"></div>
+                <div class="info-floor1-msg">
+                  <span v-text="items.authorName">猫命不同</span>
+                  <span>{{items.plNum}}条评论</span>
+                  <span>{{items.thumbsUpNum}}点赞</span>
+                  <span class="info-floor1-right">{{items.watchNum}}阅读</span>
+                </div>
+                <div class="info-floor-line"></div>
+              </div>
+              <div class="info-floor2-wrap" v-if="items.coverImgType == 1">
+                <div class="info-floor2-name" v-text="items.title"></div>
+                <div class="info-floor2-pic">
+                <div v-for="n in items.coverList" :style="{'backgroundImage': 'url('+n.imgUrl+')'}"></div>
+                </div>
+                <div class="info-floor1-msg">
+                  <span v-text="items.authorName">猫命不同</span>
+                  <span>{{items.plNum}}条评论</span>
+                  <span>{{items.thumbsUpNum}}点赞</span>
+                  <span>{{items.watchNum}} 阅读</span>
+                </div>
+                <div class="info-floor-line"></div>
+              </div>
+              <div class="info-floor3-wrap" v-if="items.coverImgType == 2">
+                <div class="info-floor3-main">
+                  <div class="info-floor3-name" v-text="items.title"></div>
+                <div class="info-floor3-pic" v-for="n in items.coverList" :style="{'backgroundImage': 'url('+n.imgUrl+')'}"></div> 
+                </div>
+                <div class="info-floor1-msg">
+                  <span v-text="items.authorName">猫命不同</span>
+                  <span>{{items.plNum}}条评论</span>
+                  <span>{{items.thumbsUpNum}}点赞</span>
+                  <span class="info-floor1-right">{{items.watchNum}}阅读</span>
+                </div>
+                <div class="info-floor-line"></div>
+              </div>
+            </div>
+            <div class="info-empty" v-if="item.emptyFlag && pageEmpty && item.list.length == 0">
+              <div class="info-pic-empty" style="background-image: url(images/infoEmpty.png)"></div>
+              <div class="word">暂无相关文章</div>
+            </div>
+            <div class="info-data-wrap" v-if="item.list.length > 0">
+              <div class="pic" v-if="!item.word" style="background-image: url(images/loading.gif)"></div>
+              <div class="word" v-if="item.word">我是有底线的</div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/swiper-animate.js"></script>
+<script type="text/javascript" src="js/convenienceInfo.js"></script>
+</body>
+</html>

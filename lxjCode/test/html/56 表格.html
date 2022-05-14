@@ -1,0 +1,50 @@
+ <!doctype html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <title>表格演示</title>
+     <style type="text/css">
+          table{
+              width: 1100px;
+              table-layout: fixed;
+         }
+         td{
+             white-space: nowrap;/*控制单行显示*/
+             overflow: hidden;/*超出隐藏*/
+             text-overflow: ellipsis;/*隐藏的字符用省略号表示*/
+         }
+     </style>
+ </head>
+ <body>
+     <table border="1" cellspacing="0" cellpadding="0">
+         <thead>
+             <tr>
+                 <th width="10%" class="name">姓名</th>
+                 <th width="20%" class="age">年龄</th>
+                 <th width="30%" class="sex">性别</th>
+                 <th width="40%" class="addr">地址</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td class="name2">李四sssssssssssssssssssssssssssssssssss</td>
+                 <td>13</td>
+                 <td>男</td>
+                 <td>山东</td>
+             </tr>
+             <tr>
+                 <td>李四</td>
+                 <td>13</td>
+                 <td>男</td>
+                 <td>山东</td>
+             </tr>
+             <tr>
+                 <td>李四</td>
+                 <td>13</td>
+                 <td>男</td>
+                 <td>山东</td>
+             </tr>
+         </tbody>
+    </table>
+ </body>
+ </html>

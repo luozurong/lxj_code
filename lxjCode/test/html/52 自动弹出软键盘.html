@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Native.js</title>
+        <script type="text/javascript">
+  var openSoftKeyboard = function() {
+        if(mui.os.ios){
+            var webView = plus.webview.currentWebview().nativeInstanceObject();
+            webView.plusCallMethod({
+                "setKeyboardDisplayRequiresUserAction": false
+            });
+        }else{
+            var webview = plus.android.currentWebview();
+            plus.android.importClass(webview);
+            webview.requestFocus();
+            var Context = plus.android.importClass("android.content.Context");
+            var InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+            var main = plus.android.runtimeMainActivity();
+            var imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+        }
+    }
+
+//页面隐藏事件
+            plus.webview.currentWebview().addEventListener("hide",function(e){
+                document.getElementById("search-text").value="";
+                    document.getElementById("search-text").blur();//搜索框取消焦点，关闭软键盘
+            });
+            //页面显示事件
+            plus.webview.currentWebview().addEventListener("show",function(e){
+                setTimeout(function() {//自动打开软键盘，搜索框获取焦点
+                        openSoftKeyboard();
+                        document.getElementById("search-text").focus();
+                    }, 300);
+            });
+        </script>
+    </head>
+    <body>
+        <button onclick="plus.webview.currentWebview().close()">Close</button><br/>
+        <input type="text"  id="search-text"/>
+        <br/>
+        打开页面后编辑框自动获取焦点并显示软键盘
+    </body>
+</html>

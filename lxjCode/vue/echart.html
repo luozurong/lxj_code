@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <style>
+        body{
+            background: #0e2359;
+        }
+    </style>
+</head>
+<body>
+    <div id="main1" style="height:230px; width: 328px;"></div>
+    <div id="main2" style="height:230px; width: 328px;margin-top:20px"></div>
+    <script type="text/javascript">
+        main1();
+        main2();
+        function main2(){
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            }); 
+            require(['echarts','echarts/chart/bar'],function (ec) {
+                var myChart = ec.init(document.getElementById('main2')); 
+                option = {
+                    title:{
+                        show: true,
+                        text: '处方药品销售TOP5',
+                        textAlign: 'center',
+                        x: 160,
+                        textStyle: {
+                            fontSize: 24,
+                            color: '#fff',
+                        },
+                        padding: 10
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'value',
+                           
+                            axisLine : {    
+                                show: false
+                            },
+                            splitLine : {
+                                show:false
+                            },
+                            splitArea : {
+                                show: false
+                            },
+                            axisLabel : {
+                                show:true,
+                                margin: 5,
+                                textStyle: {
+                                    color: '#5a77b3',
+                                    fontSize: 14
+                                }
+                            },
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'category',
+                            //data : ['巴西','印尼','美国','印度','中国'],
+                            data : ['巴西'],
+                            splitLine : {
+                                show:false
+                            },
+                            axisLine : {    
+                                show: false
+                            },
+                            axisLabel : {
+                                show:true,
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 14
+                                }
+                            },
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'本月',
+                            type:'bar',
+                            //data:[10, 15, 20, 23, 30],
+                            data:[1],
+                            barWidth : 16,
+                            itemStyle: {
+                                normal: {
+                                    color: function(params) {
+                                        var colorList = ['#256cff','#33cbbe','#256cff','#33cbbe','#256cff'];
+                                        return colorList[params.dataIndex]
+                                    },
+                                    barBorderRadius:[12, 12, 12, 12],
+                                    label: {
+                                        show: true,
+                                    },
+                                    borderColor: 'red',
+                                    borderWidth: 2
+                                },
+                                emphasis: {
+                                    barBorderRadius: 30
+                                } 
+                            }
+                        }
+                    ],
+                    noDataLoadingOption :{
+                        text: '暂无数据',
+                        effect:'bubble',
+                        effectOption : {
+                            effect: {
+
+                                n: 2 //气泡个数为0 
+                            }
+                        },
+                        textStyle: {
+                            fontSize: 10,
+                            fontWeight: 'bold'
+                        }
+
+                    },
+                    grid: {
+                        show: true,
+                        borderColor: 'transparent',
+                        x: 40,
+                        x2: 30,
+                        y: 44,
+                        y2: 25,
+                    },
+                };
+                myChart.setOption(option); 
+            });
+        }
+        function main1(){
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            require(['echarts','echarts/chart/bar'],function (ec) {
+                var myChart = ec.init(document.getElementById('main1')); 
+                option = {
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        show: true,
+                        text: '坑了个爹',
+                        textAlign: 'center',
+                        x: 160,
+                        textStyle: {
+                            fontSize: 20,
+                            color: '#fff'
+                        }
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            position: 'bottom',
+                            boundaryGap: true,
+                            axisLine : {    // 轴线
+                                show: false
+                            },
+                            axisTick : {    // 轴标记
+                                show: false,
+                                length: 10,
+                                lineStyle: {
+                                    color: 'red',
+                                    type: 'solid',
+                                    width: 2
+                                }
+                            },
+                            axisLabel : {
+                                show:true,
+                                interval: 'auto',  
+                                rotate: 0,
+                                margin: 8,
+                                formatter: '{value}月',
+                                textStyle: {
+                                    color: '#5a77b3',
+                                    fontSize: 14,
+                                }
+                            },
+                            splitLine : {
+                                show:false
+                            },
+                            splitArea : {
+                                show: false
+                            },
+                            data : [
+                                '1','2','3','4','5'
+                            ]
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            position: 'left',
+                            boundaryGap: [0,0.1],
+                            axisLine : {    // 轴线
+                                show: false
+                            },
+                            axisTick : {    // 轴标记
+                                show: false
+                            },
+                            axisLabel : {
+                                show:true,
+                                interval: 'auto',    // {number}
+                                rotate: 0,
+                                margin: 18,
+                                textStyle: {
+                                    color: '#5a77b3',
+                                    fontSize: 14,
+                                    fontStyle: 'normal',
+                                }
+                            },
+                            splitLine : {
+                                show:true,
+                                lineStyle: {
+                                    color: '#1d3972',
+                                    type: 'solid',
+                                    width: 1
+                                }
+                            },
+                            splitArea : {
+                                show: false,
+                            }
+                        }
+                    ],
+                    series : [
+                        {
+                            name: '',
+                            type: 'bar',
+                            barWidth : 30,
+                            data:[92, 78, 64, 23.2, 25.6],
+                            itemStyle: {
+                                normal: {
+                                    color: function(params) {
+                                        var colorList = ['#256cff','#256cff','#256cff','#256cff','#256cff'];
+                                        return colorList[params.dataIndex]
+                                    },
+                                    label: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                }
+                            },
+                        }
+                    ],
+                    grid: {
+                        show: true,
+                        borderColor: 'transparent',
+                        x: 40,
+                        x2: 10,
+                        y: 47,
+                        y2: 25,
+                    },
+                };
+                myChart.setOption(option); 
+            });
+        }
+        
+    </script>
+</body>

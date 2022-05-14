@@ -1,0 +1,123 @@
+html{font-family: "微软雅黑";}
+html,body,div,p,h3,ul{border: 0; margin: 0; padding: 0;}
+h3{font-weight: normal;}
+img{width: 100%;}
+a{text-decoration: none;}
+.fl{float: left;}
+.fr{float: right;}
+.clearfix:before,.clearfix:after{display:table;content:"";}
+.clearfix:after{clear:both;}
+.clearfix{*zoom:1;}
+.mainDiv{
+	padding:30px 0px 0px;
+}
+.appDiv{
+	font-size: 0;
+	width: 50%;
+	margin: 0 auto;
+	position: relative;
+}
+.appPic{
+	width: 100%;
+}
+/*.appInfo{
+	width: 67%;
+	height: 100%;
+	padding-left: 8%;
+	box-sizing: border-box;
+}*/
+/*.appName{
+	padding-top: 5px;
+}
+.appName img{
+
+	vertical-align: middle;
+	
+}
+.appDesc{
+	position: absolute;
+	color: #6A6A6A;
+	padding: 0 2%;
+	/*font-size: 12px;*/
+	/*padding:10px 2px 0px 2px;*/
+	/*text-align: center;
+	box-sizing: border-box;
+	width: 60%;
+	bottom: 5%;*/
+/*}*/
+/*.appDesc li{
+	list-style: none;
+	float: left;
+	width: 25%;
+}*/
+.houseBg{
+	margin: 20px 0 28px 0;
+}
+
+.downloadBtn{
+	display: block;
+	width: 45%;
+	margin: 15px auto;
+	text-align: center;
+	height: 25px;
+	padding: 11px 2px;
+	font-size: 16px;
+	background-color: #575757;
+	color: #FFFFFF;
+	border-radius: 3px;
+
+}
+.downloadPic{
+	display: inline-block;
+	padding-left: 30px;
+	line-height: 26px;
+	background: url(../images/ic_phone@3x.png) left center no-repeat;
+	background-size: auto 100%;
+
+}
+
+/*分割线*/
+.hrDiv{
+	position: relative;
+}
+.hr{
+	display: block;
+	width: 40%;
+	height: 2px;
+	background-color: #ff661b;
+}
+.icon{
+	position: absolute;
+	display: inline-block;
+	width: 20%;
+	height: 10px;
+	background: url(../images/ic_down@3x.png) center center no-repeat;
+	background-size: auto 100%;
+	top: -12px;
+}
+.icon2{
+	top: 2px;
+}
+.situation{
+	padding: 50px 0;
+	text-align: center;
+}
+.situationP{
+	padding: 30px 0 10px 0;
+	font-size: 18px;
+}
+.situationTitle{
+	color: #333;
+	padding: 5px 0;
+	font-size: 20px;
+}
+.situationDesc{
+	color: #6a6a6a;
+	font-size: 14px;
+	padding: 5px 0 50px 0 ;
+}
+.situationPic{
+	width: 100%;
+	/*height: 200px;*/
+	/*border: 1px solid #C0C0C0;*/
+}

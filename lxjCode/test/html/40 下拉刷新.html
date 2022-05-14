@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<title>D</title>
+		<script src="../js/jquery-2.1.4.js"></script>
+		<link rel="stylesheet" href="../css/dropload.css">
+		<script src="../js/dropload.min.js"></script>
+		<style>
+			*{
+				padding: 0;
+				margin:0;
+			}
+			html,body{
+				height:100%;
+				
+			}
+			body{
+				display: flex;
+				flex-direction: column; 
+				overflow: hidden;
+ 
+			}
+			.header{
+				overflow: auto;
+				flex-grow: 2;
+				height:100%;
+				box-sizing: border-box;
+			}
+			.fixed{
+				flex-shrink: 0;
+				height:50px;
+				width: 100%;
+				background: #eee;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="topic-content">
+				几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费几十块打飞机上看的经费三快递费
+			</div>
+
+		</div>
+		<div class="fixed">固定栏</div>
+		<script>
+			$(function(){ 
+				var page = 0;
+				var pageFlag = true;
+				//上拉，下拉
+				var dropload =$('.header').dropload({
+				     domUp : {
+				            domClass   : 'dropload-up',
+				            // 下拉过程显示内容
+				            domRefresh : '<div class="dropload-refresh"></div>',
+				            // 下拉到一定程度显示提示内容
+				            domUpdate  : '<div class="dropload-update"></div>',
+				            // 释放后显示内容
+				            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中···</div>'
+				      },
+			        domDown : {
+			            domClass   : 'dropload-down',
+			            // 滑动到底部显示内容
+			            domRefresh : '<div class="dropload-refresh"></div>',
+			            // 内容加载过程中显示内容
+			            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中···</div>',
+			            // 没有更多内容-显示提示
+			            domNoData  : '<div class="dropload-noData">没有更多数据了···</div>'
+			        },
+				     loadUpFn:function(me){
+			    		me.resetload();
+				     },
+				     loadDownFn : function(me){//加载数据
+				     	page++;
+				     	if(pageFlag){
+				     		setTimeout(function(){
+								if(page > 2){
+									pageFlag = false;
+									me.unlock();
+									me.noData();
+									me.resetload();
+
+								}else{
+									$(".topic-content").append("<div>打算考房间是看到就发卡逛街的开发关键是的速度快房间上岛咖啡三大</div>");
+									console.log(page);
+									me.resetload();
+								}
+					     	},1500);
+				     	}
+				     } 
+				 });
+			 });
+
+		</script>
+	</body>
+</html>

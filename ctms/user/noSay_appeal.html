@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+    	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    	<meta content="yes" name="apple-mobile-web-app-capable">
+		<title>禁言申诉</title>
+		<!--<script src="../common/js/fontSize.js" type="text/javascript" charset="utf-8"></script>-->
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+		<link rel="stylesheet" type="text/css" href="css/noSay_appeal.css"/>
+	</head>
+	<body>
+		<div class="content">
+			<!--申诉理由-->
+			<div class="reasonBox">
+				<!--审核中-->
+				<div class="waiting">
+					
+				</div>			
+				<div class="content_reason">
+					<div class="reason">
+						<textarea name="" rows="3" cols="" class="reason_textarea" maxlength="100" placeholder="输入您的申诉理由："></textarea>
+						<span class="wordCount"><span class="len">0</span>/100</span>
+					</div>
+					<div class="submit_button">
+						<span class="submit yes">提交</span>
+					</div>
+				</div>
+			</div>
+			<div class="greyBox"></div>
+			<!--申诉记录-->
+			<div class="content_record">
+				<div class="record_title">
+					<div class="circle"></div>
+					<h2>我的申诉记录</h2>
+				</div>
+				
+				<div class="recordBox">
+					<ul class="record_list"></ul>
+					<!--记录模板-->
+					<script id="recordTemplate" type="text/html">
+						<li class="list">
+							<% if(state == 0){ %>
+							<span class="status" style="color:#FC9153">申诉中</span>
+							<% }else if(state == 1){ %>
+							<span class="status" style="color:#3CBCA3">申诉成功</span>
+							<% }else if(state == 2){ %>
+							<span class="status" style="color:#ff525c">申诉失败</span>
+							<% } %>
+							<div class="list_reason">
+								<span class="posA">申诉理由：</span>
+								<span class="pdl"><%=reason%></span>
+							</div>
+							<% if(reviewReason !=''){ %>
+							<div class="list_state" >
+								<span class="posA">审核说明：</span>
+								<span class="pdl"><%=reviewReason%></span>
+							</div>
+							<% } %>
+							<span class="list_time">
+								<span>时间：</span>
+								<span class="time"><%=createTime%></span>
+							</span>
+						</li>
+					</script>
+					<div class="no_record">
+						您还没有发起申诉
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/noSay_appeal.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

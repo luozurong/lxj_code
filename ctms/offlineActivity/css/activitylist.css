@@ -1,0 +1,94 @@
+html,body{
+    /*height:100%;*/
+    /*width:100%;*/
+    background: #f3f4f5;
+    font-size:0.14rem;
+    margin:0;
+    padding:0;
+}
+ul,li{
+    list-style: none;
+}
+ul{
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+.prebig{
+    /*width:100%;*/
+    border-top:1px solid rgba(204, 204, 204, 0.51);
+    margin-bottom: 0.14rem;
+   /* height: 2.8rem;*/
+}
+.recommandImg{
+    margin: 0.14rem 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    min-height: 1.6rem;
+    /*background-image: url(../images/c_s_error.png);*/
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.recommandImg>img{
+    width: 100%;
+    /*height: 1.8rem;*/
+   min-height: 1.6rem;
+}
+.bottomtopic{
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+    padding-left:8px;
+    color: #333;
+}
+.personNum{
+    padding-left:8px;
+    height:28px;
+    line-height:28px;
+    color:#aaa;
+    font-size: 14px;
+    font-size: 0.14rem;
+}
+.status{
+    width:100%;
+    color:#fff;
+    background:#000;
+    opacity:0.7;
+    font-size:16px;
+    font-size: 0.16rem;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+    margin-top: -34px;
+    /*display:none;*/
+}
+.valueBox{
+    float:right;
+    margin-right:10px;
+}
+.value{
+    color:#fc9153;
+    font-size:0.14rem;
+    font-weight:bold;
+}
+.null{
+    display: none;
+}
+.nullPic{
+    padding-top: 1.2rem;
+    font-size: 0;
+    width: 1.8rem;
+    margin: 0 auto;
+}
+.nullPic img{
+    width: 100%;
+}
+.nullTips{
+    color: #CCCCCC;
+    text-align: center;
+    width: 2.2rem;
+    margin: 0 auto;
+    font-size: 0.16rem;
+}

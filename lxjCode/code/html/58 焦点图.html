@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <link rel="stylesheet" href="../../test/html/js/swiper.min.css">
+  <script src="../js/jquery-2.1.4.js"></script>
+
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-my{
+      width: 300px;
+      background: #fff;
+      position: relative;
+    }
+    .swiper-my>img{
+      display: block;
+      min-width: 1px;
+      height: 160px;
+      margin: 0 auto 20px;
+    }
+    .swiper-container {
+      width: 300px;
+      height: 42px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      align-items: center;
+      overflow: hidden;
+      width: 82px !important;
+    }
+    .swiper-slide>img{
+      display: block;
+      min-width: 1px;
+      height: 42px;
+      margin: 0 auto;
+    }
+    .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+        left: 9px;
+        right: auto;
+        top: 35px;
+        width: 30px;
+        height: 20px;
+    }
+    .swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+        top: 35px;
+        width: 30px;
+        height: 20px;
+    }
+    .swiper-my-position{
+      position: absolute;
+      top:140px;
+      right:10px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="swiper-my">
+    <img src="../images/picture_add.png" alt="">
+    <div class="swiper-my-position">
+      <span>2</span>
+      <span>/</span>
+      <span>5</span>
+    </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="../images/name.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/goods.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/ic_more-@3x.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/ic_cut_-no-active-.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/sellerName_logo.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/picture_add.png" alt=""></div>
+        <div class="swiper-slide"><img src="../images/add.png" alt=""></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+  <script src="../../test/html/js/swiper.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 10,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    $(".swiper-slide").click(function(){
+      var srcUrl = $(this).find("img").attr("src");
+      if(srcUrl != "../images/add.png"){
+        $(".swiper-my>img").attr("src",srcUrl);
+      }
+    })
+    
+  </script>
+</body>
+</html>

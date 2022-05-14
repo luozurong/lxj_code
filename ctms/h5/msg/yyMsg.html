@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../common/tip/lxjTip.css" />
+		<script src="../../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../common/interface.js"></script>
+		<script src="../../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>消息详情</title>
+		<style type="text/css">
+			body,
+			html {
+				line-height: normal;
+				font-size: 16px;
+			}
+			
+			.header {
+				width: 100%;
+				display: -webkit-flex;
+				align-items: center;
+				padding: 10px 13px;
+				box-sizing: border-box;
+			}
+			
+			.msgTitle {
+				flex-grow: 2;
+				padding-right: 10px;
+				font-size: 18px;
+			}
+			
+			.msgTime {
+				white-space: nowrap;
+			}
+			
+			.content {
+				box-sizing: border-box;
+				padding: 5px 13px;
+				width: 100%;
+			}
+			
+			.tilte2 {
+				text-align: center;
+				font-size: 25px;
+				line-height: 45px;
+			}
+			
+			.text2 {
+				padding-top: 10px;
+			}
+			
+			.falseText {
+				width: 100%;
+				padding: 70px 13px;
+				box-sizing: border-box;
+				text-align: justify;
+				font-size: 20px;
+				color: #fc9153;
+				line-height: 40px;
+			}
+			
+			.msgTime {
+				text-align: center;
+				background-color: #F3F4F5;
+				line-height: 30px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="msgTime" v-if="jsondate">
+				{{jsondate.yyTime}}
+			</div>
+			<div class="header" v-if="jsondate">
+				<div class="msgTitle">
+					{{jsondate.yyTitle}}
+				</div>
+				<!--<div class="msgTime">
+					{{jsondate.yyTime}}
+				</div>-->
+			</div>
+			<div class="content" v-if="jsondate" v-html="jsondate.yyContent">
+			</div>
+			<!--<div class="falseText" v-if="falseTextstate">
+				<div class="tilte2">
+					<<&nbsp;笑一笑&nbsp;>>
+				</div>
+				<div class="text2">
+					{{falseText1}}
+				</div>
+			</div>-->
+
+		</div>
+		<script type="text/javascript">
+			var clientType = GetURLParameter("clientType");
+			var token = GetURLParameter("token");
+			var id = GetURLParameter("id");
+			var timestamp = new Date().getTime();
+			var isVisitor = false;
+			if(token && token.indexOf("_") == 0) {
+				isVisitor = true;
+				userAccount = token;
+			}
+			var backHomePage = GetURLParameter("backHomePage"); //回退到生活首页
+			if(backHomePage == "1") {
+				backToHomePage();
+			}
+			/*token = "15240141226953117c09660c44679885";
+			chimsHost = "https://tt.hori-gz.com:8443";
+			id = "152395288929229732b4e0774a58aa06";*/
+			/*
+											result: "0",
+											yyType: 1,
+											reason: "",
+											yyTitle: "霍金和中国：喜欢中国女孩 曾为上长城威胁自杀",
+											yyTime: "2018-03-15 13:43:39",
+											introduce: "简介简介",
+											yyContent: '<p>原标题：<a href="http: //news.sina.com.cn/o/2018-03-14/doc-ifyshfyx0157170.shtml" target="_blank">霍金</a>和中国：喜欢中国女孩 曾为上长城威胁自杀　</p><p>　　2018年3月14日，英国著名物理学家斯蒂芬·霍金家人发表声明证实，霍金在位于剑桥的家中去世，享年76岁。</p><p>　　从人类社会到宇宙星辰，他证明了广义相对论的奇性定理黑洞面积定理，提出了黑洞蒸发理论和无边界的霍金宇宙模型。在轮椅上坐了几十年，他说，“即使把我关在果壳之中，我仍然认为自己是无限宇宙之王”。</p><p><img src="/ueditor/jsp/upload/image/20180315/1521083742269082051.jpg" alt=""/><span class="img_descr"></span></p><p>　　霍金他曾经三次来华：1985年来到中国合肥，2002年在北京和杭州作科普报告，2006年又到北京参加国际弦理论大会，去年还开通中文微博成为“网红”。</p><p>　　他最后一条微博发于去年11月24日，回复了回答TFBOYS成员王俊凯的一个提问。截止去世，他一共发出了20条中英文双语微博。</p><p>　　他一直试图通过通俗演讲，将自己的思想与整个世界交流。在霍金眼中，人类社会相互作用、不断演进，恰如广袤宇宙一般。</p><p>　　<strong>不上长城就自杀</strong></p><p>　　1985年，霍金第一次访华。对于当时的中国人来说，霍金这个名字还不像今天这样如雷贯耳，尽管那个时候的霍金在学术上早已成就斐然。</p><p>　　4月28日到 5月2日，霍金在合肥停留了四天，被安排住在稻香楼宾馆，是毛泽东在合肥的下榻处。中国科技大学是唯一的邀请单位，公众报告被安排在学校的水上报告厅。当时那批幸运的听众将近有三四百人，他们多数都是年轻的学生。</p><p>　　当时在报告厅的朱也旷曾回忆过当时的情景：</p><p>　　“霍金在助手的簇拥下进场了，果然如传说的那样坐在轮椅上。他系着领带，穿着整洁的白衬衫，瘦削的脸庞上架着一副大框的金丝眼镜，看上去相当年轻。大厅里爆发出一阵热烈的掌声，还夹杂着少许的叹息声。</p><p>　　那时霍金只有43岁，刚刚完成了《时间简史》的初稿，声誉正处于持续增长中，但还没有成为大众明星，因此几乎看不到记者在场，也看不到令人厌恶的、闪个不停的闪光灯。轮椅停在了讲台的右侧。主持人介绍说，霍金先生是最年轻的英国皇家学会会员，剑桥大学的卢卡斯讲座教授。这两个头衔对于在场的人已经有足够的吸引力了。在整个报告中，霍金的脑袋朝一边歪斜着，目光似乎始终看着一个地方。”</p><p><br/></p>',
+										*/
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					jsondate: {},
+					falseText1: "",
+					falseTextstate: false,
+					falseText: ["那些因为缘分而来的东西，终有缘尽而别的时候。", "人生，只要还有一线希望，就还有无限的可能。", "曾经以为，拥有是不容易的；后来才知道，舍弃更难。", "爱若无法抚慰彼此，便不过是喜欢而已。", "最能反映女人品味的，不是她的衣着、爱好，也不是她开的车、看的书、家里的装饰，而是她爱上一个怎样的男人。即使她在其他方面品味优雅，若爱上一个差劲的男人，便功亏一篑。", "有一个人，教会你怎样去爱了，但是，他却不爱你了。以后，我再也不会奋不顾身的去爱一个人了，哪怕是你。我终于明白，人这一辈子，真爱只有一回，而后即便再有如何缠绵的爱情，终究不会再伤筋动骨。", "想要忘记一段感情， 方法永远只有一个： 时间和新欢。 要是时间和新欢也不能让你忘记一段感情， 原因只有一个： 时间不够长， 新欢不够好。 "],
+					apiurl: chimsHost + "/chims/servlet/getYyMsgInfo", //信息详情接口
+					apiurl1: chimsHost + "/chims/servlet/addMessageInfoPvRecord", //访问记录
+				},
+				filters: {
+					//状态过滤
+
+				},
+				mounted: function() {
+					this.$nextTick(function() {
+						setTitle("消息详情")
+						//console.log(99999999);
+						this.getDatejson();
+					});
+
+				},
+				methods: {
+					getDatejson: function() {
+						var params = {};
+						var timestamp = new Date().getTime();
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							id: id
+						};
+						vue.falseText1 = vue.falseText[(Math.floor(Math.random() * 6))];
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl + "?str=" + encodeURI(paramData), {
+							method: "POST",
+							emulateJSON: true,
+							emulateHTTP: true,
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {
+							// 响应成功回调
+							if(response.body.result == 0) {
+								vue.jsondate = response.body;
+							} else {
+								lxjTip.alert("抱歉，消息内容已被删除", {
+									yes: function(index) {
+										setTimeout(function() {
+											goBack();
+										}, 100);
+										lxjTip.close(); //如果设定了yes回调，需进行手工关闭
+									}
+								});
+								vue.falseTextstate = true;
+							}
+							setTimeout(function() {
+								vue.addMessageInfoPvRecordFun()
+							}, 50)
+
+						}, function(response2) {
+							// 响应错误回调
+							lxjTip.alert("消息内容获取失败", {
+								yes: function(index) {
+									setTimeout(function() {
+										goBack();
+									}, 100);
+									lxjTip.close(); //如果设定了yes回调，需进行手工关闭
+								}
+							});
+							vue.falseTextstate = true;
+							console.log(JSON.stringify(response2))
+							//	console.log(JSON.stringify(response))
+						});
+					},
+					addMessageInfoPvRecordFun: function() {
+						var params = {};
+						var timestamp = new Date().getTime();
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							messageInfoId: id,
+							type: 2
+						};
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl1 + "?str=" + encodeURI(paramData), {
+							method: "POST",
+							emulateJSON: true,
+							emulateHTTP: true,
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {
+							// 响应成功回调
+							console.log(JSON.stringify(response))
+						}, function(response2) {
+							// 响应错误回调			
+							console.log(JSON.stringify(response2))
+							//	console.log(JSON.stringify(response))
+						});
+					},
+
+				}
+			});
+
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return decodeURI(r[2]);
+				return null;
+			}
+
+			function refreshData() {
+				setTimeout(function() {
+
+				}, 0);
+				return 1;
+			}
+		</script>
+	</body>
+
+</html>

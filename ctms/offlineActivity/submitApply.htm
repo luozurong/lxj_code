@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>提交免费参团名单</title>
+		<style type="text/css">
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+			
+			.line_01 {
+				width: 100%;
+				height: 1px;
+				background-color: #999;
+				transform: scaleY(0.5);
+				-webkit-transform: scaleY(0.5)
+			}
+			
+			.header_box {
+				width: 100%;
+				padding: 0.56rem 23%;
+				box-sizing: border-box;
+				min-height: 1.56rem;
+			}
+			
+			.header_box img {
+				width: 100%;
+				display: block;
+			}
+			
+			.main_box {
+				width: 100%;
+				padding: 0 13.5%;
+				box-sizing: border-box;
+				min-height: 1.56rem;
+			}
+			
+			.input_box {
+				width: 100%;
+				box-sizing: border-box;
+				display: -webkit-flex;
+				padding-bottom: 0.1rem;
+			}
+			
+			.input_box img {
+				display: block;
+				width: 0.22rem;
+				height: 0.22rem;
+			}
+			
+			.input_box input {
+				-webkit-flex-grow: 2;
+				-webkit-align-self: flex-end;
+				padding-left: 0.13rem;
+			}
+			
+			.buttom_box {
+				width: 100%;
+				padding: 0.56rem 0 0;
+				box-sizing: border-box;
+				text-align: center;
+			}
+			
+			#applyButtom {
+				width: 1.6rem;
+				height: 0.44rem;
+				font-size: 0.18rem;
+				border: 0.01rem solid #FC9103;
+				color: #FC9103;
+				border-radius: 0.22rem;
+				display: inline-block;
+				text-align: center;
+				line-height: 0.42rem;
+				box-sizing: border-box;
+			}
+			input{
+				font-size: 0.16rem;
+			}
+		</style>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);		
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header_box">
+				<img src="images/apply@3x.png" style="" />
+			</div>
+			<div class="main_box" style="">
+				<div class="input_box">
+					<img src="images/ic_name@3x.png" />
+					<input type="text" v-model="username" maxlength="250" name="username" id="username" value="" placeholder="姓名" />
+				</div>
+				<div class="line_01">
+				</div>
+				<div class="input_box" style="padding-top: 0.3rem;">
+					<img src="images/ic_phone@3x.png" />
+					<input type="text" v-model="userphone" maxlength="250" name="userphone" id="userphone" value="" placeholder="电话" />
+				</div>
+				<div class="line_01">
+				</div>
+				<div class="buttom_box">
+					<div id="applyButtom" v-on:click="applyData()">
+						提交报名
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var clientType = GetURLParameter("clientType");
+
+			var token = GetURLParameter("token");
+			var activityId = GetURLParameter("activityId");
+
+			//			var token = "150466051614efe732aa084a42b48ea8";
+			//			activityId = "15045799838244a94f65634f42fab683";
+			//ctmsHost="http://192.168.51.26:8090";
+			var timestamp = new Date().getTime();
+
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					jsondate: {},
+					username: '',
+					userphone: '',
+					apiurl: ctmsHost + "/ctmsApi/activity/submitApplyActivity", //报名活动
+				},
+				filters: {
+					//状态过滤
+				},
+				mounted: function() {
+					this.$nextTick(function() {
+						//console.log(99999999);
+						//	this.getDatejson(pageSize, 1);
+					});
+
+				},
+				methods: {
+					applyData: function() {
+						var jsonData = {
+							eventId: "2.0-click22",
+							eventName: "提交报名按键点击数"
+						};
+						jsonData = JSON.stringify(jsonData);
+						//调用APP接口，添加百度统计
+						nativeMethod("baiduStatistics", jsonData);
+						if(vue.username.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+							lxjTip.msg("姓名不可以为空！", {
+								time: 3000
+							});
+							document.getElementById("username").focus();
+							return false;
+						}
+						if(vue.userphone.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+							lxjTip.msg("电话不可以为空！", {
+								time: 3000
+							});
+							document.getElementById("userphone").focus();
+							return false;
+						}
+						var params = {};
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							activityId: activityId,
+							userName: vue.username,
+							mobile: vue.userphone,
+						};
+
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl + "?str=" + encodeURI(paramData), {
+							emulateJSON: true,
+							method: "get",
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {
+							// 响应成功回调
+							console.log(JSON.stringify(response.body))
+							//this.message = JSON.stringify(response.body);
+							this.jsondate = response.body;
+							if(response.body.result == 0) {
+								lxjTip.msg("报名成功！", {
+									time: 3000
+								});
+								setTimeout("goBack()", 1000);
+							} else {
+								lxjTip.msg("报名失败", {
+									time: 3000
+								});
+							}
+
+						}, function(response2) {
+							// 响应错误回调
+							console.log(JSON.stringify(response2.body))
+							//	console.log(JSON.stringify(response))
+						});
+					},
+				}
+			});
+
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+
+			function refreshData() {
+				setTimeout(function() {}, 0);
+				return 1;
+			}
+		</script>
+	</body>
+
+</html>

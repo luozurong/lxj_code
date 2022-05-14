@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>参选详情页</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/elect.css">
+    <link rel="stylesheet" href="../common/css/mui.min.css">
+    <script type="text/javascript"	src="../common/js/jquery-2.1.4.js"></script>
+    <script src="../common/interface.js"></script>
+    <script src="../common/interfaceParameters.js"></script>
+    <script src="../common/js/fontSize.js"></script>
+    <script src="../common/js/underscore.js"></script>
+    <script src="js/common.js"></script>
+    <script src="../common/tip/lxjTip.js"></script>
+    <link rel="stylesheet" href="../common/tip/lxjTip.css"/>
+</head>
+<body>
+    <div id="getVoteActivity" style="background:#fff;"></div>
+    <script id="getVoteActivityTemplate" type="text/template">
+            <div class="electTopic"><%=title%></div>
+            <div class="electTime"><%=creatorName%> <span><%=startTime%></span></div>
+            <div class="electDisc"><%=content%></div>
+    </script>
+    <div class="detailBox">
+        <div class="detailTopic">为你优选</div>
+        <div id="commodityList"></div>
+    </div>
+    <script id="commodityListTemplate" type="text/template">
+        <div class="detailLeft" id="<%=commodityId%>" commodityType="<%=commodityType%>">
+            <div class="detailImg">
+                <img src="<%=pictureUrl%>" width="100%" alt=""/>
+            </div>
+            <div class="detailTalk"><%=name%></div>
+            <div class="value">
+                <span style="font-size:0.14rem;">¥<span style="font-size:0.18rem;"><%=commodityPriceMax%></span>.<span><%=commodityPriceMin%></span></span>
+                <s style="color:#ccc;margin-left:8px;"><%=originalPrice%></s>
+            </div>
+            <div style="margin-bottom: 10px;">
+             <span class="volume" style="color:#aaa;">
+               <%=salesVolume%>人已购买
+             </span>
+            </div>
+        </div>
+    </script>
+    <div class="reminder">已经到底了</div>
+    <!--底部投票按钮-->
+    <div  style="width: 100%;height:0.68rem;opacity:0;clear: both;">
+    </div>
+    <div class="voteBtn">
+        <div>我要参选</div>
+    </div>
+</body>
+<script src="../common/js/mui.min.js"></script>
+<script src="../common/js/mui.previewimage.js"></script>
+<script src="../common/js/mui.zoom.js"></script>
+<script>
+    mui.previewImage();
+</script>
+<script src="js/elect.js"></script>
+</html>

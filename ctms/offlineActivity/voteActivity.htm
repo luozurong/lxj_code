@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>票选详情页</title>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css" />
+		<link rel="stylesheet" href="css/vote.css" />
+
+		<script type="text/javascript" src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js"></script>
+		<script src="../common/js/fontSize.js"></script>
+		<script src="js/common.js"></script>
+		<script src="../common/js/underscore.js"></script>
+		<script src="../common/tip/lxjTip.js"></script>
+		<link rel="stylesheet" href="../common/tip/lxjTip.css" />
+		<style type="text/css">
+			body,
+			html {
+				background-color: #f4f5f6;
+				line-height: normal;
+				font-family: "PingFang SC",Helvetica, Tahoma, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+		</style>
+		
+		<script type="text/javascript">
+		//	百度统计代码
+		var activityId = GetURLParameter('activityId');
+		var clientType = GetURLParameter('clientType');
+		if(clientType!='android'){clientType='ios'};
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview',false]);
+		if(activityId){
+			_hmt.push(['_trackPageview', '/client='+clientType+'-活动-投票类活动-活动ID='+activityId]);
+		}
+		(function() {
+		  var hm = document.createElement("script");
+//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+		  hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";//正式
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+	</head>
+
+	<body>
+
+		<div class="huodong1" id="activityId"></div>
+		<script id="activityIdTemplate" type="text/template">
+			<div>
+				<div style="font-weight:600;font-size:0.2rem;color: #333;">
+					<%=title%>
+				</div>
+				<div class="voteTime">联享家<span style="color:#808080;padding-left: 0.12rem;"><%=startTime%></span></div>
+			</div>
+			<!--<div class="map">-->
+			<!--<img src="<%=indexPic%>" width="100%" alt="主图"/>-->
+			<!--</div>-->
+			<div class="content">
+				<%=content%>
+			</div>
+		</script>
+		<script id="isMultiSelectTemplate" type="text/template">
+			<div class="pollnum">
+				共有
+				<%=voteNum%>位邻居参选，
+				<%=pollNum%>位邻居投票 <span></span>
+			</div>
+			<!--<div class="height"></div>-->
+		</script>
+		<div style="background:#fff;">
+			<div class="isMultiSelect" id="isMultiSelect"></div>
+			<div class="huodong2" id="activityOptions"></div>
+		</div>
+		<!-- 票选列表-->
+		<script id="activityOptionsTemplate" type="text/template">
+			<% _.each(data, function(item,idx){%>
+			<%if(data.isMultiSelect==0){%>
+			<div class="voteSelect">
+				<div>
+					<lable>
+						<div class="select_list">&nbsp;</div>
+						<input name="Fruit" class="select" type="radio" value="" />
+						<%=item.title%>&nbsp;<span style="color: #c09853">(<%=item.pollNums%>票)</span>
+					</lable>
+				</div>
+			</div>
+			<% }else{%>
+			<div class="voteSelect">
+				<div>
+					<lable>
+						<div class="select_list">&nbsp;</div>
+						<input name="Fruit" class="select" type="checkbox" value="" />
+						<%=item.title%>&nbsp;<span style="color: #c09853">(<%=item.pollNums%>票)</span>
+					</lable>
+				</div>
+			</div>
+			<% }%>
+			<div class="voteImg">
+				<img src="<%=item.picSource%>" width="100%" alt="" />
+			</div>
+			<%})%>
+		</script>
+		<div class="detailBox">
+			<div class="detailTopic">为你优选</div>
+			<div id="commodityList"></div>
+		</div>
+		<script id="commodityListTemplate" type="text/template">
+			<div class="detailLeft" id="<%=commodityId%>" commodityType="<%=commodityType%>">
+				<div class="detailImg">
+					<img src="<%=pictureUrl%>" width="100%" alt="" />
+				</div>
+				<div class="detailTalk">
+					<%=name%>
+				</div>
+				<div class="value">
+					<% var item1 = parseFloat(commodityPrice).toFixed(2).split(".")[0] %>
+					<% var item2 = parseFloat(commodityPrice).toFixed(2).split(".")[1] %>
+					<% var item3 = parseFloat(originalPrice).toFixed(2) %>
+					<span>¥<span style="font-size:0.16rem;"><%=item1%></span>.<span style="font-size:0.12rem;"><%=item2%></span></span>
+					<%if(originalPrice&&originalPrice>0){%>
+					<s style="color:#ccc;padding-left:0.1rem;font-size: 0.12rem;">¥<%=item3%></s>
+					<%}else{%>
+					<%}%>
+				</div>
+				<div style="margin-bottom: 10px;">
+					<span class="volume">
+               <%=salesVolume%>人已购
+             </span>
+				</div>
+			</div>
+		</script>
+		<div class="reminder">我是有底线的</div>
+		<!--底部投票按钮-->
+		<div id="nothingbottom" style="width: 100%;height:0.67rem;opacity: 0;clear: both;">
+		</div>
+		<div class="voteBtn">
+			<div></div>
+		</div>
+		<div id="disisExistCommunity" v-if="jsondate.isExistCommunity!=1" style="position: fixed;bottom: 0;left: 0;width: 100%;height: 0.54rem;background-color: #000000;opacity: 0.7;display: -webkit-flex;display: none;-webkit-align-items: center;">
+                 <span style="line-height: 1;width: 100%;text-align: center;color: #fff;font-size: 0.17rem;">你所在的小区暂不支持该活动</span>
+		</div>
+	</body>
+	<script src="../common/js/mui.min.js"></script>
+	<script src="../common/js/mui.previewimage.js"></script>
+	<script src="../common/js/mui.zoom.js"></script>
+	<script>
+		mui.previewImage();
+	</script>
+	<script src="js/voteActivity.js"></script>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title></title>
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/underscore.js"></script>
+		<link rel="stylesheet" href="css/specialDetail.css">
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<style type="text/css">
+			video {
+				width: 100%;
+				max-width: 100%;
+				background-color: #000;
+			}
+		</style>
+		<script type="text/javascript">
+			//	百度统计代码
+			var PvId = GetURLParameter('id');
+			var clientType = GetURLParameter('clientType');
+			var from = GetURLParameter('from');
+			var baiduPvId = GetURLParameter('baiduPvId');
+			if(clientType != 'android') {
+				clientType = 'ios'
+			};
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAutoPageview', false]);
+			if(PvId) {
+				if(PvId=='152896825907c390684fbcbc4705a103'&&from=='push'){ 
+					PvId = '6001';
+				}
+				/*else if(id=='1528359009657e769ff7cb8141a595e7'&&from=='push'){//埋点太多，释放部分
+					id = '6002';
+				}else if(id=='15320794006176325f874b3f4d209e15'&&from=='push'){
+					id = '6003';
+				}else if(id=='153500818729795070f5c01045aabb1e'&&from=='push'){
+					id = '6004';
+				}else if(id=='153500583733e1f81b064a9d47458aba'&&from=='push'){
+					id = '6005';
+				}else if(id=='15357080932875700c2e28c8436daa11'&&from=='push'){
+					id = '6006';
+				}else if(id=='1536138337377f506f98c0074b1c81b5'&&from=='push'){
+					id = '6007';
+				}else if(id=='153620351664a3282d4f891445cb917d'&&from=='push'){
+					id = '6008';
+				}else if(id=='153561574544d7175c5a9dc34dc8b194'&&from=='push'){
+					id = '6009';
+				}else if(id=='1536833647366e56851668724a478298'&&from=='push'){
+					id = '6010';
+				}*/
+				else if(PvId=='153916102351a051f4be4b7d4260ac85'&&from=='push'){
+					PvId = '6011';
+				}else if(PvId=='1540184256424d351bde22b646f19adc'&&from=='push'){
+					PvId = '6012';
+				}else if(PvId=='15416644974522f8be6af1cc4c61ae42'&&from=='push'){
+					PvId = '6013';
+				}else if(PvId=='1541726992367792c6744e494fffbd13'&&from=='push'){
+					PvId = '6014';
+				}else if(PvId=='154156198243e5b393973d2a48e798ef'&&from=='push'){
+					PvId = '6015';
+				}else if(PvId=='154295174888745b16e279264fb9aeb6'&&from=='push'){
+					PvId = '6016';
+				}else if(PvId=='154356017680d7b3ece678f1480aa70c'&&from=='push'){//create 2018/11/30
+					PvId = '6017';
+				}else if(PvId=='154414992380563e632558a1431299fd'&&from=='push'){//create 2018/12/7
+					PvId = '6018';
+				}else if(PvId=='154441084273a27c5fd23cf34c62adb2'&&from=='push'){//create 2018/12/10
+					PvId = '6019';
+				}else if(PvId=='15445131847459df9e1fa64243fe966d'&&from=='push'){//create 2018/12/11
+					PvId = '6020';
+				}
+				
+				if (baiduPvId&&from=='push') {//根据页面来源统计
+					PvId = baiduPvId;
+				}
+				
+				_hmt.push(['_trackPageview', '/client=' + clientType + '-专题-专题ID=' + PvId]);
+			}
+			(function() {
+				var hm = document.createElement("script");
+				//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+				hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7"; //正式
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+		<style type="text/css">
+			iframe {
+				border: none;
+				padding: 0;
+				margin: 0;
+			}
+			.zkspecial_boxios{
+				overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;
+			}
+			.zkspecialiframeios{
+				width: 1px; min-width: 100%; *width: 100%;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="special-header">
+			<div class="special-height">
+				<div class="special-detail">
+					<div class="special-detail-name"></div>
+					<div class="special-detail-time">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="special-pic">
+						<p></p>
+					</div>
+				</div>
+				<div id="zkspecial_box" style="width: 100%;display: none;">
+					<iframe id="zkspecial" src="" width="100%" height="100%"></iframe>
+				</div>
+				<div class="special-comment">
+					<div class="special-comment-count">
+						<span>评论 (<span id="specialBackNum"></span>)</span>
+					</div>
+					<div class="special-comment-item"></div>
+				</div>
+				<div class="comment-over">我是有底线的</div>
+			</div>
+		</div>
+		<div class="margins-bottoms" style="width: 100%;"></div>
+		<div class="top-fixed">
+			<img src="images/top.png" alt="">
+		</div>
+		<div class="special-fixed">
+			<div class="special-share">
+				<img src="images/btn_ic_share_xxhdpi.png" alt="">
+				<span>分享</span>
+			</div>
+			<div class="special-collect">
+				<img src="images/btn_ic_collect_nor_xxhdpi.png" alt="">
+				<span>收藏</span>
+			</div>
+			<div class="plNum">
+				<img src="images/ic_like_nor_xxhdpi.png" alt="">
+				<span>点赞</span>
+			</div>
+			<div class="commemt-num" onclick="commentJump()">
+				<img src="images/btn_ic_message.png" alt="">
+				<span>评论</span>
+			</div>
+		</div>
+		<script type="text/html" id="special_comment_empty">
+			<div class="special-comment-empty">暂时还没有评论，快点来抢沙发！</div>
+		</script>
+		<script type="text/html" id="special_comment">
+			<% _.each(data, function (item) { %>
+			<div class="subjectBack" id="<%= item.id%>">
+				<%if(item.userHeadPicUrl!=null &&  item.userHeadPicUrl !=''){ %>
+				<img class="special-comment-pic" src="<%= item.userHeadPicUrl%>" alt="" useraccount="<%= item.backAccount%>" onclick="goToUser(this)">
+				<%}else{%>
+				<%if(item.sex == 2){ %>
+				<img class="special-comment-pic" src="../invitation/images/ic_woman@3x.png" alt="" useraccount="<%= item.backAccount%>" onclick="goToUser(this)">
+				<%}else{%>
+				<img class="special-comment-pic" src="../invitation/images/ic_man@3x.png" alt="" useraccount="<%= item.backAccount%>" onclick="goToUser(this)">
+				<%}%>
+				<%}%>
+				<div class="special-comment-content">
+					<div class="special-comment-name">
+						<span class="comment-name"><%= item.backNick%></span>
+						<% if(item.restoredAccount != "" && item.restoredAccount != null){ %>
+						<span class="comment-span">&nbsp;回复了</span>
+						<span class="comment-name"><%=item.restoredNick%></span>
+						<%}%>
+						<span class="comment-time"><%= item.createTime%></span>
+					</div>
+					<%if(item.delBack=='0'){ %>
+					<div class="special-comment-word" onclick="deleteComment('<%= item.id%>','<%=item.parentId%>')">
+						<%= item.content%>
+					</div>
+					<%}else{%>
+					<div class="special-comment-word">
+						<%= item.content%>
+					</div>
+					<%}%>
+				</div>
+			</div>
+			<%})%>
+
+		</script>
+
+		<script type="text/javascript">
+			if(GetURLParameter("clientType") != 'ios') {
+				var windowheight = document.documentElement.clientHeight;
+				var bottomheight = $(".special-fixed").height();
+				document.getElementById("zkspecial_box").style.height = (windowheight - bottomheight) + "px";
+			}else{
+				$("#zkspecial").attr("scrolling",'no');
+				$("#zkspecial").addClass('zkspecialiframeios');
+				$("#zkspecial_box").addClass('zkspecial_boxios');
+			}
+		</script>
+		<script src="js/specialDetail.js?lbb=026"></script>
+	</body>
+
+</html>

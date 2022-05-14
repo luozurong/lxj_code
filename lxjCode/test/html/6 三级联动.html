@@ -1,0 +1,125 @@
+<!DOCTYPE heml>
+<html>
+<header>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>三级联动</title>
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" href="../css/mui.picker.css">
+	<link rel="stylesheet" href="../css/mui.poppicker.css">
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
+</header>
+<body>
+	<div id="address">地址</div>
+	<script>
+		var addressBtn = document.getElementById("address");
+		var picker = new mui.PopPicker({layer:3});
+		addressBtn.onclick = function(){
+			
+			 picker.setData([{
+		        value: '110000',
+		        text: '北京市',
+		        children: [{
+		                value: "110101",
+		                text: "东城区"
+		        }]
+		    }, {
+		        value: '120000',
+		        text: '天津市',
+		        children: [{
+			        value: "120101",
+		            text: "和平区"
+		        }, {
+		            value: "120102",
+		            text: "河东区"
+		        }, {
+		            value: "120104",
+		            text: "南开区"
+		        }
+		        ]
+		    },{
+		        value: '120000',
+		        text: '广西',
+		        children: [{
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        },{
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        },{
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        },
+		        {
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        },
+		        {
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        },{
+			        value: "120101",
+		            text: "贵港"
+		        }, {
+		            value: "120102",
+		            text: "南宁"
+		        }, {
+		            value: "120104",
+		            text: "百色"
+		        }
+
+		        ]
+		    }])
+			picker.pickers[0].setSelectedIndex(1, 1000,function(){
+				
+			});
+
+			var picItem = picker.getSelectedItems();
+			console.log(picItem)
+			picker.show(function (selectItems) {
+			    console.log(selectItems[0].text);//智子
+			    console.log(selectItems[0].value);//zz 
+			})
+		}
+		function ajaxs(){
+			setTimeout(function(){
+				console.log(1)
+			},300);	
+			var picItem = picker.getSelectedItems();
+			console.log(picItem);
+		}
+	</script>
+</body>
+</html>

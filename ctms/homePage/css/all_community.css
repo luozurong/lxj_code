@@ -1,0 +1,256 @@
+html{
+	height: 100%;
+	background-color: #F3F4F5;
+	font-size: 100px;
+}
+
+.followCommunity_list,.recommendCommunity_list{
+	position: relative;
+	padding: 0 .14rem;
+	background-color: #FFFFFF;
+}
+.icon{
+	position: absolute;
+	top: 0.14rem;
+	width: .6rem;
+	height: .6rem;
+}
+.icon img{
+	width: 100%;
+	height: 100%;
+}
+.follow_community{
+	position: relative;
+	border-top: 1px solid #F0F0F0;
+	padding: .15rem 0;
+}
+.recommend_community{
+	position: relative;
+	padding: .15rem 0;
+	border-bottom: 1px solid #F0F0F0;
+}
+.recommend_community:last-child{
+	border-bottom:none;
+}
+.follow_community:first-child{
+	border-top: none;
+}
+.community_data{
+	height: .6rem;
+	box-sizing: border-box;
+	padding-left:0.7rem;
+	color: #AAAAAA;
+	font-size: .14rem;
+}
+.community_title{
+	max-width: 70%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: .18rem;
+	padding-right: .1rem;
+	color: #333333;
+}
+.recommend_community .community_title{
+	max-width: 56%;
+}
+.dataBox{
+	height: .3rem;
+	line-height: .3rem;
+}
+.followNum,.heat,.ative{
+	display: inline-block;
+	padding: 0 0.1rem 0 0.2rem;
+	height: 0.3rem;
+	line-height: 0.34rem;
+	font-size: 0.14rem;
+}
+.followNum{
+	background: url(../images/ic_people@3x.png) left 7px no-repeat;
+	background-size: .16rem;
+}
+.heat{
+	background: url(../images/ic_hot@3x.png) left 7px no-repeat;
+	background-size: .16rem;
+}
+.ative{
+	background: url(../images/ic_activity@3x.png) left 7px no-repeat;
+	background-size: .16rem;
+}
+.greyBox{
+	display: none;
+	width: 100%;
+	height: .12rem;
+	background-color: #f4f5f6;
+}
+
+
+.community_tips{
+	display: none;
+	position: relative;
+	height: .61rem;
+	line-height: .61rem;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: .18rem;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+.line1,.line2{
+	display: inline-block;
+	position: absolute;
+	font-size: 0;
+}
+.line2{
+	left: 50%;
+	margin-left: 0.1rem;
+}
+.line1{
+	right: 50%;
+	margin-right: 0.1rem;
+}
+.line2 img,.line1 img{
+	width: 40%;
+	vertical-align: middle;
+}
+
+.add_community {
+	width: .75rem;
+	height: .28rem;
+	line-height: .26rem;
+	font-size: 0.14rem;
+	color: #FD9152;
+	text-align: center;
+	/*line-height: .27rem;*/
+	box-sizing: border-box;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.14rem;
+	right: 0;
+	z-index: 888;
+	border-radius: 0.13rem;
+	border: 1px solid #FD9152;
+}
+.add_community img{
+	width: 100%;
+	/*vertical-align:middle*/
+}
+
+.null{
+	display: none;
+}
+.nullPic{
+	padding-top: 1.2rem;
+	font-size: 0;
+	width: 1.8rem;
+	margin: 0 auto;
+}
+.nullPic img{
+	width: 100%;
+}
+.nullTips{
+	color: #CCCCCC;
+	text-align: center;
+	width: 2.2rem;
+	margin: 0 auto;
+}
+/*.dropload-refresh,.dropload-update,.dropload-noData,.dropload-load{
+	font-size: 14px;
+	color: #BFBFBF;
+}
+.upIcon,.downIcon{
+	display: inline-block;
+	font-size: 0;
+	vertical-align: middle;
+	width:20px;
+	height: 50px;
+	background: url(../images/shanglala.png) center center no-repeat;
+	background-size: 100% ;
+}
+.downIcon{;
+	background: url(../images/xiala.png) center center no-repeat;
+	background-size: 100% ;
+}*/
+.mui-content{
+	background-color: rgba(0,0,0,0);
+}
+.mui-pull{
+	font-weight: normal;
+	color: #CCCCCC;
+}
+.mui-pull-caption{
+	padding-left: 8px;
+}
+.mui-pull .mui-icon{
+	margin: 0;
+	/*display: inline-block;
+	font-size: 0;
+	vertical-align: middle;
+	width:20px;
+	height: 30px;
+	margin: 0;
+	background: url(../images/shanglala.png) center center no-repeat;
+	background-size: 100% ;*/
+}
+.mui-icon-pulldown:before {
+    content: '';
+	display: inline-block;
+	font-size: 0;
+	vertical-align: middle;
+	width:20px;
+	height: 30px;
+	background: url(../images/shanglala.png) center center no-repeat;
+	background-size: 100% ;
+}
+.mui-pull-caption-nomore{
+	padding: 0;
+}
+.noData{
+	display: none;
+	text-align: center;
+	color: #CCCCCC;
+	line-height: 40px;
+	font-size: 15px;
+}
+
+
+/*适配320屏幕*/
+@media screen and (max-width: 320px) {
+	.community_data{
+		padding-left: 0.6rem;
+	}
+	.community_title{
+		font-size:0.15rem;
+	}
+	.follow_community,.recommend_community{
+	    padding: .05rem 0;
+	}
+	.icon{
+		top: 0.11rem;
+		width: .48rem;
+		height: .48rem;
+	}
+	.recommend_community .community_title{
+		max-width: 48%;
+	}
+	.community_tips{
+	    height: 0.48rem;
+    	line-height: .48rem;
+    	font-size: 0.16rem;
+	}
+	.line1{
+	    margin-right: 0.05rem;
+	}
+	.line2{
+	    margin-left: 0.05rem;
+	}
+	.line2 img, .line1 img{
+		width: 35%;
+	}
+	.noData{
+		font-size: 0.13rem;
+	}
+	.greyBox{
+		height: 0.08rem;
+	}
+}

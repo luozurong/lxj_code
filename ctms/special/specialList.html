@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>专题列表</title>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+	<script src="js/underscore.js"></script>
+<!-- 	<script src="js/echo.min.js"></script> -->
+	<link rel="stylesheet" href="css/specialList.css">
+	<link rel="stylesheet" href="css/iscroll.css">
+	<script src="../common/js/iscroll.js"></script>
+	<script src="js/iScrollInit.js"></script>
+	<link rel="stylesheet" href="../common/tip/lxjTip.css">
+	<script src="../common/tip/lxjTip.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+	<style>
+        body,ul,li {padding:0;margin:0;border:0}
+        body {font-size:12px;}
+        .header {position:absolute;top:0; left:0;width:100%;height:45px;line-height:45px;font-size:16px;text-align:center;background:#e6e6e6}
+        .footer {position:absolute;bottom:0; left:0;width:100%;height:48px;line-height:48px;font-size:16px;text-align:center;background:#e6e6e6}
+        #wrapper {position:absolute;top:0; bottom:0;left:0;width:100%}
+        #pullDown, #pullUp {background:transparent;border-bottom:none;padding:0 10px;height:27px;line-height:27px;color:#888;text-align:center;font-weight:normal;}
+        .pullUpLabelNoData{color:#888;display: none;text-align: center;line-height:38px;}
+        .pullDownLabel,#pullDown,#pullUp{display: none;}
+        #scroller{transform: translate(0px, -30px);}
+		.pullUpIcons{
+        	width:60px;
+        	height:60px; 
+        	display: inline-block;
+        	transition: all 2s;
+        	background: url(images/pull-icon.png) no-repeat -9px -88px;
+        	float:left;
+        	opacity: 0;
+        	transform: rotate(360deg);
+        	-webkit-transform: rotate(360deg);
+        	-moz-transform: rotate(360deg);
+        	-o-transform: rotate(360deg);
+			animation: rotation 1.5s linear infinite;
+			-moz-animation: rotation 1.5s linear infinite;
+			-webkit-animation: rotation 1.5s linear infinite;
+			-o-animation: rotation 1.5s linear infinite;
+        	
+        }
+        @-webkit-keyframes rotation{
+			from {-webkit-transform: rotate(0deg)}
+			to {-webkit-transform: rotate(360deg)}
+		}
+        .pullUpLabel{
+        	float:left; 
+        }
+        #pullUp{
+        	margin: 0.05rem 0;
+        	text-align: center;
+        }
+        #pullUp>div{
+        	margin:0;
+            padding:0;
+            display:inline-block;
+            _display:inline;
+            *display:inline;
+        }
+        #pullUp>div img{
+        	float:left;
+        }
+		.pullUpImg{
+			display: none;
+		}
+		.pullUpImg{
+            display: inline-block;
+            height: 25px;
+            width: 25px;
+            background: url(images/pull-icon.png) 0 -75px;
+            background-size: cover;        
+            transform: rotate(360deg);
+            animation: rotation 1.5s linear infinite;
+            float:left;
+            display: none;
+        }
+        
+         @-webkit-keyframes rotation{
+            from {-webkit-transform: rotate(0deg)}
+            to {-webkit-transform: rotate(360deg)}
+        }
+    </style>	
+</head>
+<body>
+	<div id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownLabel">下拉刷新</span>
+            </div>
+            <div id="thelist">
+            	<div class="special" id="special"></div>
+            </div><!--<li>加载的数据</li>-->
+            <div id="pullUp">
+            	<div>
+	                <!-- <img class="pullUpImg" src="images/pull-icom.gif" alt=""> -->
+	                <i class="pullUpImg"></i>
+	                <span class="pullUpLabel">上拉加载更多</span>
+                </div>
+            </div>
+             <div class="pullUpLabelNoData">我是有底线的</div>
+        </div>
+    </div>
+	
+
+	<script type="text/html" id="sepcial_item">
+		<% _.each(data, function (item) { %>
+			<div onclick="goSpecialDetail(this)" class="special-item">
+				<img class="special-pic" src="images/c_s_error.png" data-echo="<%= item.picture1_thumpath%>" alt="">
+				<div class="special-content">
+					<div class="special-name"><%= item.title%></div>
+					<div class="special-disc"><%= item.disc%></div>
+					<div class="special-comment" onclick="goSpecialDetailComment(this)">
+						<span><%= item.create_time%></span>
+						<div>
+							<span><%= item.pl_num%></span>
+							<img src="images/btn_ic_message.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		<%})%>
+	</script>
+	<script src="js/specialList.js"></script>
+</body>
+</html>

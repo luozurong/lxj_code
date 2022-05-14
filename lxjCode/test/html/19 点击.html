@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <style>
+       .swiper{
+            width: 300px;
+            overflow: hidden;
+            border:1px solid red;
+            position: relative;
+       } 
+       .swiper-wrap{
+            border:1px solid green;
+            overflow: hidden;
+       }
+       .swiper-item{
+            float:left;
+            margin-right:15px;
+       }
+       .swiper-item img{
+            float:left;
+            max-width: 80px;
+            
+       }
+       .swiper-wrap .swiper-item-add{
+            margin-right:0px;
+       }
+       .swiper-prev{
+            position: absolute;
+            left:0px;
+            top:20px;
+            z-index: 1;
+            color:red;
+            cursor: pointer;
+       }
+       .swiper-next{
+            position: absolute;
+            right:0px;
+            top:20px;
+            z-index: 1;
+            color:red;
+            cursor: pointer;
+       }
+    </style>
+</head>
+<body>
+    <div class="swiper">
+        <div class="swiper-wrap">
+           <div class="swiper-item"><img src="../img/timg.jpg" alt=""></div> 
+           <div class="swiper-item"><img src="../img/shops_pic_1.png" alt=""></div> 
+           <div class="swiper-item"><img src="../img/timg.jpg" alt=""></div> 
+           <div class="swiper-item"><img src="../img/shops_pic_1.png" alt=""></div> 
+           <div class="swiper-item"><img src="../img/timg.jpg" alt=""></div> 
+           <div class="swiper-item swiper-item-add"><img src="../img/shops_pic_1.png" alt=""></div> 
+        </div>
+        <div class="swiper-prev"><</div>
+        <div class="swiper-next">></div>
+    </div>
+    <script>
+        $(function(){
+            var swiperWrapWidth = 95*$(".swiper-item img").length-15;
+            $(".swiper-wrap").css("width",swiperWrapWidth);
+            var width = 80;
+
+            //-95*($(".swiper-item img").length-3)
+            $(".swiper-prev").click(function(){
+
+                    $(".swiper-wrap").animate({"marginLeft":"+="+95},200);
+                    console.log($(".swiper-wrap").css("marginLeft"));
+                
+                
+            });
+            $(".swiper-next").click(function(){
+
+                    $(".swiper-wrap").animate({"marginLeft":"-="+95},200,function(){
+                        console.log($(".swiper-wrap").css("marginLeft"));
+                    });
+                  
+            })
+        });
+    </script>
+</body>
+</html>

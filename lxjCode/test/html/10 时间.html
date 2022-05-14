@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>选择开始时间和结束时间</title>
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="js/WdatePicker.js"></script>
+    <link rel="stylesheet" href="css/datepicker.css">
+    <script>
+        $(function() {
+            $('#submitDiv').on('click', '#submitForm', function() {
+                $("#resultDiv").html('');
+                var begin_date = $.trim($('#begin_date').val());
+                console.log(begin_date);
+                var end_date = $.trim($('#end_date').val());
+                console.log(end_date)
+                if (!begin_date) {
+                    $("#resultDiv").html("请选择开始时间").css("color", "red");
+                    return false;
+                } else if (!end_date) {
+                    $("#resultDiv").html("请选择结束时间").css("color", "red");
+                    return false;
+                }
+                $('#dateForm').submit();
+            });
+        });
+    </script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        table td {
+            padding: 10px 20px;
+            text-align: left;
+        }
+
+        .fixWidth {
+            width: 120px;
+        }
+
+        #testDiv {
+            margin: 0 auto;
+            padding-top: 50px;
+            border: 1px solid #7c7c7c;
+            width: 800px;
+            height: 200px;
+            border: 1px solid #7c7c7c;
+        }
+
+        #submitDiv {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        #submitDiv span {
+            color: #fff;
+            padding: 0px 20px;
+        }
+
+        #submitDiv a {
+            background: #89D900;
+            text-decoration: none;
+        }
+
+        #resultDiv {
+            text-align: left;
+            padding-left: 150px;
+            margin-top: 20px;
+            height: 40px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="testDiv">
+    <div id="contentDiv">
+        <form method="get" id="dateForm" action="">
+            <table>
+                <tr>
+                    <td><span>开始时间</span></td>
+                    <td><input type="text" id="begin_date" name="begin_date"
+                               class="Wdate fixWidth"
+                               onfocus="WdatePicker({startDate:'%y',dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'end_date\')}'})"></td>
+                    <td><span>结束时间</span></td>
+                    <td><input type="text" id="end_date" name="end_date"
+                               class="Wdate fixWidth"
+                               onfocus="WdatePicker({startDate:'%y',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begin_date\')}'})"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="submitDiv">
+        <a id="submitForm" href="javascript:void(0);"> <span>查询</span></a>
+    </div>
+    <div id="resultDiv"></div>
+</div>
+</body>
+</html>

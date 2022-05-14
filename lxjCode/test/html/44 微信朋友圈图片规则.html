@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <script src="../js/jquery-2.1.4.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .img-rule1-pic{
+            border: 1px solid red;
+        }
+        .img-rule1{
+            box-sizing: border-box;
+            padding: 0 0.12rem;
+        }
+        .container{
+            max-width:250px;
+            max-height:355px;
+            max-height:;
+            box-sizing: border-box;
+            border:1px solid red;
+            overflow: hidden;
+        }
+        .container img{
+            max-width: 100%;
+        }
+        .img-rule2{
+            width: 100%;
+            display: flex;
+            box-sizing: border-box;
+            padding:0 0.12rem;
+        }
+        .img-rule2 span{
+            display: inline-block;
+            box-sizing: border-box;
+            border:1px solid red;
+            width: 1.26rem;
+            height: 1.26rem;
+        }
+        .img-rule2 span:nth-child(2){
+            margin:0 0.06rem;
+        }
+        .img-rule3{
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 0.12rem;
+            margin-top:0.06rem;
+        }
+        .img-rule3 span{
+            display: inline-block;
+            box-sizing: border-box;
+            border:1px solid red;
+            width: 1.26rem;
+            height: 1.26rem;
+            float:left;
+        }
+        .img-rule3 span:nth-child(1),.img-rule3 span:nth-child(2){
+            margin-bottom:0.06rem;
+        }
+        .img-rule3 span:nth-child(2n){
+            margin-right: 0.1rem;
+            margin-left: 0.06rem;
+        }
+    </style>
+
+    <script>
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+            isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+            dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+            dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+            scale = 1 / dpr,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function() {
+                var width = docEl.clientWidth;
+                if(width / dpr > 768) {
+                    width = 768 * dpr;
+                }
+                docEl.style.fontSize = 100 * (width / 414) + 'px';
+            };
+            recalc();
+            if(!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window); 
+    </script>
+</head>
+<body>
+    <div class="img-rule1"></div>
+    <div class="img-rule2"></div>
+    <div class="img-rule3"></div>
+    <script>
+        
+        var data1 = [{url:"img/test1.jpg"},{url:"img/shuijiao.jpg"},{url:"img/yuantiao.jpg"}];
+        var data2 = [{url:"img/muwu.jpg"},{url:"img/picture_add.png"},{url:"img/shuijiao.jpg"},{url:"img/yuantiao.jpg"}];
+
+        //只有一张图时
+        var _html1 = '<div class="container" style="background: url(img/3.jpg) no-repeat center;background-size: cover;"><img src="img/3.jpg" style="opacity: 0;display: none"></div>';
+        $(".img-rule1").append(_html1); 
+
+        $(".container img").load(function(){
+            $(this).show();
+            var imgWidth = $(".container img").width();
+            var imgHeight = $(".container img").height();
+            console.log(imgWidth+" "+imgHeight);
+            var compareFlag = imgWidth/imgHeight;
+
+            if(compareFlag >= 1){
+                var maxWidthValue1 = imgWidth > 250 ? 250 :imgWidth
+                $(".container").css({"maxWidth":maxWidthValue1,"maxHeight":imgHeight});
+                console.log(maxWidthValue1);
+            }else if(compareFlag >= 0.565 && compareFlag < 1){
+                var maxWidthValue2 = imgWidth > 200 ? 200 :imgWidth
+                $(".container").css({"maxWidth":maxWidthValue2,"maxHeight":imgHeight});
+                 console.log(maxWidthValue2);
+            }else if(compareFlag < 0.565){
+                var maxWidthValue3 = imgWidth > 150 ? 150 :imgWidth
+                $(".container").css({"maxWidth":maxWidthValue3,"maxHeight":266});
+                 console.log(maxWidthValue3);
+            }
+        });
+
+        //2~3三张图
+        var _html2 = "";
+        for(var i = 0; i < data1.length; i++){
+            _html2 += " <span style='background:url("+data1[i].url+") no-repeat center;background-size:cover;'></span>";
+        }
+        $(".img-rule2").append(_html2);
+
+        //四张图
+        var _html3 = "";
+        for(var i = 0; i < data2.length; i++){
+            _html3 += " <span style='background:url("+data2[i].url+") no-repeat center;background-size:cover;'></span>";
+        }
+        $(".img-rule3").append(_html3);
+
+    </script>
+</body>
+</html>

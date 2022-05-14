@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="custorm-detail-empty">
+    <img src="img/picture_add.png" alt="">
+    <input type='file' name='myFile' size='15' multiple/>
+</div>
+<button>点击</button>
+<script>
+        $("button").click(function(){
+            var myform = new FormData();//多图片上传
+            for(var i = 0;i<$(".custorm-detail-empty input")[0].files.length;i++){
+                if(i != 1){
+                    myform.append("file[]",$(".custorm-detail-empty input")[0].files[i]);
+                    console.log($(".custorm-detail-empty input")[0].files[i]);
+                }
+            }
+            console.log(myform);
+        });
+       /* $.ajax({
+            url: '${ctxPath}/weixin/business/product/addImage' ,
+            type: 'POST',
+            data: myform,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+            }
+        });*/
+
+</script>
+</body>
+</html>

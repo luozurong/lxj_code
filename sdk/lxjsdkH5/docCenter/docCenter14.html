@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <!--<iframe id="iframeId" src="docCenter1.html" onload="changeFrameHeight()" frameborder="0"></iframe>-->
+        <div class="profile">
+            <div class="normal_index headline_h2" style="font-weight:600;">二、ObjectC环境配置</div>
+            <p class="text_index normal_index">手动配置.framework形式开发包</p>
+            <p class="text_index normal_index">SDK中包含了 <span style="color:#e4393a"> HoriLXJSDK.framework、WebRTC.framework、HoriLXJSDK.bundle</span>三个文件。</p>
+            <div class="normal_index headline_h2" style="font-weight:600;">1.在General -> Embedded Binaries添加WebRTC.framework：</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iossong.jpg" alt=""/>
+            </div>
+            <div class="normal_index headline_h2" style="font-weight:600;">2.在Build Phases -> Line Binary and Libraries添加：</div>
+            <pre class="normal_index">
+
+                HoriLXJSDK.framework
+                libsqlite3.tbd
+                libstdc++.tbd
+                libz.tbd
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosgai.jpg" alt=""/>
+            </div>
+            <div class="normal_index headline_h2" style="font-weight:600;">3.Build Phases标签添加HoriLXJSDL.bundle</div>
+            <pre class="normal_index">
+
+                4.Build Settings标签
+                Enable Bitcode选NO
+                Other Linker Flags添加：-ObjC
+
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/ioshang.jpg" alt=""/>
+            </div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosbad.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+
+                5.在项目plist文件中添加相机和麦克风的访问权限：
+                访问相机：Privacy - Camera Usage Description
+                访问麦克风：Privacy - Microphone Usage Description
+                进入后台模式：Required background modes - App downloads content in response to push notifications
+            </pre>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosting.jpg" alt=""/>
+                <img style="padding:20px 0 0 140px;" src="img/15216217768568.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>

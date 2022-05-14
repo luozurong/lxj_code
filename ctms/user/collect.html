@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>专题收藏</title>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+	<link rel="stylesheet" href="css/collect.css">
+	<link rel="stylesheet" href="../common/tip/lxjTip.css">
+	<script src="../common/tip/lxjTip.js"></script>
+	<script src="../common/vue/vue.min.js"></script>
+	<script src="../common/vue/vue-resource.min.js"></script>
+	<script src="../common/plugin/vue-scroller/vue-scroller.min.js"></script>
+	<script src="../common/vue/vue-lazyload.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+</head>
+<body>
+	<div class="collect" id="collect" v-cloak>
+		<scroller :on-infinite="infinite">
+			<div class="vue-load"></div>
+			<div class="collect-item" v-for="(item,index) in collectItem" :key="index">
+				<div  @click="specialDetailJump(item.id)">
+					 <div class="collect-pic-bg" v-if="item.picture1Thumpath != null" v-bind:style="{ backgroundImage: 'url('+item.picture1Thumpath+')'}"></div> 
+					<!-- <img class="collect-pic" :src="lazyImg" v-lazy="item.picture1Thumpath" alt="">  -->
+					<div class="collect-name" v-text="item.title"></div>
+					<div class="collect-disc" v-text="item.secondTitle"></div>
+				</div>
+				<div class="collect-wrap">
+					<span class="collect-time">{{item.createTime | time}}</span>
+					<div class="collect-right">
+						<img class="collect-share" @click="shares(item.id,item.title,item.secondTitle,item.picture1Thumpath)" src="../special/images/btn_ic_share_xxhdpi.png" alt="">
+						<img class="collect-sure" @click="collectClick(item.id,item.title,item.createTime,index)" src="../special/images/btn_ic_collect_pre_xxhdpi.png">
+						<span class="collect-up">
+							<img v-if="item.upType == 0" @click="upClickNor(item.id,item.title,item.createTime,item.upType,index,$event)" :src="upImgUrlNor">
+							<img v-if="item.upType == 1" @click="upClickPre(item.id,item.title,item.createTime,item.upType,index,$event)" :src="upImgUrlPre">
+							<span v-text="item.sum"></span>
+						</span>
+						<span class="collect-comment" @click="commentJump(item.id)">
+							<img src="../special/images/btn_ic_message.png" alt="">
+							<span v-text="item.plNum"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="collect-empty" v-if="emptyFlag">
+				<img src="images/collect-empty.png" alt="">
+				<p>您还未收藏任何内容</p>
+				<div @click="goIndex()">去看看</div>
+			</div>
+		</scroller>
+	</div>
+	<script src="js/collect.js"></script>
+</body>
+</html>

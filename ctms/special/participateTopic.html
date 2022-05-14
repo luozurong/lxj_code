@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>我参与的内容</title>
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/specialList.css">
+    <link rel="stylesheet" href="css/participateTopic.css">
+    <link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+    <link rel="stylesheet" href="css/iscroll.css">
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/js/iscroll.js"></script>
+	<script src="js/iScrollInit.js"></script>
+	<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../common/tip/lxjTip.css">
+	<script src="../common/tip/lxjTip.js"></script>
+	<style>
+        body,ul,li {padding:0;margin:0;border:0}
+        body {font-size:12px;}
+        #wrapper {position:absolute;top:0; bottom:0;left:0;width:100%; margin-top:0.8rem;box-sizing:border-box;}
+        #pullDown, #pullUp {background:transparent;border-bottom:none;padding:0 10px;height:27px;line-height:27px;color:#ccc;text-align:center;font-weight:normal;}
+        .pullUpLabelNoData{color:#ccc;display: none;text-align: center;line-height:38px;font-size: 0.12rem;}
+        .pullDownLabel,#pullDown,#pullUp{display: none;}
+		#thelist{
+			padding-top:0.12rem;
+		}
+        #scroller{transform: translate(0px, -30px);}
+		.pullUpIcons{
+        	width:60px;
+        	height:60px; 
+        	display: inline-block;
+        	transition: all 2s;
+        	background: url(images/pull-icon.png) no-repeat -9px -88px;
+        	float:left;
+        	opacity: 0;
+        	transform: rotate(360deg);
+        	-webkit-transform: rotate(360deg);
+        	-moz-transform: rotate(360deg);
+        	-o-transform: rotate(360deg);
+			animation: rotation 1.5s linear infinite;
+			-moz-animation: rotation 1.5s linear infinite;
+			-webkit-animation: rotation 1.5s linear infinite;
+			-o-animation: rotation 1.5s linear infinite;
+        	
+        }
+        @-webkit-keyframes rotation{
+			from {-webkit-transform: rotate(0deg)}
+			to {-webkit-transform: rotate(360deg)}
+		}
+        .pullUpLabel{
+        	float:left; 
+            font-size: 0.12rem;
+        }
+        #pullUp{
+        	margin: 0.05rem 0;
+        	text-align: center;
+        }
+        #pullUp>div{
+        	margin:0;
+            padding:0;
+            display:inline-block;
+            _display:inline;
+            *display:inline;
+        }
+        #pullUp>div img{
+        	float:left;
+        }
+		.pullUpImg{
+			display: none;
+		}
+		.pullUpImg{
+            display: inline-block;
+            height: 25px;
+            width: 25px;
+            background: url(images/pull-icon.png) 0 -75px;
+            background-size: cover;        
+            transform: rotate(360deg);
+            animation: rotation 1.5s linear infinite;
+            float:left;
+            display: none;
+        }
+        
+         @-webkit-keyframes rotation{
+            from {-webkit-transform: rotate(0deg)}
+            to {-webkit-transform: rotate(360deg)}
+        }
+         #scroller {
+            transform: translate3d(0,0,0);
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+         } 
+    </style>
+	<style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .img-rule1{
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .container{
+            max-width:2.64rem;
+            max-height:3.45rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .container img{
+            max-width: 100%;
+        }
+        .img-rule2{
+            width: 100%;
+            display: -webkit-flex;
+            box-sizing: border-box;
+        }
+        .img-rule2 span{
+            display: inline-block;
+            box-sizing: border-box;
+            width: 1.26rem;
+            height: 1.26rem;
+        }
+        .img-rule2 span:nth-child(2){
+            margin:0 0.06rem;
+        }
+        .img-rule3{
+            width: 100%;
+            box-sizing: border-box;
+            margin-top:0.06rem;
+        }
+        .img-rule3 span{
+            display: inline-block;
+            box-sizing: border-box;
+            width: 1.26rem;
+            height: 1.26rem;
+            float:left;
+        }
+        .img-rule3 span:nth-child(1),.img-rule3 span:nth-child(2){
+            margin-bottom:0.06rem;
+        }
+        .img-rule3 span:nth-child(2n){
+            /*margin-right: 0.1rem;*/
+            margin-right: 0.7rem;
+            margin-left: 0.06rem;
+        }
+    </style>
+    <script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+    
+</head>
+<body>
+	<div class="header">
+		<input type="hidden" id="tokenUser"></input>
+		<div class="topic-header">
+			<div class="topic-all topic-header-active">
+				<span id="all">0</span>
+				<span class="topic-active" style="display: block;width: 100%;margin-top:0.02rem;font-size: 0.14rem;">全部</span>
+				<i></i>
+			</div>
+			<div class="topic-special">
+				<span id="publish">0</span>
+				<span style="display: block;width: 100%;margin-top:0.02rem;font-size: 0.14rem;">发布</span>
+				<i></i>
+			</div>
+			<div class="topic-praise">
+				<span id="praise">0</span>
+				<span style="display: block;width: 100%;margin-top:0.02rem;font-size: 0.14rem;">点赞</span>
+				<i></i>
+			</div>
+			<div class="topic-comments">
+				<span id="comment">0</span>
+				<span style="display: block;width: 100%;margin-top:0.02rem;font-size: 0.14rem;">评论</span>
+				<i></i>
+			</div>
+		</div>
+		<div id="wrapper">
+	        <div id="scroller">
+	            <div id="pullDown">
+	                <span class="pullDownLabel">下拉刷新</span>
+	            </div>
+	            <div id="thelist">
+	            	<div class="lists" id="special"></div>
+	            </div><!--<li>加载的数据</li>-->
+	            <div id="pullUp">
+	            	<div>
+		                <!-- <img class="pullUpImg" src="images/pull-icom.gif" alt=""> -->
+		                <i class="pullUpImg"></i>
+		                <span class="pullUpLabel">上拉加载更多</span>
+	                </div>
+	            </div>
+	             <div class="pullUpLabelNoData">已显示全部内容</div>
+	        </div>
+    	</div>
+	</div>
+	<div class="special-input-fixed">
+		<div><div class="special-fixed-world" contenteditable="true"></div></div>
+		<span onclick="sendComment()">发送</span>
+	</div>
+	<script src="js/participateTopic2.js"></script>
+</body>
+</html>

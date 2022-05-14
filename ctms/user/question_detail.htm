@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+	    <title>帮助与反馈</title>
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				min-height: 100%;
+				background-color: #fff;
+				color: #333;
+				font-size: 14px;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+		</style>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+		<style type="text/css">
+			#app {
+				width: 100%;
+				min-height: 100%;
+				overflow: hidden;
+			}
+			
+			.nothing0 {
+				-webkit-order: 0;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing1 {
+				-webkit-order: 1;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing3 {
+				-webkit-order: 3;
+				-webkit-flex-grow: 5;
+			}
+			
+			.colorTb {
+				color: #FC9153!important;
+			}
+			
+			.border_colorTb {
+				border-color: #FC9153!important;
+			}
+			
+			.line_01 {
+				width: 100%;
+				height: 1px;
+				background-color: #F0F0F0;
+				transform: scaleY(0.5);
+				-webkit-transform: scaleY(0.5);
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+			
+			#app {
+				background-image: url(images/004.png);
+				background-position: 0 0;
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+			}
+		</style>
+		<style type="text/css">
+			
+			.header_title{
+				width: 100%;
+				box-sizing: border-box;
+				padding:0 0.14rem;
+				background-color: #fff;
+				color: #333;
+				font-size: 20px;
+				font-size: 0.2rem;
+			}
+			.question_tilte{
+				line-height: 0.3rem;
+				padding: 0.25rem 0;
+			}
+			#main{
+				width: 100%;
+				box-sizing: border-box;
+				padding: 0.2rem 0.14rem 0;
+				font-size: 16px;
+				font-size: 0.16rem;
+				color: #888;
+				line-height: 0.24rem;
+				text-align: justify;
+				word-break: break-all;
+				background-color: #fff;
+			}
+			.borderbottom{
+				width: 100%;
+				height: 1px;
+				background-color: #ccc;
+				transform: scaleY(0.33);
+	            -webkit-transform: scaleY(0.33);
+			}
+			
+			
+		</style>
+	</head>
+
+	<body style="min-height: 100%;background-color: #fff;">
+		<div id="app" v-cloak>
+			<header>
+				<div class="header_title">
+					<div class="question_tilte">
+						{{qaQuestionindex}}.{{qaQuestion.title}}
+					</div>
+					<div class="borderbottom">					
+					</div>
+				</div>
+			</header>
+			<div id="main" v-html="qaQuestion.content">				
+			</div>		
+		</div>
+	</body>
+	<script src="js/question_detail.js" type="text/javascript" charset="utf-8"></script>
+</html>

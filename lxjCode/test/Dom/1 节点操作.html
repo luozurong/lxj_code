@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>节点操作</title>
+	</head>
+	<body>
+		<div class="node-parent" id="node_parent">
+			<div class="node-item">
+				<div class="node-child">子节点11</div>
+				<div class="node-child">子节点12</div>
+				<div class="node-child">子节点13</div>
+			</div>
+			<div class="node-item">
+				<div class="node-child">子节点21</div>
+				<div class="node-child">子节点22</div>
+				<div class="node-child">子节点23</div>
+			</div>
+			<i>标签名</i>
+			<input type="text" name="choose" value="选择">
+			<img class="test-img" data-value="orderid" src="../img/shops_pic_1.png" alt="">
+		</div>
+	</body>
+	<script>
+		//按ID查询
+		var textValue = document.getElementById("node_parent");
+		console.log(textValue.childNodes[0].nodeType);
+		//console.log(textValue.childElementNodes[0].nodeType)
+		console.log(textValue.firstElementChild[1]);
+		//按类名查询
+		console.log(textValue.getElementsByClassName("node-child")[0]);
+		//按标签名查询
+		var tagValue = document.getElementsByTagName("i")[0];
+		console.log(tagValue.innerHTML);
+		tagValue.
+		//按name名查询
+		var nameValue = document.getElementsByName("choose")[0];
+		console.log(nameValue);
+		//按选择器
+		var selectorValue = document.querySelectorAll("#node_parent");
+		var selectorsValue = document.querySelectorAll(".node-child");
+		console.log(selectorsValue);
+
+
+		//属性
+		var imgValue = document.getElementsByClassName("test-img")[0];
+		var imgSrc = imgValue.src;
+		var imgDataValue = imgValue.getAttribute("data-value");
+		var imgClassName = imgValue.ClassName;
+		console.log(imgSrc);
+		console.log(imgDataValue);
+	    imgValue.setAttribute("data-value","ids");
+		// hasAttribute()判断是否有某属性，removeAttribute()删除某属性
+	</script>
+</html>

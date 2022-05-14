@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>投诉</title>
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+		<link rel="stylesheet" type="text/css" href="css/complaintList.css"/>
+		<style type="text/css">
+			[v-cloak] {
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="header">
+				请选择举报原因
+			</div>
+			<div class="listMain">
+				<ul class="lists">
+					<li :class='["list",{listActive:list.id === activeItem.id}]' v-for='list in lists' v-if='list.status===1' @click='selectItem(list)'>{{list.name}}</li>
+				</ul>
+			</div>
+			<div class="footer">
+				<div class="pushBtn" v-if='isNull' style="background-color: #CCCCCC;">确认举报</div>
+				<div class="pushBtn" @click='push' v-if='!isNull'>确认举报</div>
+			</div>
+		</div>
+		
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/complaintList.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

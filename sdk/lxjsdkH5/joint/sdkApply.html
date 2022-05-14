@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>我的应用账号申请</title>
+		<link rel="stylesheet" href="css/sdkApply.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="sdkApply">
+			<div class="apply-header">
+				<img src="img/AA.png" alt="">
+				<span class="apply-name" v-text="userAccount"></span>
+				<span class="apply-edit" @click="goUser()">编辑账户</span>
+				<a  href="../index/index.html" class="apply-index">返回首页</a>
+			</div>
+			<div class="terrace-wrap">
+				<div class="terrace-title">
+					<img src="../common/img/logo.png" alt="">
+					<span>联享家开放平台-我的应用账号申请</span>
+				</div>
+				<div class="terrace-applay">
+					<div class="terrace-name">
+						<span class="terrace-span">公司名称：</span>
+						<span class="terrace-company" v-text="terraceCompany"></span>
+						<!-- <input type="text" placeholder="请填入公司名称" v-model="company"> -->
+						<p v-if="companyFlag" v-text="companyFlagWord"></p>
+					</div>
+					<div class="terrace-name">
+						<span class="terrace-span">应用名称：</span>
+						<input type="text" placeholder="请填入应用名称" v-model="appName">
+						<p v-if="appNameFlag" v-text="appNameFlagWord"></p>
+					</div>
+					<div class="terrace-name">
+						<span class="terrace-span">APP类型：</span>
+						<label><input type="radio" name="apptype" v-model="picked" value="2" checked>ios</label>
+						<label><input type="radio" name="apptype" v-model="picked" value="1">Android</label>
+						<p></p>
+					</div>
+					<div class="terrace-name">
+						<span class="terrace-span" v-text="appPakegeName"></span>
+						<input type="text" :placeholder="placeHolder" v-model="appPackage">
+						<p v-if="appPackageFlag" v-text="appPackageFlagWord"></p>
+					</div>
+					<div class="terrace-submit">
+						<span @click="sdkSubmit()" @keyup.enter="sdkSubmitMouse">立即申请</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="js/sdkApply.js"></script>
+	</body>
+</html>

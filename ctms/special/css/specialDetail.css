@@ -1,0 +1,333 @@
+*{
+	padding:0;
+	margin: 0;
+	list-style:none;
+	font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+html,body{
+	height:100%;
+}
+body{
+	background-color: #f3f4f5;
+	font-size: 0.14rem;
+	color:#333;
+	max-width: 7.68rem;
+	margin:0 auto;
+}
+a{
+	color:#666;
+}
+input::placeholder{
+	color:#ccc;
+}
+.special-detail-name{
+	font-size: 0.16rem;
+	font-weight: 600;
+	line-height: 0.3rem;
+	padding-top:0.14rem;
+}
+.special-detail-time{
+	font-size: 0.13rem;
+	color:#aaa;
+	margin-top:0.01rem;
+	padding-bottom:0.21rem;
+	border-bottom:1px solid #eee;
+	font-family:"PingFang SC Regular";
+}
+.special-detail{
+	width: 100%;
+	padding:0 0.13rem;
+	box-sizing: border-box;
+	background: #fff;
+	overflow: hidden;
+}
+.special-pic img{
+	width:100% !important;
+	height:100% !important;
+	display: block;
+	margin: 0 auto !important;
+	/*width: auto;
+    height: auto;  
+    max-width: 100%;  
+    max-height: 100%;   */
+}
+.special-pic{
+	padding-bottom:0.12rem;
+	padding-top:0.12rem;
+	line-height: 0.27rem;
+	font-size: 0.16rem;
+	color:#555;
+	width:100%;
+}
+.special-pic p,.special-pic p ol,.special-pic p ol li,.special-pic p ol li span{
+	display:block;
+	width:100%;
+	word-wrap: break-word;
+}
+.special-comment{
+	/* margin-bottom:0.14rem; */
+	background: #fff;
+	width:100%;
+}
+.special-comment-count{
+	color:#555;
+	font-size: 0.16rem;
+	line-height: 0.46rem;
+	border-bottom:1px solid #eee;
+	margin:0 0.13rem;
+	background: #fff;
+	margin-top:0.1rem;
+}
+.special-comment-item{
+	padding:0 0.13rem;
+	width:100%;
+	box-sizing:border-box;
+}
+.special-comment-item>div{
+	width:100%;
+	overflow: hidden;
+	padding: 0.12rem 0;
+	box-sizing: border-box;
+	border-bottom: 1px solid #eee;
+}
+.special-comment-item>div:last-child{
+	border-bottom:none;
+}
+.special-comment-name{
+	line-height: 0.23rem;
+	overflow: hidden;
+	width:100%;
+}
+.special-comment-name span:nth-child(1){
+	float:left;
+	font-size: 0.14rem;
+}
+.special-comment-name span.comment-time{
+	float:right;
+	font-size: 0.12rem;
+	color:#aaa;
+}
+.special-comment-word{
+	color:#333;
+	line-height: 0.28rem;
+	font-size: 0.16rem;
+	width:100%;
+	word-wrap: break-word;
+	letter-spacing: 0.5px;
+	text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 25;
+    -webkit-box-orient: vertical;
+}
+.special-comment-item>div>img{
+	width:0.4rem;
+	height:0.4rem;
+	border-radius: 100%;
+	float:left;
+	margin-top:0.05rem;
+}
+.special-comment-item>div>div{
+	float:left;
+	width:3.36rem;
+	margin-left:0.12rem;
+}
+.special-load-more{
+/* 	position: static;
+left:0;
+bottom:0.53rem;
+z-index: 1; */
+	width: 100%;
+	text-align:center;
+	line-height: 0.25rem;
+	color:#ccc;
+	display: none;
+	line-height:0.3rem;
+	margin-bottom: 54px;
+}
+.special-header{
+	box-sizing:border-box;
+}
+ .special-height{
+	display:none;
+} 
+.special-comment-fixed{
+	background: #fff;
+	width: 100%;
+	text-align:center;
+	line-height: 0.5rem;
+	padding: 0.06rem 0;
+	box-sizing: border-box;
+	overflow: hidden;
+	border-top:1px solid #f0f0f0;
+	height:0.53rem;
+	/* -webkit-flex-shrink:0; */
+}
+.special-comment-fixed div{
+	float:left;
+	line-height: 0.36rem;
+	background: #f4f5f6;
+	overflow: hidden;
+	border-radius: 0.18rem;
+	width: 3.25rem;
+	margin-left:0.13rem;
+}
+.special-comment-fixed div input{
+	float: left;
+	height: 0.3rem;
+	line-height: 0.3rem;
+	margin-top: 0.06rem;
+	margin-bottom:0.04rem;
+	width:2.95rem;
+	box-sizing: border-box;
+	padding: 0 0.13rem;
+	outline: none;
+	color:#666;
+	float:left;
+	background: #f4f5f6;
+	border:none;
+	-webkit-appearance: none;
+	font-size:0.16rem;
+}
+.special-comment-fixed div img{
+	float:left;
+	width: 0.17rem;
+	height:0.17rem;
+	margin-left:0.13rem;
+	margin-top:0.12rem;
+}
+.special-comment-fixed span{
+	display: inline-block;
+	float:right;
+	width:0.76rem;
+	font-size: 0.18rem;
+	float:right;
+	height:0.4rem;
+	color:#999;
+	border:none;
+	cursor: pointer;
+	line-height: 0.4rem;
+}
+.special-comment-fixed span.special-comment-active{
+	color:#fc9153;
+}
+.special-comment-item .special-comment-empty{
+	line-height: 0.6rem;
+	text-align: center;
+	color:#aaa;
+	border:none;
+	padding: 0;
+}
+.special-download-fixed{
+	position: fixed;
+	bottom:0;
+	left:0;
+	z-index: 10;
+	background: rgba(51,51,51,0.8);
+	width: 100%;
+	height:0.6rem;
+	display: none;
+}
+.special-logo-word{
+	height:0.46rem;
+	margin: 0.08rem 0 0 0.14rem;
+}
+.special-cancel{
+	float:right;
+	height:0.16rem;
+	width:0.16rem;
+	margin: 0.22rem 0.15rem 0 0.3rem;
+}
+.special-download{
+	display: inline-block;
+	width: 0.58rem;
+	height:0.3rem;
+	line-height:0.3rem;
+	border:1px solid #fff;
+	color:#fff;
+	border-radius: 0.15rem;
+	text-align: center;
+	float: right;
+	margin-top:0.14rem;
+}
+
+.a{
+	line-height: 0.2rem;
+}
+.special-comment-count{
+	font-family: "PingFang SC Regular";
+}
+.special-comment-count>span{
+	font-family: "PingFang SC Regular";
+}
+.top{
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:1;
+	width:100%;
+	line-height: 30px;
+	background: rgba(0,0,0,0.45);
+	color:#fff;
+	text-align: center;
+	display: none;
+}
+.special-fixed{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height:50px;
+	background: #fff;
+	border-top: 1px solid #eee;
+	overflow: hidden;
+}
+.special-fixed div{
+	display: inline-block;
+	width: 25%;
+	float:left;
+	text-align: center;
+}
+.special-fixed div img{
+	width: 18px;
+	height:18px;
+	vertical-align: middle;
+	padding-bottom: 3px;
+}
+.special-fixed div span{
+	font-size:12px;
+	display: inline-block;
+	line-height: 53px;
+	color:#aaa;
+	margin-left:3px;
+}
+.special-comment-name .comment-name{
+	font-size: 0.15rem;
+	color:#fc9153;
+}
+.comment-over{
+	line-height: 0.6rem;
+	text-align: center;
+	color:#aaa;
+	border:none;
+	font-size: 0.14rem;
+}
+.top-fixed{
+	position: fixed;
+	bottom:60px;
+	right:10px;
+	z-index: 1;
+	display: inline-block;
+	display: none;
+}
+.top-fixed img{
+	width:40px;
+}
+.margins-bottoms{
+	height:54px;
+}
+.comment-span{
+	color:#888;
+}

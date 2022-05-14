@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <!--<iframe id="iframeId" src="docCenter1.html" onload="changeFrameHeight()" frameborder="0"></iframe>-->
+        <div class="profile">
+            <div class="normal_index headline_h2" style="font-weight:600;">三、UI定制功能</div>
+            <p class="text_index normal_index">如果没有手动配置，则按默认设置。</p>
+            <div class="text_index profile_h2 normal_index">可自定义的参数：</div>
+            <pre class="normal_index">
+
+                HR_NavigationBarTitleTextAttributes：导航栏字体颜色和字体大小；
+                HR_NavigationBarBarTintColor：导航栏背景颜色；
+                HR_NavigationBarTintColor：导航栏左侧返回键的颜色；
+                HR_NavigationBackImage：导航栏左侧返回按钮的图片；
+                HR_ControllerViewBackgroundColor：控制器View的背景颜色；
+                HR_SingleLockNormalImage：单通道锁的正常情况下的图片；
+                HR_SingleLockSelectedImage：单通道锁的选中情况下的图片；
+                HR_MultipleLockNormalImage：多通道锁的正常情况下的图片；
+                HR_MultipleLockSelectedImage：多通道锁的选中情况下的图片；
+                HR_HighlightColors：高亮的颜色（字体、背景）；
+                HR_RealtimeMonitoringImage：实时监控按钮的图片；
+                HR_BottomButtonTitleColors：底部按钮的颜色。</pre>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosbug.jpg" alt=""/>
+            </div>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosnan.jpg" alt=""/>
+            </div>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosyong.jpg" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">初始化</div>
+            <p class="text_index normal_index">1、在AppDelegate的didFinishLaunchingWithOptions:方法中进行初始化：</p>
+            <p class="text_index normal_index">2、在AppDelegate的didFinishLaunchingWithOptions:方法中进行初始化：</p>
+            <pre class="normal_index" style="overflow-x: auto;">
+                #import <UserNotifications/UserNotifications.h>
+                #define debugLog(...)    NSLog(__VA_ARGS__)
+                #define debugMethod()    NSLog(@"%s", __func__)
+
+                UILocalNotification *sipCallInNotific;
+
+                @interface AppDelegate () <HoriLXJManagerProtocol, UNUserNotificationCenterDelegate>
+
+                @end
+
+                @implementation AppDelegate
+
+                #pragma mark - Application lifecycle
+                - (BOOL)application:(UIApplication *)application 
+                    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
+                    
+                    // 1.如果需要定制UI
+                    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [UIColor blueColor], NSForegroundColorAttributeName,
+                        [UIFont systemFontOfSize:10.0f], NSFontAttributeName, nil];
+                    
+                    NSDictionary *dictionary = @{
+                        HR_NavigationBarTitleTextAttributes : attributes,
+                        HR_NavigationBarBarTintColor        : [UIColor orangeColor],
+                        HR_NavigationBarTintColor           : [UIColor greenColor],
+                        HR_NavigationBackImage              : [UIImage imageNamed:@"old_monitor_button"],
+                        HR_HighlightColors                  : [UIColor redColor],
+                        HR_RealtimeMonitoringImage          : [UIImage imageNamed:@"old_monitor_button"],
+                        HR_BottomButtonTitleColors          : [UIColor blackColor],
+                    };
+                    [[HoriLXJManager sharedInstance] globalCongifuration:dictionary];
+                    
+                    // 如果使用默认配置，传nil
+                    // [[HoriLXJManager sharedInstance] globalCongifuration:nil];
+                    
+                    // 2.初始化appKey
+                    [HoriLXJManager sharedInstance].lxjAppkey = @"1506670316152af7b8e1xxxx40279537";
+                    // 3.初始化SDK包名 
+                    [HoriLXJManager sharedInstance].lxjSdkPackage = @"com.xxxx.www";
+                    // 4.如果需要打开log，默认关闭
+                    [HoriLXJManager sharedInstance].lxjDebug = YES;
+                    // 5.设置测试服务器，默认是正式平台的服务器
+                    [HoriLXJManager sharedInstance].testServer = @"http://tt.hori-gz.com:8090";
+                    // 6.监听方法authenticationWithUUID鉴权结果
+                    [HoriLXJManager sharedInstance].delegate = self;
+                    
+                    // 7.注册本地通知，当APP进入后台，视频来电，弹出提示
+                    [self registerLocalNotification];
+                    [HoriSipNotificationTool addObserver:self selector:@selector(sipCallStatusNotification:) name:HoriSipCallStatusNotification object:nil];
+                }
+
+                // 进入后台保活
+                - (void)applicationDidEnterBackground:(UIApplication *)application {
+                    NSLog(@">>> application Did EnterBackground <<<");
+                    
+                    UIApplication *app = [UIApplication sharedApplication];
+                    __block UIBackgroundTaskIdentifier bgTask;
+                    
+                    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            if (bgTask != UIBackgroundTaskInvalid) {
+                                bgTask = UIBackgroundTaskInvalid;
+                            }
+                        });
+                    }];
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            if (bgTask != UIBackgroundTaskInvalid) {
+                                bgTask = UIBackgroundTaskInvalid;
+                            }
+                        });
+                    });
+                    
+                    if ([application respondsToSelector:@selector(setKeepAliveTimeout:handler:)]) {
+                        [application setKeepAliveTimeout:600
+                                                 handler:^{
+                                                     debugMethod();
+                                                     debugLog(@">>> Keep Alive Handler <<<");
+                                                     // Do other keep alive stuff here.
+                                                 }];
+                    }
+                }
+
+                #pragma mark - UNUserNotificationCenterDelegate
+                - (void)userNotificationCenter:(UNUserNotificationCenter *)center
+                didReceiveNotificationResponse:(UNNotificationResponse *)response
+                         withCompletionHandler:(void(^)(void))completionHandler {
+                    // 系统要求执行这个方法
+                    completionHandler();
+                }
+
+                #pragma mark - HoriLXJManagerProtocol
+                // 鉴权失败
+                - (void)authenticationFailure:(NSString *)failure {
+                    NSLog(@"%s, %@", __FUNCTION__, failure);
+                }
+
+                // 鉴权成功
+                - (void)authenticationSuccess {
+                    NSLog(@"%s", __FUNCTION__);
+                }
+
+                #pragma mark - HoriSipCallStatusNotification
+                // sip call通知
+                - (void)sipCallStatusNotification:(NSNotification *)notification {
+                    NSLog(@"%@", notification.userInfo);
+                    NSDictionary *info = notification.userInfo;
+                    
+                    //弹出本地通知
+                    if ([info[HoriSipCallStatusKey] isEqualToString:HoriSipCallStatusCallIn]) {
+                        [self sendCallInLocalNotification];
+                    } else if ([info[HoriSipCallStatusKey] isEqualToString:HoriSipCallStatusClose]) {
+                        [self cancelCallInLocalNotification];
+                    }
+                }
+
+                #pragma mark - Private Method
+                // 注册本地通知
+                - (void)registerLocalNotification {
+                    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+                        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+                        center.delegate = self;
+                        
+                        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
+                                              completionHandler:^(BOOL granted, NSError *_Nullable error) {
+                                                  if (!error) {
+                                                      [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *_Nonnull settings) {
+                                                          NSLog(@"%@", settings);
+                                                      }];
+                                                      
+                                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                                          [[UIApplication sharedApplication] registerForRemoteNotifications];
+                                                      });
+                                                      
+                                                  }
+                                              }];
+                    } else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [[UIDevice currentDevice].systemVersion doubleValue] < 10.0) {
+                        //voip推送注册了一次
+                        //ios8注册推送通知
+                        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                                             settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                                                             categories:nil]];
+                        
+                        [[UIApplication sharedApplication] registerForRemoteNotifications];
+                        
+                    } else {
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+                #pragma clang diagnostic pop
+                    }
+                }
+
+                // 发生本地通知
+                - (void)sendCallInLocalNotification {
+                    if (!sipCallInNotific) {
+                        sipCallInNotific = [[UILocalNotification alloc] init];
+                    }
+                    
+                    if (sipCallInNotific) {
+                        sipCallInNotific.alertAction = @"接听门禁来电";
+                        NSString *title = @"您有一个新的来电";
+                        
+                        // 设置通知内容
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        [dateFormatter setDateFormat:@"HH:mm"];
+                        NSString *curDate = [dateFormatter stringFromDate:[NSDate date]];
+                        sipCallInNotific.alertBody = [NSString stringWithFormat:@"%@  %@", curDate, title];
+                        // 设置重复间隔
+                        sipCallInNotific.repeatInterval = 0;
+                        // 通知提示音
+                        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"HoriLXJSDK" ofType:@"bundle"];
+                        sipCallInNotific.soundName = [bundlePath stringByAppendingPathComponent:@"notific_bell_20.aac"];
+                        sipCallInNotific.userInfo = @{ @"type" : @"SipCall" };
+                        
+                        if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+                            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+                        }
+                        [[UIApplication sharedApplication] presentLocalNotificationNow:sipCallInNotific];
+                    }
+                }
+
+                // 取消本地通知
+                - (void)cancelCallInLocalNotification {
+                    if (sipCallInNotific) {
+                        [[UIApplication sharedApplication] cancelLocalNotification:sipCallInNotific];
+                    }
+                    sipCallInNotific = nil;
+                }
+                @end
+                </pre>
+            <div class="text_index profile_h2 normal_index">用户登录</div>
+
+            <p class="text_index normal_index">用户登录时调用authenticationWithUUID:接口</p>
+            <pre class="normal_index">
+            - (void)loginAction {
+                // userId：用户的账号；userName：用户名(可选)；userPhone：用户手机号(可选)
+                [[HoriLXJManager sharedInstance]
+                    authenticationWithUUID:uuid
+                    userId:userId
+                    userName:nil
+                    userPhone:nil];
+            }</pre>
+            <div class="text_index profile_h2 normal_index">界面的调起</div>
+            <p class="normal_index text_index">锁列表界面</p>
+            <div>
+                <img style="padding:20px 0 0px 140px;" src="img/ioskankan.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+
+                HoriLockViewController *vc = [[HoriLockViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">监控界面</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosuserd.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+            HoriMonitorViewController *vc = [[HoriMonitorViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">住房管理</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosjing.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+                HoriHousingManagementViewController *vc =[[HoriHousingManagementViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">住房管理</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosyun.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+                HoriHouseHoldManagementViewController *vc = [[HoriHouseHoldManagementViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">备用电话</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosring.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+            HoriStandbyTelephoneViewController *vc = [[HoriStandbyTelephoneViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">勿扰模式</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosling.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+                HoriDoNotDisturbViewController *vc = [[HoriDoNotDisturbViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">家庭机</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosli.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+                HoriHomeMachinViewController *vc = [[HoriHomeMachinViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+            <p class="normal_index text_index">对讲记录</p>
+            <div>
+                <img style="padding:20px 0 30px 140px;" src="img/iosbiling.jpg" alt=""/>
+            </div>
+            <pre class="normal_index">
+                HoriCallRecordViewController *vc = [[HoriCallRecordViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];</pre>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>
+

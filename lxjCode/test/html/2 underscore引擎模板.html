@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var tml = '<div class="dialog" role="dialog" {if(id){} id="{-id}"{}}>' +
+            '<div class="header">' +
+            '<span class="caption">{-caption}</span>' +
+            '{if(closable){}' +
+            '<div class="button close"><img src="images/close.gif"/></div>' +
+            '{}}</div>' +
+            '<div class="content"></div>' +
+            '</div>';
+    tmp = _.template(tml, { id: "dialog1",     caption: "title",    closable: false} );
+    setTitle("baioti")
+</script>
+<div class="dialog" role="dialog" id="dialog1">
+    <div class="header">
+        <span class="caption">title</span>
+    </div>
+    <div class="content"></div>
+</div>
+</body>
+</html>

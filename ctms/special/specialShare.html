@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>联享家-文章分享</title>
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="../common/interfaceParameters.js"></script>
+		<script src="../common/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/underscore.js"></script>
+		<link rel="stylesheet" href="css/specialShare.css">
+		<script src="js/specialShare.js"></script>
+		<script src="https://static.mlinks.cc/scripts/dist/mlink.min.js"></script>
+		<script type="text/javascript">
+			//		获取参数start
+			var id = GetURLParameter("id");
+			var u = navigator.userAgent;
+			var clientType = "";
+			if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+				clientType = "android";
+			} else {
+				clientType = "ios";
+			}
+			console.log(clientType)
+			//      获取参数end
+			//      统计start
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAutoPageview', false]);
+			if(id) {
+				_hmt.push(['_trackPageview', '/client=' + clientType + '-专题-分享-专题ID=' + id]);
+			}
+			(function() {
+				var hm = document.createElement("script");
+				//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+				hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7"; //正式
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+			//		统计end
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+		<style type="text/css">
+			video {
+				width: 100%;
+				max-width: 100%;
+				background-color: #000;
+			}
+			
+			iframe {
+				border: none;
+				padding: 0;
+				margin: 0;
+			}
+			.zkspecial_boxios{
+				overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;
+			}
+			.zkspecialiframeios{
+				width: 1px; min-width: 100%; *width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="top">点击返回顶部</div>
+		<div class="special-detail">
+			<div class="special-detail-name"></div>
+			<div class="special-detail-time">
+				<span></span>
+				<span></span>
+			</div>
+			<div class="special-pic">
+				<p></p>
+			</div>
+
+		</div>
+		<div id="zkspecial_box" style="width: 100%;display: none;">
+			<iframe id="zkspecial" src="" width="100%" height="100%"></iframe>
+		</div>
+		<div class="special-download-fixed">
+			<img class='special-logo-word' src="images/lianxianjia.png" alt="">
+			<img class='special-cancel' src="images/btn_cancle.png" alt="" onclick="closeFooter()">
+			<a id="goupdown" style="display: inline-block;float: right;"><span id='down' class='special-download'>打开</span></a>
+		</div>
+	</body>
+	<script type="text/javascript">
+			if(clientType != 'ios') {
+				var windowheight = document.documentElement.clientHeight;
+				var bottomheight = $(".special-fixed").height();
+				document.getElementById("zkspecial_box").style.height = (windowheight - bottomheight) + "px";
+			}else{
+				$("#zkspecial").attr("scrolling",'no');
+				$("#zkspecial").addClass('zkspecialiframeios');
+				$("#zkspecial_box").addClass('zkspecial_boxios');
+			}
+		</script>
+
+</html>

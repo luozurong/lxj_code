@@ -1,0 +1,134 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "MILT_RG,arial,Microsoft YaHei";
+	font-size: 14px;
+}
+body{
+	background: #f7f8f9;
+}
+a{
+	text-decoration: none;
+	color:#333;
+}
+.apply-header{
+	overflow: hidden;
+	width: 1100px;
+	margin:0 auto;
+	padding: 20px 0;
+	border-bottom:1px solid #f0f0f0;
+	background: #fff;
+	margin-top: 40px;
+}
+.apply-header img{
+	width: 60px;
+	height:60px;
+	border-radius: 100%;
+	float:left;
+	margin-left:10px;
+}
+.apply-header span{
+	float:left;
+}
+.apply-name{
+	font-size: 20px;
+	color:#333;
+	line-height: 60px;
+	margin-left: 10px; 
+	cursor: pointer;
+}
+.terrace-name .terrace-company{
+	text-align: left;
+	min-width: 100px;
+	color:#666;
+}
+.apply-edit{
+	font-size: 12px;
+	color:#fc9153;
+	line-height: 60px;
+	margin-left: 10px; 
+	cursor: pointer;
+}
+.apply-index{
+	float:right;
+	line-height: 60px;
+	margin-right:10px;
+}
+.terrace-wrap{
+	width:1100px;
+	margin: 0 auto;
+	background: #fff;
+	margin-top: 40px;
+	padding: 20px 0 60px 0;
+}
+.terrace-title{
+	overflow: hidden;
+	width: 535px;
+	margin: 0 auto;
+}
+.terrace-title img{
+	width: 50px;
+	height:50px;
+	float: left;
+}
+.terrace-title span{
+	font-size: 30px;
+	color:#666;
+	float: left;
+	line-height: 50px;
+	margin-left:10px;
+}
+.terrace-applay{
+	border-top: 1px solid #eee;
+	margin-top:20px;
+	padding-top: 30px;
+}
+.terrace-name,.terrace-submit{
+	width:400px;
+	margin:20px auto;
+}
+.terrace-name .terrace-span{
+	display: inline-block;
+	font-size: 16px;
+	line-height: 45px;
+	height:45px;
+	width: 90px;
+	text-align: right;
+}
+.terrace-name>input{
+	width:250px;
+	border:1px solid #eee;
+	line-height: 45px;
+	height:45px;
+	padding-left:10px;
+}
+.terrace-name label{
+	margin-right:20px;
+	display: inline-block;
+	overflow: hidden;
+}
+.terrace-name label input{
+	display: inline-block;
+	width:15px;
+	height:15px;
+	float:left;
+	margin-top:3px;
+}
+.terrace-name p{
+	color:#e4393a;
+	margin-left:85px;
+}
+.terrace-submit{
+	margin-top:40px;
+}
+.terrace-submit span{
+	display: inline-block;
+	line-height: 45px;
+	background: #fc9153;
+	color:#fff;
+	text-align: center;
+	width:260px;
+	letter-spacing: 2px;
+	margin-left:84px;
+	cursor: pointer;
+}

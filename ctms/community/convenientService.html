@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>便民信息</title>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+			
+		//	百度统计代码
+		var from = GetURLParameter('from');
+		var activityId = 8001;
+		var clientType = GetURLParameter('clientType');
+		if(clientType!='android'){clientType='ios'};
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview',false]);
+		if(from&&from==='push'){
+			activityId = 8002;
+		}else if(from&&from==='hd'){
+			activityId = 8003;
+		}
+		_hmt.push(['_trackPageview', '/client='+clientType+'-导航-生活导航-iconID='+activityId]);
+		(function() {
+		  var hm = document.createElement("script");
+//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+		  hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";//正式
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+			
+		</script>
+		<style type="text/css">
+			body,
+			html {
+				line-height: normal;
+				font-size: 16px;
+				background-color: #F3F4F5;
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+			
+			#app {
+				width: 100%;
+			}
+			
+			.mainBox {
+				width: 100%;
+			}
+			
+			.itemBox {
+				padding: 0 0.14rem;
+				box-sizing: border-box;
+				background-color: #fff;
+			}
+			
+			.item {
+				color: #333;
+				width: 100%;
+				height: 0.54rem;
+				display: flex;
+				border-bottom: 1px solid #eee;
+				align-items: center;
+				display: -webkit-flex;
+				-webkit-align-items: center;
+			}
+			
+			.mainBox .itemBox:nth-last-child(1) .item {
+				border: none;
+			}
+			
+			.item span {
+				display: inline-block;
+				color: #333;
+				line-height: 1;
+				font-size: 16px;
+				font-size: 0.16rem;
+				padding-right: 0.12rem;
+				flex-grow: 3;
+				-webkit-flex-grow: 3;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.item span:nth-child(2) {
+				display: inline-block;
+				color: #555;
+				line-height: 1;
+				font-size: 15px;
+				font-size: 0.15rem;
+				flex-shrink: 0;
+				flex-grow: 0;
+				-webkit-flex-shrink: 0;
+				-webkit-flex-grow: 0;
+				padding-right: 0.12rem;
+			}
+			
+			.item a {
+				display: inline-block;
+				color: #555;
+				line-height: 1;
+				font-size: 15px;
+				font-size: 0.15rem;
+				flex-shrink: 0;
+				-webkit-flex-shrink: 0;
+				padding-right: 0.12rem;
+			}
+			
+			.item img {
+				display: block;
+				width: 0.08rem;
+				height: auto;
+				flex-shrink: 0;
+				-webkit-flex-shrink: 0;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<div class="mainBox">
+				<div class="itemBox" v-for="(item,index) in textList" v-if="item.length>0&&!isCalltel">
+					<div class="item">
+						<span>{{item.split(/\:|\：/)[0]}}</span>
+						<!--<a  v-on:click="gotel(item.split(/\:|\：/)[1])"  >{{item.split(/\:|\：/)[1]}}</a>-->
+						<a :href="'tel:' + item.split(/\:|\：/)[1]">{{item.split(/\:|\：/)[1]}}</a>
+						<img src="images/ic_more_grey@3x.png" />
+					</div>
+				</div>
+				<div class="itemBox" v-for="(item,index) in textList" v-if="item.length>0&&isCalltel">
+					<div class="item">
+						<span>{{item.split(/\:|\：/)[0]}}</span>
+						<!--<a  v-on:click="gotel(item.split(/\:|\：/)[1])"  >{{item.split(/\:|\：/)[1]}}</a>-->
+						<span>{{item.split(/\:|\：/)[1]}}</span>
+						<img src="images/ic_more_grey@3x.png" />
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			var clientType = GetURLParameter("clientType");
+			var token = GetURLParameter("token");
+			var organizationSeq = GetURLParameter("organizationSeq");
+			var timestamp = new Date().getTime();
+			var isVisitor = false;
+			if(token && token.indexOf("_") == 0) {
+				isVisitor = true;
+				userAccount = token;
+			}
+			var backHomePage = GetURLParameter("backHomePage"); //回退到生活首页
+			if(backHomePage == "1") {
+				backToHomePage();
+			}
+//			token = "_15311065406574f8b64488c6466b8ef0";
+			//cmsHost = "http://192.168.51.24:8090";
+			//cmsHost = "https://tt.hori-gz.com:8443";
+			//organizationSeq = "4400100299";
+
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					jsondate: {},
+					isCalltel: false,
+					textList: [],
+					apiurl: cmsHost + "/cms/servlet/findAreaConvenienceInformation", //信息详情接口
+				},
+				filters: {
+					//状态过滤
+
+				},
+				mounted: function() {
+					this.$nextTick(function() {
+						setTitle("便民信息");
+						if(sessionStorage.getItem("lxjversionsName") < 5090 && clientType == 'ios') {
+							this.isCalltel = true;
+						}
+						//console.log(99999999);
+						this.getDatejson();
+					});
+
+				},
+				methods: {
+					getDatejson: function() {
+						var params = {};
+						var timestamp = new Date().getTime();
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							organizationSeq: organizationSeq
+						};
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl + "?str=" + encodeURI(paramData), {
+							method: "POST",
+							emulateJSON: true,
+							emulateHTTP: true,
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {
+							// 响应成功回调
+							if(response.body.result == 0) {
+								vue.jsondate = response.body;
+								
+								if(response.body.convenienceInformation!=null&&response.body.convenienceInformation.length > 0) {
+									var regT = /\;|\；/;
+									vue.textList = response.body.convenienceInformation.split(regT)
+									console.log(vue.textList)
+								} else {
+									lxjTip.alert("抱歉，你的小区暂无便民信息", {
+										yes: function(index) {
+											setTimeout(function() {
+													goBack();
+											}, 100);
+											lxjTip.close(); //如果设定了yes回调，需进行手工关闭
+										}
+									});
+								}
+							} else {
+								lxjTip.alert("抱歉，信息内容已被删除", {
+									yes: function(index) {
+										setTimeout(function() {
+											//	goBack();
+										}, 100);
+										lxjTip.close(); //如果设定了yes回调，需进行手工关闭
+									}
+								});
+								vue.falseTextstate = true;
+							}
+						}, function(response2) {
+							// 响应错误回调
+							lxjTip.alert("信息内容获取失败", {
+								yes: function(index) {
+									setTimeout(function() {
+										//	goBack();
+									}, 100);
+									lxjTip.close(); //如果设定了yes回调，需进行手工关闭
+								}
+							});
+							vue.falseTextstate = true;
+							console.log(JSON.stringify(response2))
+							//	console.log(JSON.stringify(response))
+						});
+					},
+					gotel: function(teln) {
+						window.location.href = "tel:" + teln;
+					},
+					goapp: function() {
+						window.location.href = "itms-apps://itunes.apple.com/app/id1034650295";
+					},
+
+				}
+			});
+
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return decodeURI(r[2]);
+				return null;
+			}
+
+			function refreshData() {
+				setTimeout(function() {
+
+				}, 0);
+				return 1;
+			}
+		</script>
+	</body>
+
+</html>

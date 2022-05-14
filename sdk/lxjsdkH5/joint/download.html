@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>联享家开放平台</title>
+		<link rel="stylesheet" href="css/download.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div class="index-link" id="indexWrap" v-cloak>
+			<div>
+				<div class="logo">
+					<img src="../common/img/logo.png" width="32" height="32" alt="logo">
+					<span>联享家开放平台</span>
+				</div>
+				<div class="index-nav">
+					<!-- <div class="index-nav-login" >
+						<input type="hidden"  value="session">
+						<div v-if="loginBeforeFlag">
+							<a class="login" href="login.html">登录</a>
+							<span>|</span> 
+							<a class="register" href="register.html">注册</a>
+						</div>
+						<div v-if="loginAfterFlag">
+							<a @click="goUser()">{{userAccount}}</a>
+							<span>|</span> 
+							<a @click="noLogin()">退出登录</a>
+						</div>
+					</div> -->
+					<div class="index-nav-warp">
+						<a href="../index/index.html">首页</a>
+						<a href="../joint/download.html">应用下载</a>
+						<a href="../docCenter/docCenter.html">文档</a>	
+						<!-- <a href="../docCenter/docCenter7.html">联系我们</a> -->
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div class="download-disc">
+			<div class="download-disc-word1">欢迎来到联享家SDK应用下载中心</div>
+			<div class="download-disc-word2">实时掌握产品表现，洞察用户行为，助您实现数据安全化</div>
+		</div>
+		<div class="download-sdk">
+			<div class="download-an">
+				<p class="download-title">联享家(Android SDK)</p>
+				<div class="download-div">
+					<p class="download-word">
+						<img src="img/quality@3x.png" width="18" alt="">
+						<span>联享家sdk正式版v1.1.01</span>
+					</p>
+					<p class="download-word">
+						<img src="img/quality@3x.png" width="18" alt="">
+						<span>联享家sdk Dome</span>
+					</p>
+					<p class="download-word">
+						<img src="img/quality@3x.png" width="18" alt="">
+						<span>联享家sdk文档</span>
+					</p>
+					<a class="download-sure1" href="http://sdk.hori-gz.com:8090/android/AndroidSDK1.1.01.rar">联享家sdk正式版1.1.01下载</a>
+				</div>
+			</div>
+			<div class="download-ios">
+				<p  class="download-title">联享家(IOS SDK)</p>
+				<div class="download-div">
+					<p class="download-word">
+						<img src="img/prizeshow_03.png" width="18" alt="">
+						<span>联享家sdk正式版v1.1.01</span>
+					</p>
+					<p class="download-word">
+						<img src="img/prizeshow_03.png" width="18" alt="">
+						<span>联享家sdk Dome</span>
+					</p>
+					<p class="download-word">
+						<img src="img/prizeshow_03.png" width="18" alt="">
+						<span>联享家sdk文档</span>
+					</p>
+					<a class="download-sure2" href="http://sdk.hori-gz.com:8090/ios/HoriLXJSDK-V1.1.01.tar.bz2">联享家sdk正式版v1.1.01下载</a>
+				</div>
+			</div>
+		</div>
+		<div class="index-footer">
+			<div>
+				<div class="footer-floor1">
+					<div>
+						<div class="footer-floor-key">帮助和文档</div>
+						<div><a href="javascript:;">文档中心</a></div>
+						<div><a href="javascript:;">如何成为开发者</a></div>
+					</div>
+					<div>
+						<div class="footer-floor-key">联系我们</div>
+						<div><a href="javascript:;">联系方式</a></div>
+						<div><a href="javascript:;">微信公众号</a></div>
+					</div>
+				</div>
+				<div class="footer-floor2">©2017 广州合立正通信息科技有限公司</div>
+			</div>
+		</div>
+		<script src="js/download.js"></script>
+	</body>
+</html>

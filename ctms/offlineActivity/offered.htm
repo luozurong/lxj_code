@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/mui.min.css">
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<link rel="stylesheet" type="text/css" href="css/offered.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js"></script>
+		<script src="js/hadoop.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>参团活动</title>
+		<style type="text/css">
+			body,
+			html {
+				background-color: #f4f5f6;
+				line-height: normal;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			#activitylist_header,
+			#activitylist_main,
+			#shop_box,
+			#footer,
+			#shop_box .shop {
+				background-color: #fff;
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+		</style>
+		<script type="text/javascript">
+		//	百度统计代码
+		var activityId = GetURLParameter('activityId');
+		var clientType = GetURLParameter('clientType');
+		if(clientType!='android'){clientType='ios'};
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview',false]);
+		if(activityId){
+			_hmt.push(['_trackPageview', '/client='+clientType+'-活动-参团类活动-活动ID='+activityId]);
+		}
+		(function() {
+		  var hm = document.createElement("script");
+//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+		  hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";//正式
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+	</head>
+
+	<body>
+		<div id="app" v-cloak v-if="jsondate.result==0">
+			<div id="activitylist_header">
+				<div class="title_box">
+					<div id="title">
+						{{jsondate.title}}
+					</div>
+					<!--<div class="quanzi">
+						55555
+					</div>-->
+				</div>
+				<div class="electTime">联享家<span style="color:#808080;padding-left: 0.12rem;">{{jsondate.startTime }}</span></div>
+			</div>
+			<div id="activitylist_main">
+				<!--<div id="main_img">
+					<img v-bind:src='jsondate.indexPic' />
+				</div>-->
+				<div id="activitylist_describe" v-if="jsondate.content" v-html="jsondate.content">
+				</div>
+
+			</div>
+			<div id="shop_box" v-if="jsondate.commodityList&&jsondate.commodityList.length>0">
+				<div id="shop_box_content">
+					为你优选
+				</div>
+				<div class="shop" v-for='item in jsondate.commodityList' v-on:click="goShoping(item.commodityType,item.commodityId)">
+					<div class="shop_img">
+						<img v-bind:src='item.pictureUrl' />
+					</div>
+					<div class="shop_describe">
+						{{item.name}}
+					</div>
+					<div class="shop_price">
+						<div class="new_price">
+							<span>¥</span><span v-text="String(item.commodityPrice).split('.')[0]">0</span><span v-if="item.commodityPrice>0">.</span><span v-if="item.commodityPrice>0" v-text="String(parseFloat(item.commodityPrice).toFixed(2)).split('.')[1]">00</span>
+						</div>
+						<div class="old_price" v-if="item.originalPrice&&item.originalPrice>0">
+							<span>¥</span><span v-text="String(item.originalPrice).split('.')[0]">0</span><span v-if="item.originalPrice>0">.</span><span v-if="item.originalPrice>0" v-text="String(parseFloat(item.originalPrice).toFixed(2)).split('.')[1]">00</span>
+						</div>
+					</div>
+					<div class="sales">
+						{{item.salesVolume}}人已购
+					</div>
+				</div>
+			</div>
+			<div v-if="onbottomState" style="text-align: center;line-height: 0.6rem;width: 100%;height: 0.6rem;color:#ccc;font-size:0.15rem;clear: both;background-color: #F3F4F5;">
+				我是有底线的
+			</div>
+			<div style="width: 100%;height: 0.54rem;opacity: 0;clear: both;" v-if="jsondate.isExistCommunity==1">
+			</div>
+			<div id="footer" v-if="jsondate.isExistCommunity==1">
+				<div id="valid_activity">
+					<div id="activity_price_box">
+						<div id="activity_price">参团价<span>¥</span><span v-text="String(jsondate.price).split('.')[0]">0</span><span v-if="jsondate.price>0">.</span><span v-if="jsondate.price>0" v-text="String(parseFloat(jsondate.price).toFixed(2)).split('.')[1]">00</span></div>
+						<div class="flex_item2">
+						</div>
+						<div id="activity_people">
+							<span>已报{{jsondate.groupMenbers+jsondate.baseSignUp}}人/</span><span>成团人数{{jsondate.groupAmount}}人</span>
+						</div>
+					</div>
+					<div id="buttom_box">
+						<div id="invite_box" v-if="jsondate.status==2||jsondate.status==1" v-on:click="inviteFriend(jsondate.activityId,jsondate.code)">
+							邀请好友参团
+						</div>
+						<div id="gopay_box" v-if="jsondate.isAttend==0&&jsondate.status==2&&jsondate.groupMenbers<jsondate.limitAmount" v-on:click="goApply(jsondate.price,jsondate.isExistCommunity,jsondate.code)">
+							立即参团
+						</div>
+						<div id="failure_box" v-if="jsondate.isAttend==1&&jsondate.status==2">
+							您已报名
+						</div>
+						<div id="failure_activity" v-if="jsondate.groupMenbers==jsondate.limitAmount&&jsondate.status==2">
+							已截止报名
+						</div>
+						<div id="failure_activity" v-if="jsondate.status==3">
+							活动已结束
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="disisExistCommunity" v-if="jsondate.isExistCommunity!=1" style="position: fixed;bottom: 0;left: 0;width: 100%;height: 0.54rem;background-color: #000000;opacity: 0.7;display: -webkit-flex;-webkit-align-items: center;">
+                 <span style="line-height: 1;width: 100%;text-align: center;color: #fff;font-size: 0.17rem;">你所在的小区暂不支持该活动</span>
+			</div>
+		</div>
+	</body>
+	<script src="js/offered.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/js/mui.min.js"></script>
+	<script src="../common/js/mui.previewimage.js"></script>
+	<script src="../common/js/mui.zoom.js"></script>
+	<script>
+		mui.previewImage();
+	</script>
+
+</html>

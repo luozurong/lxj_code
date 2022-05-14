@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>专栏列表</title>
+	<link rel="stylesheet" href="css/specialColumn.css">
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+	<script src="../common/tip/lxjTip.js"></script>
+	<script src="../common/vue/vue.min.js"></script>
+	<script src="../common/vue/vue-resource.min.js"></script>
+	<script src="../common/plugin/vue-scroller/vue-scroller.min.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+</head>
+<body>
+	<div class="column" id="column">
+		<scroller :on-infinite="loadMore" ref="my_scroller">
+	      <div style="height: 1px;margin-top:-1px;"></div>
+	      <div class="column-item" v-for="item in columnItem" @click="specialMain(item.specialColumnId)">
+				<img class="column-pic" :src="item.picturePath" alt="">
+				<div class="column-wrap">
+					<div class="column-name" v-text="item.name"></div>
+					<div class="column-disc" v-text="item.content"></div>
+					<div class="column-num">
+						<span v-text="item.specialNum"></span>
+						<span>篇内容</span>
+					</div>
+				</div>
+			</div>
+	    </scroller>
+	</div>
+	<script src="js/specialColumn.js"></script>
+</body>
+</html>

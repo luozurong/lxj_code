@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>评论</title>
+	<link rel="stylesheet" href="css/commentList.css">
+    <link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+    <script src="../common/vue/vue.min.js"></script>
+    <script src="../common/vue/vue-resource.min.js"></script>
+    <script src="../common/js/underscore.js"></script>
+    <script src="../common/tip/lxjTip.js"></script>
+    <script src="../common/js/mui.min.js"></script>
+    <script src="../common/interface.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+</head>
+<body class="comment-body">
+	<div class="comment">
+    	<div class="comment-num"><p>全部评论(<span></span>)</p></div>
+        <div class="comment-wrap-all"></div>
+    </div>
+    
+    <div class="comment-fixed">
+    	<div class="comment-fixed-left">
+    		<img src="images/ic_comment.png" alt="">
+    		<div oninput="myEditChange(this)" type="text" contenteditable="true" data-text="说点什么吧..."></div>
+    	</div>
+    	<div class="comment-fixed-right" onclick="commentSubmit()">发送</div>
+    </div>
+    <script type="text/html" id="special_comment_empty">
+        <div class="special-comment-empty">暂时还没有评论，快点来抢沙发！</div>
+    </script>
+    <script type="text/html" id="commentItem">
+        <% _.each(data, function (item) { %>
+        <%if(item.delBack=='0'){ %>
+            <div class="comment-item" id="<%= item.id%>" onclick="deleteComment('<%= item.id%>','<%=item.parentId%>')">
+        <%}else{%>
+            <div class="comment-item" onclick="commentClik(this)" data-val="<%=item.id%>" data-value="<%=item.backNick%>">
+        <%}%>
+            <%if(item.userHeadPicUrl!=null &&  item.userHeadPicUrl !=''){ %>
+                <img class="comment-pic" useraccount="<%= item.backAccount%>" onclick="goToUser(this)" src="<%= item.userHeadPicUrl%>">
+            <%}else{%>
+                <img class="comment-pic" src="images/ic_default_avatar.png">
+            <%}%>
+            <div class="comment-wrap">
+                <div class="comment-main">
+                    <span class="comment-name"><%= item.backNick%></span>
+                    <% if(item.restoredAccount != "" && item.restoredAccount != null){ %>
+                        <span class="comment-span">回复了</span>
+                        <span class="comment-name"><%= item.restoredAccount %></span>
+                    <%}%>
+                    <span class="comment-time"><%= item.createTime%></span>
+                </div>
+                <%if(item.delBack=='0'){ %>
+                    <div class="comment-word"><%= item.content%></div>
+                <%}else{%>
+                    <div class="comment-word"><%= item.content%></div>
+                <%}%>
+            </div>
+        </div>
+        <%})%>
+        <div class="comment-over">我是有底线的</div>
+    </script>
+	<script src="js/commentList.js"></script>
+</body>
+</html>

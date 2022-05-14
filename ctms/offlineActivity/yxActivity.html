@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>营销活动</title>
+	<link rel="stylesheet" href="css/yxActivity.css">
+	<link rel="stylesheet" href="../common/tip/lxjTip.css">
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+	<script src="../common/tip/lxjTip.js"></script>
+	<script src="../common/vue/vue.min.js"></script>
+	<script src="../common/vue/vue-resource.min.js"></script>
+	<script src="../common/plugin/vue-scroller/vue-scroller.min.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+		
+		//	百度统计代码
+		var activityId = GetURLParameter('marketId');
+		var clientType = GetURLParameter('clientType');
+		if(clientType!='android'){clientType='ios'};
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview',false]);
+		if(activityId){
+			_hmt.push(['_trackPageview', '/client='+clientType+'-商品列表-列表ID='+activityId]);
+		}
+		(function() {
+		  var hm = document.createElement("script");
+//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+		  hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";//正式
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>	
+	<style type="text/css">
+		.bannerNone{
+			height: 1px;
+		}
+	</style>
+</head>
+<body>
+	<div class="marketing" id="marketing" v-cloak>
+		<scroller :no-Data-Text="noDataText4"  :on-infinite="infinite" >
+			<div class="vue-load"></div>	
+			<div class="marketing-floor1" v-if="showType == 1">
+				<div class="marketing-banner" :class="{bannerNone:banner==''}"><img v-if="banner!=''" :src="banner" alt=""></div>
+				<div class="marketing-item" @click="goDetail(item.commodityId)" v-for="(item,index) in commodityList" :key="index">
+					<img class="marketing-pic" :src="item.commodityThumbLogo"  alt="">
+					<div class="marketing-wrap">
+						<div class="marketing-name" v-text="item.commodityName"></div>
+						<div class="marketing-disc"><span v-text="item.commodityIntroduction"></span></div>
+						<div class="marketing-num">
+							<div class="marketing-price">
+								<span> {{item.currentPrice | pricePre}}</span>
+								<div>{{item.currentPrice | priceNext}}</div>
+							</div>
+							<s :class="{'price-active': item.prePrice == null}" >￥{{item.prePrice}}</s>
+						</div>
+					</div>
+				</div>
+			</div>
+	        <div class="marketing-floor2" v-if="showType == 2">
+	        	<div class="marketing-banner"><img v-if="banner!=''" :src="banner" alt=""></div>
+	        	<div class="marketing-floor2-wrap">
+	        		<div class="marketing-floor2-item" @click="goDetail(item.commodityId)" v-for="(item,index) in commodityList" :key="index">
+	        			<div class="marketing-floor2-pic">
+	        				<img :src="item.commodityThumbLogo" alt="">
+	        				<div class="marketing-floor2-disc" v-if="item.commodityIntroduction != null" v-text="item.commodityIntroduction"></div>
+	        			</div>
+	        			<div class="marketing-floor2-name" v-text="item.commodityName"></div>
+	        			<div class="marketing-floor2-num">
+	        				<div class="marketing-floor2-price">
+	        					<span>{{item.currentPrice | pricePre}}</span>
+	        					<div>{{item.currentPrice | priceNext}}</div>
+	        				</div>
+	        				<span class="marketing-floor2-people" :class="{'price-active': item.prePrice == null}">{{item.prePrice}}</span>
+	        			</div>
+	        		</div>
+	        	</div>
+	        </div>
+	        <div class="marketing-floor3" v-if="showType == 3">
+	        	<div class="marketing-floor3-item" @click="goDetail(item.commodityId)" v-for="(item,index) in commodityList" :key="index">
+	        		<img class="marketing-floor3-pic" :src="item.commodityThumbLogo" alt="">
+	        		<div class="marketing-floor3-name" v-text="item.commodityName"></div>
+	        		<div class="marketing-floor3-num">
+	    				<div class="marketing-floor3-price">
+	    					<span>{{item.currentPrice | pricePre}}</span>
+	    					<div>{{item.currentPrice | priceNext}}</div>
+	    				</div>
+	    				<s :class="{'price-active': item.prePrice == null}">￥{{item.prePrice}}</s>
+	    			</div>
+	        	</div>
+	        	
+	        </div>
+    	</scroller>
+	</div>
+	<script src="js/yxActivity.js"></script>
+</body>
+</html>

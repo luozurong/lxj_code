@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <!--<iframe id="iframeId" src="docCenter1.html" onload="changeFrameHeight()" frameborder="0"></iframe>-->
+        <div class="profile">
+            <div class="normal_index headline_h2" style="font-weight:600;">一、注册和获取密钥</div>
+            <div class="text_index profile_h2 normal_index">1.1 账户注册：</div>
+            <p class="text_index normal_index">平台地址：<a href="http://sdk.hori-gz.com:8090/lxjsdkH5/index/register.html">http://sdk.hori-gz.com:8090/lxjsdkH5/index/register.html</a></p>
+            <p class="text_index normal_index">右上角点击注册，已存在帐号忽略此步骤，直接登录。</p>
+            <div class="text_index profile_h2 normal_index">使用联享家门禁服务</div>
+            <p class="text_index normal_index">用户在使用SDK之前需要获取联享家移动版开发密钥（appKey），该ak与你的联享家账户相关联。 您必须先有联享家帐户，才能获得appKey。同时该appKey与您引用SDK的程序Bundle Identifier有关。请妥善保存appKey，SDK初始化时需要用到appKey。</p>
+            <div class="text_index profile_h2 normal_index">获取服务密钥（appKey）,联享家iOS SDK开发密钥的申请步骤如下：</div>
+            <p class="text_index normal_index">联享家iOS SDK开发密钥的申请步骤如下：</p>
+            <div class="text_index profile_h2 normal_index">1）打开应用管理，如下图所示</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosbing.jpg" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">2）点击添加应用，开始申请开发密钥，如下图：</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosding.jpg" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index"> 3）填写公司名称、应用名称、Bundle Identifier、APP类型选择iOS，点击立即申请：</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosfeel.jpg" alt=""/>
+            </div>
+            <div class="text_index profile_h2 normal_index">4）请等待后台工作人员对信息进行验证：</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosadd.jpg" alt=""/>
+            </div>
+            <p class="text_index normal_index">Bundle Identifier</p>
+            <p class="text_index normal_index">在申请开发密钥的时候，需要填写对应工程的Bundle Identifier，以下为您提供两种获取 Bundle Identifier 的方法。</p>
+            <div class="text_index profile_h2 normal_index">方法：一通过代码获取，代码如下所示：</div>
+            <pre class="normal_index">NSString *bundleIdentifier  = [[NSBundle mainBundle] bundleIdentifier]; </pre>
+            <div class="text_index profile_h2 normal_index">方法：二Xcode 切换到 General 标签，查看 Bundle Identifier，如下图所示：</div>
+            <div>
+                <img style="padding:20px 0 0 140px;" src="img/iosada.jpg" alt=""/>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>
+

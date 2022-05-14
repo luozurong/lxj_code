@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <style>
+        div{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div>1</div>
+<script>
+    $("div").click(function(){
+        var num = parseInt($(this).text())+1;
+        $(this).text(num);
+        sessionStorage.setItem("num",num);
+    });
+    var number = sessionStorage.getItem("num");
+    console.log(number);
+
+
+</script>
+</body>
+</html>

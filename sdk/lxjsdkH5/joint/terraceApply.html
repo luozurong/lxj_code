@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>平台账号申请</title>
+		<link rel="stylesheet" href="css/terraceApply.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="terraceApply" v-cloak>
+			<div class="apply-header">
+				<img src="img/AA.png" alt="">
+				<span class="apply-name" v-text="userAccount"></span>
+				<span class="apply-edit" @click="goUser()">编辑账户</span>
+				<a href="../index/index.html" class="apply-index">返回首页</a>
+			</div>
+			<div class="terrace-wrap">
+				<div class="terrace-title">
+					<img src="../common/img/logo.png" alt="">
+					<span>联享家开放平台-平台账号申请</span>
+				</div>
+				<div class="terrace-applay">
+					<div class="terrace-name">
+						<span>公司名称：</span>
+						<input v-if="inputEstateFlag" type="text" placeholder="请填入公司名称" v-model="company">
+						<span v-if="getEstateFlag" v-text="companySpan">合力正通测试小区</span>
+						<p v-if="companyFlag" v-text="companyFlagWord"></p>
+					</div>
+					<div class="terrace-name">
+						<span>小区地址：</span>
+						<select name="" id="" v-model='province'>
+							<option value="">请选择</option>
+							<option v-for="item in provinceList" :value="item">{{item.name}}</option>
+						</select>
+						<select name="" id="" v-model='city'>
+							<option value="">请选择</option>
+							<option v-for="item in cityList" :value="item">{{item.name}}</option>
+						</select>
+						<select name="" id="" v-model='area'>
+							<option value="">请选择</option>
+							<option v-for="item in areaList " :value="item">{{item.name}}</option>
+						</select>
+						<select name="" id="" v-model='street'>
+							<option value="">请选择</option>
+							<option v-for="item in streetList " :value="item">{{item.name}}</option>
+						</select>
+						<p v-if="addrFlag" v-text="addrFlagWord"></p>
+					</div>
+					<div class="terrace-name">
+						<span>小区名称：</span>
+						<input type="text" placeholder="请填入小区名称" v-model="areaName">
+						<p v-if="areaCodeFlag" v-text="areaCodeFlagWord"></p>
+					</div>
+					<div class="terrace-submit">
+						<span @click="addTerrace()" @keyup.enter="addTerraceMouse">立即申请</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="js/terraceApply.js"></script>
+	</body>
+</html>

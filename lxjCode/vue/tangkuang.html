@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ECharts</title>
+  <link rel="stylesheet" type="text/css" href="plugin/easyui/themes/default/easyui.css">
+	<script type="text/javascript" src="plugin/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="plugin/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+  <div class="confirm2">点击2</div>
+  <div class="confirm">点击</div>
+  <script>
+  $(function(){
+    $(".confirm").click(function(){
+
+      $.extend($.messager.defaults,{  
+        ok:"确定",  
+        cancel:"取消"  
+      });  
+      confirm('消息','是否删除','确定','删除',function(){
+        console.log(111);
+      },function(){})
+    }); 
+
+    //dialog('confirm2','sdd',300,200,'确定','删除',function(){
+
+    //},function(){
+
+    //})
+  }); 
+
+  function confirm(title,world,sureword,cancelword,sure,cancel){
+   // parent.document.getElementById("mode").computed.style.display = 'block';
+    $.messager.confirm(title,world,sureword,cancelword,
+      function(r){
+      if(r){
+        sure();
+      }else{
+        cancel();
+      }
+      parent.document.getElementById("mode").style.display = 'none';
+    });
+    var left = $(".window").css('left');
+    $(".window,.window-shadow").css('left',parseInt(left)-100);
+  }
+
+  function dialog(select,title,width,height,sureword,closeworld,sure,close){
+    $('.'+select).dialog({
+      title: 'title',
+      width: width,
+      height: height,
+      closed: false,
+      cache: false,
+      modal: true,
+      buttons:[{
+				text: sureword,
+				handler:function(){
+          sure();
+          $('.'+select).window('close');
+        }
+			},{
+				text: closeworld,
+				handler:function(){
+          close();
+          $('.'+select).window('close');
+        }
+			}]
+    });
+    var left = $(".window").css('left');
+    $(".window,.window-shadow").css('left',parseInt(left)-100);
+  }
+  </script>
+</body>
+</html>

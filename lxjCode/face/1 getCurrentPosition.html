@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获取地理位置</title>
+	</head>
+	<body>
+		<script>
+			navigator.geolocation.getCurrentPosition(function(res){
+				console.log(1);
+				console.log(res);
+			});
+
+			navigator.geolocation.watchPosition(function(res){
+				console.log(2);
+			});
+
+			var clearFlag = navigator.geolocation.clearWatch();
+
+			function aa(){
+				console.log(111);
+			}
+
+			
+		</script>
+	</body>
+</html>

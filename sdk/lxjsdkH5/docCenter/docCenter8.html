@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <!--<iframe id="iframeId" src="docCenter1.html" onload="changeFrameHeight()" frameborder="0"></iframe>-->
+        <div class="profile">
+            <div class="normal_index headline_h2" style="font-weight:600;">第三方系统接入鉴权接口</div>
+            <p class="text_index normal_index">接口描述：第三方平台携带鉴权账号和密码请求联享家平台进行鉴权操作，鉴权通过则联享家平台响应令牌给第三方系统，第三方系统保存该令牌；该令牌将作为第三方系统与联享家平台交互的凭证，后续同步数据等交互操作均需要带上该令牌，以验证操作的合法性；令牌过期时，则第三方平台需要重新调用接入鉴权流程，以获取最新令牌。
+            </p>
+            <div class="text_index profile_h2 normal_index">请求参数说明：</div>
+            <table class="table_gauge" style="font-size: 16px;width:100%;" width="600" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td>token</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>注意：鉴权接口token值为空</td>
+                </tr>
+                <tr>
+                    <td>account</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>鉴权帐号</td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>密码</td>
+                </tr>
+            </table>
+            <h4 style="margin-top:20px;" class="profile_h2 text_index normal_index">请求示例：</h4>
+        <pre style="font-size: 16px;">
+    {
+        "header":{
+        "token":"","time_stamp":"201305144142724"
+            },
+        "body":{
+        " account ":"wer23432",
+        “password”:”123456”
+        }
+    }
+        </pre>
+            <h4 class="text_index profile_h2">响应参数说明：</h4>
+            <table class="table_gauge" style="font-size: 16px;margin-top:20px;width:auto;" width="600" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="width: 60px;">名称</td>
+                    <td style="width: 60px;">类型</td>
+                    <td style="width:75px;">是否必填</td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td>result</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>请求处理结果当结果为“0”时为正确其它详见错误码定义表</td>
+                </tr>
+                <tr>
+                    <td>reason</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>错误描述</td>
+                </tr>
+                <tr>
+                    <td>token</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>鉴权通过，则该值为32位字符串；鉴权不通过，则该值为空字符串</td>
+                </tr>
+            </table>
+            <h4 class="text_index profile_h2 normal_index" style="margin-top:20px;">响应请求案例：</h4>
+            <pre style="font-size: 16px;">{"result":"0","reason":"",”token”:” 14434225639955790b2d03a44ecfa4d7”}</pre>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>活动列表</title>
+		<meta content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css" />
+		<link rel="stylesheet" href="css/activitylist.css">
+		<script type="text/javascript" src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/js/underscore.js"></script>
+		<script src="../common/js/fontSize.js"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js"></script>
+		<script src="js/common.js"></script>
+		<script src="../common/js/echo.min.js"></script>
+		<style type="text/css">
+			body,
+			html {
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			#getActivity {
+				padding: 0;
+			}
+			
+			#getActivity .prebig:nth-child(1) {
+				border: none;
+			}
+			
+			.special-load-more {
+				/*position: relative;
+				left: 0;
+				bottom: 0;*/
+				z-index: 1;
+				background: #f3f4f5;
+				width: 100%;
+				text-align: center;
+				line-height: 0.25rem;
+				color: #999;
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="null">
+			<div class="nullPic">
+				<img src="images/noactivity.png" />
+			</div>
+			<div class="nullTips">
+				您还没有参与活动
+			</div>
+		</div>
+		<!-- 活动是否结束的判断-->
+		<ul style="background-color: #fff;">
+			<!-- 未结束-->
+			<li>
+				<ul id="getActivity"></ul>
+			</li>
+			<!-- 已结束-->
+			<li>
+				<ul id="getActivityStatus3">
+
+				</ul>
+			</li>
+		</ul>
+		<div class="special-load-more">加载更多中...</div>
+		<script id="getActivityTemplate" type="text/template">
+			<% _.each(data, function(item,idx){ %>
+			<!-- 未结束的活动-->
+			<%if(item.status==2){%>
+			<li class="prebig" data-urlType="<%=item.urlType%>" data-activityUrl="<%=item.activityUrl%>" data-voteCategory="<%=item.voteCategory%>" data-voteStatus="<%=item.voteStatus%>" data-status="<%=item.status%>" data-category="<%=item.category%>" data-activityId="<%=item.activityId%>" onclick="statuss(this)">
+				<div class="recommandImg">
+					<img src="<%=item.indexPic%>" alt="主图" />
+				</div>
+				<!-- 报名活动  票选活动  参选活动的区分-->
+				<%if(item.category==1){%>
+				<div class="bottomtopic">
+					<% var item1 = parseFloat(item.price).toFixed(2).split(".")[0] %>
+					<% var item2 = parseFloat(item.price).toFixed(2).split(".")[1] %>
+					<span><%=item.title%></span>
+					<span class="valueBox">
+	                            <span style="color:#555;">参团价：</span>
+					<span class="value" style="font-size:0.17rem;">¥<span style="font-size:0.17rem;"><%=item1%></span>.<span style="font-size:0.12rem;"><%=item2%></span></span>
+					</span>
+				</div>
+				<div class="personNum">
+					已有<span style="color:#FC9153;"><%=(Number(item.attendNums)+Number(item.baseSignUp))%></span> <span>位邻居参团</span>
+				</div>
+				<%}else if(item.category==2){%>
+				<!-- 只有参选类 对应的显示-->
+				<div class="bottomtopic">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+					<%if(item.attendNums){%>
+					<span style="padding-right: 0.12rem;">已有<span style="color:#FC9153;"><%=item.attendNums%></span><span>位邻居参选</span></span>
+					<%}%>
+					<%if(item.voteNums){%>
+					<span>已有<span style="color:#FC9153;"><%=item.voteNums%></span><span>位邻居投票</span></span>
+					<%}%>
+				</div>
+
+				<!-- 普通活动-->
+				<%}else if(item.category==3){%>
+				<div class="bottomtopic">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+
+				</div>
+
+	
+				<!-- 链接活动-->
+				<%}else if(item.category==4){%>
+				<div class="bottomtopic" data-urlType="<%=item.urlType%>" data-activityUrl="<%=item.activityUrl%>">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+
+				</div>
+
+				<%}%>
+			</li>
+			<%}%>
+			<%})%>
+		</script>
+		<!-- 已结束-->
+		<script id="getActivityStatus3Template" type="text/template">
+			<% _.each(data, function(item,idx){ %>
+			<%if(item.status==3){%>
+			<li class="prebig" data-urlType="<%=item.urlType%>" data-activityUrl="<%=item.activityUrl%>" data-voteCategory="<%=item.voteCategory%>" data-voteStatus="<%=item.voteStatus%>" data-status="<%=item.status%>" data-category="<%=item.category%>" data-activityId="<%=item.activityId%>" onclick="statuss(this)">
+				<div class="recommandImg">
+					<img src="<%=item.indexPic%>" alt="主图" />
+					<!-- 判断活动是否结束的显示状态-->
+					<div class="status">已结束</div>
+				</div>
+				<!-- 报名活动  票选活动  参选活动的区分-->
+				<%if(item.category==1){%>
+				<div class="bottomtopic">
+					<% var item1 = parseFloat(item.price).toFixed(2).split(".")[0] %>
+					<% var item2 = parseFloat(item.price).toFixed(2).split(".")[1] %>
+					<span><%=item.title%></span>
+					<span class="valueBox">
+                            <span style="color:#555;">参团价：</span>
+					<span class="value" style="font-size:0.17rem;">¥<span style="font-size:0.17rem;"><%=item1%></span>.<span style="font-size:0.12rem;"><%=item2%></span></span>
+					</span>
+				</div>
+				<div class="personNum">
+					已有<span style="color:#fca06c;"><%=(Number(item.attendNums)+Number(item.baseSignUp))%></span> <span>位邻居参团</span>
+				</div>
+				<%}else if(item.category==2){%>
+				<!-- 只有参选类 对应的显示-->
+				<div class="bottomtopic">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+					<%if(item.attendNums){%>
+					<span style="padding-right: 0.12rem;">已有<span style="color:#FC9153;"><%=item.attendNums%></span><span>位邻居参选</span></span>
+					<%}%>
+					<%if(item.voteNums){%>
+					<span>已有<span style="color:#FC9153;"><%=item.voteNums%></span><span>位邻居投票</span></span>
+					<%}%>
+				</div>
+
+				<!-- 普通活动-->
+				<%}else if(item.category==3){%>
+				<div class="bottomtopic">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+
+				</div>
+
+			
+				<!-- 链接活动-->
+				<%}else if(item.category==4){%>
+				<div class="bottomtopic">
+					<span><%=item.title%></span>
+				</div>
+				<div class="personNum">
+
+				</div>
+
+				<%}%>
+			</li>
+			<%}%>
+			<%})%>
+		</script>
+		<script src="js/activity.js"></script>
+	</body>
+
+</html>

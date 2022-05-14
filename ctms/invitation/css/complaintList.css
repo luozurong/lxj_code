@@ -1,0 +1,63 @@
+* {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+html{
+	min-height: 100%;
+	background-color: #F3F4F5;
+	font-size: 100px;
+}
+#app{
+	margin-bottom: 0.72rem;
+}
+.header{
+	font-size: 0.14rem;
+	color: #888888;
+	height: 0.34rem;
+	line-height: 0.34rem;
+	padding: 0 0.14rem;
+}
+.listMain{
+	background-color: #FFFFFF;
+	padding: 0 0.14rem;
+}
+.list{
+	height: 0.6rem;
+	line-height: 0.6rem;
+	border-bottom: 1px solid #F1F2F3;
+}
+.list:last-child{
+	border-bottom: none;
+}
+.listActive{
+	background:url(../../common/receiverInfo/ic_tick@3x.png) 98% center no-repeat;
+	background-size: 0.2rem 0.2rem;
+}
+.footer{
+	width: 100%;
+	background-color: #F3F4F5;
+	box-sizing: border-box;
+	padding: 0.14rem;
+	position: fixed;
+	bottom: 0;
+}
+.pushBtn{
+	width: 100%;
+	color: #FFFFFF;
+	background-color: #FC9153;
+	height: 0.44rem;
+	line-height: 0.44rem;
+	font-size: 0.18rem;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 320px) {
+	html{
+		font-size: 87px;
+	}
+}
+@media screen and (min-width: 321px) and (max-width: 360px) {
+	html{
+		font-size: 90px;
+	}
+}

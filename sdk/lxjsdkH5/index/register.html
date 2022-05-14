@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>联享家开放平台</title>
+		<link rel="stylesheet" href="css/login.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="register">
+			<div class="login-link">
+				<div>
+					<img src="../common/img/logo.png" width="32" alt="">
+					<span>联享家开放平台</span>
+					<div class="login-link-a">
+						<a href="../index/index.html" class="apply-index">首页</a>
+						<a href="../docCenter/docCenter.html">文档中心</a>
+						<!-- <a href="../docCenter/docCenter7.html">联系我们</a> -->
+					</div>
+				</div>
+			</div>
+			<div class="login-container">
+				<div class="login-wrap">
+					<div class="login-pic">
+						<img src="img/appp44.jpg" alt="">
+					</div>
+					<div class="login-content">
+						<div class="login-content-pic">
+							<span>联享家账号注册</span>
+						</div>
+						<div class="register-content-main">
+							<p v-if="successFlag" v-text="successFlagWord"></p>
+							<div class="register-wrap">
+								<div>
+									<span>用户名：</span>
+									<input  type="text" @blur="userAccountBlur" v-model="userAccount" placeholder="请填入用户名">
+									<p v-if="userAccountFlag" v-text="userAccountFlagWord"></p>
+									<p v-if="registedFlag" v-text="registedFlagWord"></p>
+								</div>
+								<div>
+									<span>密码：</span>
+									<input type="password" @blur="passwordAccountBlur" v-model="password" placeholder="请填入密码">
+									<p v-if="passwordFlag" v-text="passwordFlagWord"></p>
+								</div>
+								<div>
+									<span>确认密码：</span>
+									<input type="password" @blur="passwordAgainAccountBlur" v-model="passwordAgain" placeholder="请填入确认密码">
+									<p v-if="passwordAginFlag" v-text="passwordAginFlagWord"></p>
+								</div>
+								<div>
+									<span>手机号：</span>
+									<input type="tel" @blur="mobileAccountBlur" v-model="mobile" placeholder="请填入手机号">
+									<p v-if="mobileFlag" v-text="mobileFlagWord"></p>
+								</div>
+							</div>
+							<div class="register-submit" @click="registerSubmit()" @keyup.enter="registerSubmitMouse">立即注册</div>
+						</div>
+						<div class="register-other">
+							<a href="login.html">立即登录</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="js/register.js"></script>
+	</body>
+</html>

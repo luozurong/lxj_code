@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传资料</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../common/css/mui.min.css">
+    <link rel="stylesheet" href="../common/tip/lxjTip.css"/>
+    <link rel="stylesheet" type="text/css" href="../common/css/reset.css"/>
+    <link rel="stylesheet" href="css/submit.css">
+    <script type="text/javascript"	src="../common/js/jquery-2.1.4.js"></script>
+    <script src="../common/interface.js"></script>
+    <script src="../common/js/fontSize.js"></script>
+    <script src="../common/tip/lxjTip.js"></script>
+    <script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        /*#upimgbg{
+            background-image: url("images/btn_add@3x.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            width: 100%;height: 100%;display: none;
+        }
+        #upimgbg img{
+            width: 100%;height: 100%;
+            display: block;
+            opacity: 0;
+        }*/
+    </style>
+</head>
+<body>
+	<div class="content">
+	    <div class="topic">
+	        <span>标题</span>
+	        <!--<div class="simulateInput">请输入15字内标题</div>-->
+	        <input class="evaluateText" type="text" placeholder="请输入15字内标题" maxlength="15" id="evaluateText"/>
+	    </div>
+	    <div class="upload_box">
+	    	<!--上传按钮-->
+	        <div class="upload_btn" onclick="imageUpload()" >
+                <img src="images/btn_add@3x.png" width="100%" height="100%"/>
+	        </div>
+	        <!--上传的图片-->
+	        <div class="picture">
+	        	<img src="images/c_s_error.png" width="100%" height="100%" data-preview-src data-preview-group='1' class="pic"/>
+	            <div class="delet" onclick="delet()">
+	                <img src="images/btn_ic_cancel@3x.png" width="100%" alt="删除"/>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="voteBtn">
+	        <div class="submit" onclick="doSubmit()">确认提交</div>
+	    </div>
+	</div>
+</body>
+<script src="../common/js/mui.min.js"></script>
+<script src="../common/js/mui.previewimage.js"></script>
+<script src="../common/js/mui.zoom.js"></script>
+<script>
+    mui.previewImage();
+</script>
+<script src="js/submit.js"></script>
+</html>

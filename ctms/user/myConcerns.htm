@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/myConcerns.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<title>我的关注</title>
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				min-height: 100%;
+				background-color: #fff;
+				color: #333;
+				font-size: 14px;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+		</style>
+
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+		<style type="text/css">
+			#app {
+				width: 100%;
+				min-height: 100%;
+				overflow: hidden;
+			}
+			
+			.nothing0 {
+				-webkit-order: 0;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing1 {
+				-webkit-order: 1;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing3 {
+				-webkit-order: 3;
+				-webkit-flex-grow: 5;
+			}
+			
+			.colorTb {
+				color: #FC9153!important;
+			}
+			
+			.border_colorTb {
+				border-color: #FC9153!important;
+			}
+			
+			.line_01 {
+				width: 100%;
+				height: 1px;
+				background-color: #F0F0F0;
+				transform: scaleY(0.5);
+				-webkit-transform: scaleY(0.5);
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+			/*确认按钮*/
+			
+			.demo3 {
+				min-width: 70%;
+				max-width: 70%;
+			}
+			
+			.demo3 .lxj_tipButtom {
+				display: -webkit-flex;
+				-webkit-justify-content: space-between;
+			}
+			
+			.demo3 .lxj_tipButtomA0 {
+				-webkit-order: 1;
+				font-size: 0.17rem;
+			}
+			
+			.demo3 .lxj_tipButtomA1 {
+				-webkit-order: 0;
+				font-size: 0.17rem;
+			}
+			
+			.demo3 .lxj_content {
+				padding: 40px;
+				font-size: 0.16rem;
+			}
+			
+			.demo2 {}
+			
+			.demo2 .lxj_content {
+				padding: 40px;
+				font-size: 0.16rem;
+			}
+			
+			.demo2 .lxj_tipButtom {}
+			
+			.demo2 .lxj_tipButtomA0 {
+				font-size: 0.17rem;
+				width: 90%;
+			}
+			
+			/*#app {
+				background-image: url(images/003.png);
+				background-position: 0 0;
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+			}*/
+		</style>
+	</head>
+
+	<body style="min-height: 100%;background-color: #f3f4f5;">
+		<div id="app" v-cloak>
+			<div class="top_border">
+			</div>
+			<div id="main_box" v-if="SpecialColumnList.length>0&&showState">
+				<div class="item_box" v-for="(item,index) in SpecialColumnList">
+                    <div class="item_info" v-on:click="goSpecialindex(item)">
+                    	<div class="itemimg_box">
+                    		<div class="itemimg" v-if='item.picturePath' v-bind:style="{ backgroundImage: 'url('+item.picturePath+')' }"></div>
+                    		<div class="itemimg" v-if='!item.picturePath' style="background-image:url(../special/images/ic_man@3x.png);"></div>
+                    	</div>
+                    	<div class="iteminfo_box">
+                    		<div class="item_name">
+                    			{{item.name}}
+                    		</div>
+                    		<div class="item_text">
+                    			{{item.content}}
+                    		</div>
+                    	</div>
+                    </div>
+					<div class="item_bottomborder">
+					</div>
+				</div>
+			</div>
+			<div class="bottomText" v-if="SpecialColumnList.length>0&&showState">
+				已显示全部内容
+			</div>
+			
+			
+	
+			<div v-cloak v-if="SpecialColumnList.length==0&showState" id="no_order">
+				<div id="displaynone" style="width:100%;height: 103.4px;">
+				</div>
+				<div class="nothing_img_box" style="text-align: center;width:100%;"><img id="nothing_img" src='images/collect-empty.png' style="width:90px;" /></div>
+				<div class="displaynone10" style="width:100%;height: 10px;">
+				</div>
+				<div class="nothing_text" style="text-align: center;width: 100%;font-size: 16px;height: 70px;line-height: 70px;color:#999;">暂无关注</div>
+<!-- 				<div class="nothing_text" style="text-align: center;width: 100%;color: #999;font-size: 14px;">赶快去逛逛吧！</div>
+ -->			</div>
+
+		</div>
+
+		</div>
+
+			
+
+		<script type="text/javascript">
+			var windowwidth = document.documentElement.clientWidth;
+			var windowheight = document.documentElement.clientHeight;
+			document.getElementById("no_order").style.height = windowheight + "px";
+			document.getElementById("no_order").style.backgroundColor = "#f3f4f5";
+			document.getElementById("nothing_img").style.width = 180 * windowwidth / 414 + "px";
+			document.getElementById("displaynone").style.height = (windowheight - 180 * windowwidth / 414 - 70) * 0.3 + "px";
+		</script>
+
+	</body>
+	<script src="js/myConcerns.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

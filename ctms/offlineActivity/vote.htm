@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>票选详情页</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/vote.css"/>
+    <link rel="stylesheet" href="../common/css/mui.min.css">
+    <script type="text/javascript"	src="../common/js/jquery-2.1.4.js"></script>
+    <script src="../common/interface.js"></script>
+    <script src="../common/interfaceParameters.js"></script>
+    <script src="../common/js/fontSize.js"></script>
+    <script src="js/common.js"></script>
+    <script src="../common/js/underscore.js"></script>
+    <script src="../common/tip/lxjTip.js"></script>
+    <link rel="stylesheet" href="../common/tip/lxjTip.css"/>
+  </head>
+  <body>
+
+    <div class="huodong1" id="activityId"></div>
+      <script id="activityIdTemplate" type="text/template">
+        <div>
+            <div style="font-weight:700;font-size:0.2rem;"><%=title%></div>
+            <div class="voteTime"><%=creatorName%><span style="color:#808080;"><%=startTime%></span></div>
+        </div>
+        <!--<div class="map">-->
+          <!--<img src="<%=indexPic%>" width="100%" alt="主图"/>-->
+        <!--</div>-->
+        <div class="content"><%=content%></div>
+      </script>
+    <script id="isMultiSelectTemplate" type="text/template">
+      <div class="pollnum">
+        共有<%=voteNum%>名邻居参选，<%=pollNum%>名邻居投票 <span></span>
+      </div>
+      <!--<div class="height"></div>-->
+    </script>
+    <div style="background:#fff;">
+      <div class="isMultiSelect" id="isMultiSelect"></div>
+      <div class="huodong2" id="activityOptions"></div>
+    </div>
+    <!-- 票选列表-->
+    <script id="activityOptionsTemplate" type="text/template">
+      <% _.each(data, function(item,idx){%>
+      <%if(data.isMultiSelect==0){%>
+      <div class="voteSelect">
+        <div>
+          <lable>
+            <div class="select_list">&nbsp;</div>
+            <input name="Fruit" class="select" type="radio" value="" /><%=item.title%>&nbsp;<span style="color: #c09853">(<%=item.pollNums%>票)</span>
+          </lable>
+        </div>
+      </div>
+      <% }else{%>
+      <div class="voteSelect">
+        <div>
+          <lable>
+            <div class="select_list">&nbsp;</div>
+            <input name="Fruit" class="select" type="checkbox" value="" /><%=item.title%>&nbsp;<span style="color: #c09853">(<%=item.pollNums%>票)</span>
+          </lable>
+        </div>
+      </div>
+      <% }%>
+      <div class="voteImg">
+        <img src="<%=item.picSource%>" width="100%" alt=""/>
+      </div>
+      <%})%>
+    </script>
+    <div class="detailBox">
+      <div class="detailTopic">为你优选</div>
+      <div id="commodityList"></div>
+    </div>
+    <script id="commodityListTemplate" type="text/template">
+      <div class="detailLeft" id="<%=commodityId%>" commodityType="<%=commodityType%>">
+        <div class="detailImg">
+          <img src="<%=pictureUrl%>" width="100%" alt=""/>
+        </div>
+        <div class="detailTalk"><%=name%></div>
+        <div class="value">
+          <span>¥<span style="font-size:0.16rem;"><%=commodityPriceMax%></span>.<span><%=commodityPriceMin%></span></span>
+          <s style="color:#ccc;padding-left:0.1rem;"><%=originalPrice%></s>
+        </div>
+        <div style="margin-bottom: 10px;">
+             <span class="volume">
+               <%=salesVolume%>人已购买
+             </span>
+        </div>
+      </div>
+    </script>
+    <div class="reminder">已经到底了</div>
+    <!--底部投票按钮-->
+    <div  style="width: 100%;height:0.68rem;opacity: 0;clear: both;">
+    </div>
+    <div class="voteBtn">
+      <div>投票</div>
+    </div>
+  </body>
+  <script src="../common/js/mui.min.js"></script>
+  <script src="../common/js/mui.previewimage.js"></script>
+  <script src="../common/js/mui.zoom.js"></script>
+  <script>
+    mui.previewImage();
+  </script>
+  <script src="js/vote.js"></script>
+</html>

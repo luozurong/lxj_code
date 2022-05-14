@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            list-style: none;
+        }
+        #banner{
+            width:500px;
+            margin:0 auto;
+            overflow: hidden;
+            position:relative;
+        }
+        .banner-img{
+            width:2000px;
+        }
+        .banner-img  li{
+            width:500px;
+            float:left;
+        }
+        .banner-ol{
+            position:absolute;
+            bottom:20px;
+            left:300px;
+            z-index:2;
+        }
+        .banner-ol li{
+            float:left;
+            width:14px;
+            border-radius: 7px;
+            margin-left:5px;
+            border:1px solid red;
+            text-align: center;
+            cursor: pointer;
+        }
+        .banner-btn{
+            width:500px;
+            position:absolute;
+            top:120px;
+            left:0;
+            z-index:1;
+            color:red;
+        }
+        .prev{
+            float:left;
+            font-size:50px;
+            cursor:pointer;
+        }
+        .next{
+            float:right;
+            font-size:50px;
+            cursor:pointer;
+        }
+        .active{
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <div>
+            <ul class="banner-img">
+                <li><img src="img/muwu.jpg" alt=""/></li>
+                <li><img src="img/shuijiao.jpg" alt=""/></li>
+                <li><img src="img/yuantiao.jpg" alt=""/></li>
+            </ul>
+            <ol class="banner-ol">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ol>
+        </div>
+        <div class="banner-btn">
+            <a class="prev">&lt;</a>
+            <a class="next">&gt;</a>
+        </div>
+    </div>
+    <script>
+        $(function(){
+                var  index = 0;
+                $("ol li").eq(index).addClass("active");
+                function show(){
+                    $("ol li").eq(index).addClass("active").siblings().removeClass();
+                }
+                //prev
+                function prev(){
+                    if(index==0){
+                        $(".banner-img").animate({"marginLeft":-2*width},300);
+                        index=2;
+                        show();
+                    }else{
+                        $(".banner-img").animate({"marginLeft":"+="+width},300);
+                        index--;
+                        show();
+                    }
+                }
+                var width = $(".banner-img li").width();
+                $(".prev").click(function () {
+                    prev();
+                });
+
+                //next
+                $(".next").click(function () {
+                    next();
+                });
+
+                function next(){
+                    if(index==2){
+                       // $(".banner-img").stop().animate({"marginLeft":0},200);
+                        $(".banner-img").animate({"marginLeft":0},300);
+                        index=0;
+                        show();
+                    }else{
+                        //$(".banner-img").stop().animate({"marginLeft":"-="+width},200);
+                        $(".banner-img").animate({"marginLeft":"-="+width},300);
+                        index++;
+                        show();
+                    }
+                }
+
+                //click point
+                $("ol li").click(function(){
+                    $(this).addClass("active").siblings().removeClass();
+                    //$(".banner-img").stop().animate({"marginLeft":-($(this).index())*width},200);
+                    $(".banner-img").animate({"marginLeft":-($(this).index())*width},300);
+                    index=$(this).index();
+                });
+
+                //interval
+                var timer=setInterval(next,5000);
+                $("#banner").hover(function(){
+                   // hovering = true;
+                    clearInterval(timer);
+                }, function () {
+                   // hovering = false;
+                    timer = setInterval(next,5000)
+                });
+        });
+    </script>
+</body>
+</html>

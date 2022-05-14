@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>联享家开放平台</title>
+		<link rel="stylesheet" href="css/my.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="user" v-cloak>
+			<div class="apply-header">
+				<img src="../common/img/logo.png" alt="">
+				<span class="apply-name">联享家开放平台--个人中心</span>
+				<a href="../index/index.html" class="apply-index">返回首页</a>
+			</div>
+			<div class="user-password">
+				<div class="user-password-word">个人中心--密码修改</div>
+
+				<div class="user-password-form">
+					<p v-if="userTipFlag" v-text="userTipFlagWord" class="user-tip">修改成功</p>
+					<div>
+						<span>原始密码：</span>
+						<input type="text" v-model="oldPassword" placeholder="请输入原始密码">
+						<p v-if="oldPasswordFlag">请输入原始密码</p>
+					</div>
+					<div>
+						<span>新密码：</span>
+						<input type="password" v-model="newPassword" placeholder="请输入新密码">
+						<p v-if="newPasswordFlag">请输入新的密码(数字或英文6-20位)</p>
+					</div>
+					<div>
+						<span>确认密码：</span>
+						<input type="password" v-model="newPasswordAgain" placeholder="请输入确认密码">
+						<p v-if="newPasswordAgainFlag">密码不一致</p>
+					</div>
+					<div>
+						<span class="user-submit" @click="userSubmit()">立即修改</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/my.js"></script>
+	</body>
+</html>

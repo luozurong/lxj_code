@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<link rel="stylesheet" type="text/css" href="css/share.css" />
+		<script src="https://static.mlinks.cc/scripts/dist/mlink.min.js"></script>
+		<script src="../common/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/echo.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hadoop.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<title>联享家-活动分享</title>
+		<style type="text/css">
+			body,
+			html {
+				height: 100%;
+				width: 100%;
+				background-color: #f4f5f6;
+				line-height: normal;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			#activitylist_header,
+			#activitylist_main,
+			#shop_box,
+			#shop_box .shop {
+				background-color: #fff;
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+			
+			.fade-leave-active {
+				/*transition: opacity .5s*/
+			}
+			
+			.fade-leave-to {
+				opacity: 0
+			}
+			
+			#app {
+				overflow: auto;
+				-webkit-overflow-scrolling: touch
+			}
+		</style>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+			Array.prototype.contains = function(obj) {
+				var i = this.length;
+				while(i--) {
+					if(this[i] === obj) {
+						return true;
+					}
+				}
+				return false;
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<div id="activitylist_header" v-if="jsondate.result==0">
+				<div class="title_box">
+					<div id="title">
+						{{jsondate.title}}
+					</div>
+					<!--<div class="quanzi">
+						55555
+					</div>-->
+				</div>
+				<div class="electTime">联享家<span>{{jsondate.startTime}}</span></div>
+			</div>
+			<div id="activitylist_main" v-if="jsondate.result==0">
+				<!--<div id="main_img">
+					<img v-bind:src='jsondate.indexPic' />
+				</div>-->
+				<div id="activitylist_describe" v-html="jsondate.content">
+
+				</div>
+			</div>
+			<div id="voteSelectBox" v-if="jsondate.activityOptions&&jsondate.activityOptions.length>0&&jsondate.voteStatus!==0">
+				<div class="isMultiSelect">
+					共有{{jsondate.voteNum}}位邻居参选，{{jsondate.pollNum}}位邻居投票 <span v-if="jsondate.isMultiSelect==0">(单选)</span><span v-if="jsondate.isMultiSelect==1">(最多选择{{jsondate.isMultiSelectNum}}票)</span>
+				</div>
+				<div class="voteSelect_box" v-for="(items,index) in jsondate.activityOptions">
+					<div class="line_01"></div>
+					<div class="voteSelect" v-on:click="choosevoteSelect(jsondate.isMultiSelect,items.optionsId,index,jsondate.isMultiSelectNum)">
+						<div class="select_img" v-if="jsondate.isMultiSelect==0" v-bind:class="{selectChoose_img:chooseVoteid==items.optionsId}">
+						</div>
+						<div class="select_img" v-if="jsondate.isMultiSelect==1" v-bind:class="{selectChoose_img:chooseVoteidList[index]==true}">
+						</div>
+						<!--	<lable><input type="radio" name="" id="" value="" /></lable>-->
+						<div class="voteImg" v-bind:style="{backgroundImage:'url('+items.picSource+')'}">
+						</div>
+						<div class="voteContent">
+							<div class="votetext">
+								{{index+1}}.{{items.title}}
+							</div>
+							<div class="votenum">
+								<span>{{items.pollNums}}</span>票
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<!--<div class="huodong2" id="activityOptions">
+					<div class="voteSelect">
+						<div>
+							<lable>
+								<div class="select_list">&nbsp;</div>
+								<input name="Fruit" class="select" type="radio" value="" />
+								title&nbsp;<span style="color: #c09853">(票)</span>
+							</lable>
+						</div>
+					</div>
+				</div>-->
+
+			</div>
+
+			<!--<div id="shop_box">
+				<div id="shop_box_content">
+					为你优选
+				</div>
+				<div class="shop" v-for='item in jsondate.commodityLIst'>
+					<div class="shop_img">
+						<img v-bind:src='item.pictureUrl' />
+					</div>
+					<div class="shop_describe">
+						销量销量销量销量销量销量{{item.describe}}
+					</div>
+					<div class="shop_price">
+						<div class="new_price">
+							¥{{item.commodityPrice}}
+						</div>
+						<div class="old_price">
+							¥{{item.commodityPrice}}
+						</div>
+					</div>
+					<div class="sales">
+						{{item.salesVolume}}人已购买
+					</div>
+				</div>
+			</div>-->
+			<!--<div style="width: 100%;height: 60px;opacity: 0;clear: both;">
+			</div>-->
+			<!--	<transition name="fade">-->
+
+			<!--	</transition>-->
+		</div>
+		<div id="footer" style="display: none;">
+			<div id="valid_activity">
+				<img src="images/picture@3x.png" style="height: 46px;width: auto;display: block;" />
+				<div class="" style="-webkit-flex-grow: 2;">
+
+				</div>
+				<a id="godownload">
+					打开
+				</a>
+				<img src="images/btn_cancle@3x.png" onclick="hiddenFooter()" style="padding-left: 30px;width: 18px;height: 18px;display: block;" />
+
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		//		获取参数start
+		var activityId = GetURLParameter("activityId");
+		var u = navigator.userAgent;
+		var clientType = "";
+		if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+			clientType = "android";
+		} else {
+			clientType = "ios";
+		}
+		//      console.log(clientType)
+		//      获取参数end
+		//      统计start
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview', false]);
+		(function() {
+			var hm = document.createElement("script");
+			//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+			hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7"; //正式
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+		//		统计end
+		//		new Mlink({
+		//			mlink: 'https://aejlur.mlinks.cc/A0VO?activityId=' + GetURLParameter("activityId"),
+		//			button: document.querySelector('span#godownload')
+		//		});
+		//		var activityId = GetURLParameter("activityId");
+		//		var activityId = "15053863699769871d7f1b5a40ceacaf";
+		var token = "";
+		//		var ctmsHost = "https://tt.hori-gz.com:8443";
+		var timestamp = new Date().getTime();
+		var createTime = getTime();
+        var createTime2 = new Date().getTime();
+        
+		var channelType = '';
+		var title = "";
+		var otherChannelId = "";
+		var ua = navigator.userAgent.toLowerCase();
+		if(ua.match(/MicroMessenger/i) == "micromessenger") {
+			channelType = "6"; //在微信中打开
+		} else if(ua.match(/QQ/i) == "qq") {
+			channelType = "7"; //在QQ空间打开
+		} else {
+			channelType = "8";
+			otherChannelId = GetURLParameter("otherChannelId") ? GetURLParameter("otherChannelId") : 3;
+			//otherChannelId=3代表没设定其它渠道id
+		}
+
+		var vue = new Vue({
+			el: '#app',
+			data: {
+				jsondate: {},
+				orderList: [],
+				chooseVoteid: '',
+				chooseVoteidList: [],
+				footerState: true,
+				apiurl: ctmsHost + "/ctmsApi/activity/shareActivity", //报名活动详情接口
+				apiurl2: horiBigDataHost + "/horiBigData/bigSource/accessActivitySpecialDetailServlet", //用户访问活动专题详情页接口
+				apiurl3: horiBigDataHost + "/horiBigData/bigSource/accessDetailRemainTimeOrLoadServlet", //大数据活动停留时间
+
+			},
+			filters: {
+				//状态过滤
+				statusFlag: function(status, type) {},
+
+			},
+			mounted: function() {
+				this.$nextTick(function() {
+					//console.log(99999999);
+					this.getDatejson();
+				});
+
+			},
+			methods: {
+				getDatejson: function() {
+					var params = {};
+					var timestamp = new Date().getTime();
+					params.header = {
+						time_stamp: timestamp,
+						token: token
+					};
+					params.body = {
+						activityId: activityId
+					};
+
+					var paramData = JSON.stringify(params);
+					this.$http.jsonp(this.apiurl + "?str=" + encodeURI(paramData), {
+						emulateJSON: true,
+						method: "get",
+						dataType: "jsonp",
+						jsonp: "jsoncallback",
+						jsonpCallback: "success_jsonpCallback"
+					}).then(function(response) {
+						// 响应成功回调
+						console.log(JSON.stringify(response.body))
+						//this.message = JSON.stringify(response.body);
+						this.jsondate = response.body;
+						title = response.body.title;
+						var subTitle = response.body.subTitle ? response.body.subTitle : "联享家活动";
+						setShareInfo({
+							title: title,
+							summary: subTitle,
+							pic: response.body.indexPic,
+							url: window.location.href
+						});
+						if(response.body.result == 0) {
+							//							统计区分类型start
+							switch(response.body.category) {
+								case 1:
+									_hmt.push(['_trackPageview', '/client=' + clientType + '-活动-分享-参团类活动-活动ID=' + activityId]);
+									break;
+								case 2:
+									_hmt.push(['_trackPageview', '/client=' + clientType + '-活动-分享-票选类活动-活动ID=' + activityId]);
+									break;
+								case 3:
+									_hmt.push(['_trackPageview', '/client=' + clientType + '-活动-分享-普通活动-活动ID=' + activityId]);
+									break;
+							}
+							//							统计区分end
+							vue.choosevoteList(response.body.activityOptions);
+							setTimeout(function() {
+								$("#activitylist_describe img").each(function(index, element) {
+									$(element).attr('data-echo', $(element).attr("src"));
+									$(element).attr('src', "images/c_s_error.png");
+								})
+								echo.init({
+									offset: 0,
+									throttle: 100
+								});
+							}, 100);
+							setTimeout(function() {
+								vue.accessActivitySpecialDetail();
+							}, 600);
+							document.getElementById("footer").style.display = 'block';
+							new Mlink({
+								mlink: "https://aejlur.mlinks.cc/A0VO" + "?activityType=" + response.body.category + "&activityId=" + activityId + "&activityType=" + response.body.category + "&channelType=" + channelType,
+								button: document.querySelector('a#godownload')
+							});
+						} else {
+							lxjTip.alert("活动信息异常");
+						}
+
+					}, function(response2) {
+						// 响应错误回调
+						console.log(JSON.stringify(response2.body));
+						lxjTip.alert("活动异常");
+						//	console.log(JSON.stringify(response))
+					});
+				},
+				accessActivitySpecialDetail: function() {
+					try {
+						var params = {};
+						var timestamp = new Date().getTime();
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							list: [{
+								userAccount: "",
+								type: 2,
+								channelType: channelType,
+								id: activityId,
+								name: title,
+								organizationSeq: "",
+								createTime: createTime,
+								communityId: "",
+								communityName: "",
+								appBannerType: "",
+								otherChannelId: otherChannelId
+							}]
+						};
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl2 + "?str=" + encodeURI(paramData), {
+							emulateJSON: true,
+							method: "get",
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {}, function(response2) {});
+					} catch(e) {}
+				},
+				//大数据活动停留
+				accessDetailRemainTime: function(remainTime) {		
+					if(accessDetailRemainTimeState) {
+						return false;
+					}
+					accessDetailRemainTimeState = true;
+					try {
+						var params = {};
+						var timestamp = new Date().getTime();
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							list: [{
+								userAccount: userAccount,
+								type: 2,
+								operateType: 1,
+								id: activityId,
+								name: title,
+								organizationSeq: organizationSeq,
+								createTime: createTime,
+								remainTime: remainTime,
+							}]
+						};
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl3 + "?str=" + encodeURI(paramData), {
+							emulateJSON: true,
+							method: "get",
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {}, function(response2) {});
+					} catch(e) {
+						//TODO handle the exception
+					}
+				},
+				choosevoteList: function(list) {
+					if(list.length > 0) {
+						for(var i = 0; i < list.length; i++) {
+							vue.chooseVoteidList.push(false);
+						}
+					}
+				},
+				choosevoteSelect: function(isMultiSelect, id, index, isMultiSelectNum) {
+					//	console.log(isMultiSelect + " " + id + " " + index);
+					//console.log(vue.chooseVote.contains(id))
+					if(isMultiSelect == 0) {
+						vue.chooseVoteid = id;
+					} else {
+						if(vue.chooseVoteidList[index]) {
+							Vue.set(vue.chooseVoteidList, index, false);
+						} else {
+							var arr = vue.chooseVoteidList;
+							var map = {};
+							for(var i = 0; i < arr.length; i++) {
+								var ai = arr[i];
+								if(!map[ai]) {
+									map[ai] = 1;
+								} else {
+									map[ai]++;
+								}
+							}
+							var isMultiSelectNum2 = (map.true) ? (map.true) : 0;
+							console.log(isMultiSelectNum2 + " " + isMultiSelectNum);
+							if(Number(isMultiSelectNum2) > isMultiSelectNum - 1) {
+								lxjTip.msg("最多只可以选择" + isMultiSelectNum + "票！", {
+									time: 3000
+								});
+								return false;
+							}
+							Vue.set(vue.chooseVoteidList, index, true);
+						}
+						//	console.log(vue.chooseVoteidList[index]);
+					}
+				},
+				//进入确认报名页面
+				/*hiddenFooter: function() {
+					
+				},*/
+				//				downloadApp: function() {
+				//					//window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.hori.smartcommunity");
+				//					
+				//				},
+			}
+		});
+		window.onbeforeunload = onbeforeunload_handler;
+		window.onunload = onunload_handler;
+		var accessDetailRemainTimeState = false;
+		document.addEventListener('webkitvisibilitychange', function() {
+			if(document.webkitVisibilityState == 'hidden') {
+				vue.accessDetailRemainTime((new Date().getTime()) - createTime2);
+			} else {}
+		})
+
+		function onbeforeunload_handler() {
+			var warning = vue.accessDetailRemainTime((new Date().getTime()) - createTime2);
+			return warning;
+		}
+
+		function onunload_handler() {
+			vue.accessDetailRemainTime((new Date().getTime()) - createTime2);
+		}
+
+		function hiddenFooter() {
+			document.getElementById("footer").style.display = 'none';
+		}
+
+		//获取URL参数
+		function GetURLParameter(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return null;
+		}
+	</script>
+
+</html>

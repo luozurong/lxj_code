@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<title>绑定住房指引</title>
+		<script src="../common/js/fontSize.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/swiper/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bind_guide.css" />
+	</head>
+
+	<body>
+		<div class="maple-tab">
+			<ul class="clearfix">
+				<li class="tab1 fl active"><span>业主版</span></li>
+				<li class="tab2 fr"><span>家属/租客版</span></li>
+			</ul>
+		</div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<!--<div class="swiper-slide">
+		        	<div class="content_two">
+						<div class="title"><img src="images/ic_bindOne1.png"/></div>
+						<div class="bind"><img src="images/ic_bindOne2.png"/></div>
+						<div class="bind"><img src="images/ic_bindOne3.png"/></div>
+						<div class="bind"><img src="images/ic_bindOne4.png"/></div>
+					</div>
+					<div class="box"></div>
+		        </div>-->
+				<div class="swiper-slide">
+					<div class="content_two">
+						<div class="title"><img src="images/ic_bindTwo1.png" /></div>
+						<div class="bind"><img src="images/ic_bindTwo2.png" /></div>
+						<div class="bind"><img src="images/ic_bindTwo3.png" /></div>
+						<div class="bind"><img src="images/ic_bindTwo4.png" /></div>
+						<div class="bind"><img src="images/ic_bindTwo5.png" /></div>
+					</div>
+					<div class="box"></div>
+				</div>
+				<!--<div class="swiper-slide">
+		        	<div class="content_two">
+						<div class="title"><img src="images/ic_bindThree1.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree2.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree3.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree4.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree5.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree6.png"/></div>
+						<div class="bind"><img src="images/ic_bindThree7.png"/></div>
+					</div>
+					<div class="box"></div>
+		        </div>-->
+				<div class="swiper-slide">
+					<div class="content_two">
+						<div class="title"><img src="images/ic_bindFour1.png" /></div>
+						<div class="bind"><img src="images/ic_bindTwo2.png" /></div>
+						<div class="bind"><img src="images/ic_bindFour3.png" /></div>
+						<div class="bind"><img src="images/ic_bindFour4.png" /></div>
+						<div class="bind"><img src="images/ic_bindFour5.png" /></div>
+						<div class="bind"><img src="images/ic_bindFour6.png" /></div>
+						<div class="bind"><img src="images/ic_bindFour7.png" /></div>
+					</div>
+					<div class="box"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="know" onclick="onclickBack()">
+				我知道了
+			</div>
+		</div>
+
+		<script src="../common/js/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/swiper/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var u = navigator.userAgent;
+			var clientType = GetURLParameter('clientType');
+			var pushToHouseManager = GetURLParameter('pushToHouseManager');
+			if(!clientType) { //App拿不到clientType才进入
+				if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+					clientType = "ios";
+				} else {
+					clientType = "android";
+				}
+			}
+			$(function() {
+
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					autoHeight: true,
+					onSlideChangeEnd: function(e) {
+						var j = swiper.activeIndex;
+						$('.tab1, .tab2').removeClass('active').eq(j).addClass('active');
+					}
+				});
+				$('.tab1').click(function() {
+					$('.tab2').removeClass('active');
+					$(this).addClass('active');
+					swiper.slideTo(0, 300, false); //切换到第1个slide，速度为300
+				})
+				$('.tab2').click(function() {
+					$('.tab1').removeClass('active');
+					$(this).addClass('active');
+					swiper.slideTo(1, 300, false); //切换到第2个slide，速度为300
+				})
+			})
+			var b = true;//预防多次点击
+			function onclickBack() {
+				if(b){
+					b = false;
+					if(parseInt(pushToHouseManager) ==1 ){//跳住房管理
+						nativeMethod('pushToHouseManager', null);
+					}else{
+						goBack();
+					}
+					setTimeout(function(){
+						b = true;
+					},2000)
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <script src="js/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Vue Scroller</title>
+
+</head>
+<body>
+    <div id="axios"></div>
+<script>
+    var vue = new Vue({
+        el:'axios',
+        data:{
+
+        },
+        methods:{
+            mAjax: function(){
+              var param={
+                    body:{
+                        pageSize: 1,
+                        pageNum: 10,
+                        communityId: "150658668029b40bbe8f3a65453ca695"
+                    },
+                    header:{
+                        token: "151943763978fd7f12cdb6c44e2da0f8",
+                        time_stamp: new Date().getTime()
+                    }
+              }
+              console.log(param);
+              var paramString = JSON.stringify(param);
+              var url = 'https://tt.hori-gz.com:8443/ctmsApi/specialColumn/specialColumnDetailsList?str='+paramString;
+              axios(url,{
+                  responseType: 'json',
+                  withCredentials: true
+              })
+              .then(function (response) {
+                  console.log(response);
+              })
+              .catch(function (error) {
+                  console.log(error);
+              });
+            }
+        },
+        mounted: function(){
+            this.mAjax();
+        }
+    })
+</script>
+</body>
+</html>

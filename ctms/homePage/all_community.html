@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+    	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    	<meta content="yes" name="apple-mobile-web-app-capable">
+		<title>全部圈子</title>
+		<!--<script src="../common/js/fontSize.js" type="text/javascript" charset="utf-8"></script>-->
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="../common/css/dropload.css"/>-->
+		<link rel="stylesheet" type="text/css" href="../common/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/all_community.css"/>
+	</head>
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+		
+		    <div class="mui-scroll">
+				<div class="community_content">
+					<!--关注圈子列表-->
+					<ul class="followCommunity_list"></ul>
+					<!--关注圈子列表模板-->
+					<script id="followTemplate" type="text/html">
+						<li class="follow_community" onclick='goCommunityDetail("<%=name%>","<%=communityId%>","0")'>
+							<div class="icon"><img src="<%=icon%>"/></div>
+							<div class="community_data">
+								<div class="dataBox clearfix">
+									<div class="community_title fl"><%=name%></div>
+									<div class="fl">
+										<!--今日话题数-->
+										<span>今日:</span>
+										<% if(todayTopicNum >99){ %>
+											<span>99+</span>
+										<% }else{ %>
+											<span><%=todayTopicNum%></span>
+										<% } %>
+									</div>
+								</div>
+								<div class="dataBox">
+									<span class="followNum"><%=followNum%></span>
+									<span class="heat"><%=heat%>℃</span>
+									<!--<% if(heat>100){ %>
+										<span class="heat">100℃</span>
+									<% }else{ %>
+										<span class="heat"><%=heat%>℃</span>
+									<% } %>-->
+									<span class="ative"><%=activityNum%></span>
+								</div>
+							</div>
+						</li>
+					</script>
+					
+					<div class="greyBox"></div>
+					
+					<div class="community_tips">
+						<span class="line1">
+							<img src="images/zuo@3x.png"/>
+						</span>
+						全部圈子
+						<span class="line2">
+							<img src="images/you@3x.png"/>
+						</span>
+					</div>
+					
+					<!--推荐圈子列表-->
+					<ul class="recommendCommunity_list"></ul>
+					<!--推荐圈子列表模板-->
+					<script id="recommendTemplate" type="text/html">
+						<li class="recommend_community" onclick='goCommunityDetail("<%=name%>","<%=id%>","1")'>
+							<div class="icon"><img src="<%=icon%>"/></div><!--头像-->
+							<div class="community_data">
+								<div class="dataBox clearfix">
+									<div class="community_title fl"><%=name%></div><!--标题-->
+									<div class="fl">
+										<!--今日话题数-->
+										<span>今日:</span>
+										<% if(todayTopicNum >99){ %>
+											<span>99+</span>
+										<% }else{ %>
+											<span><%=todayTopicNum%></span>
+										<% } %>
+									</div>
+								</div>
+								<div class="dataBox">
+									<span class="followNum"><%=followerNum%></span><!--关注者数-->
+									<span class="heat"><%=heat%>℃</span>
+									<!--<% if(heat>100){ %>
+										<span class="heat">100℃</span>
+									<% }else{ %>
+										<span class="heat"><%=heat%>℃</span>
+									<% } %>-->
+									<!--<span class="ative">22</span>-->
+								</div>
+							</div>
+							<div class="add_community" onclick="follow('<%=id%>')">
+								<!--<img src="images/btn_ic_add@3x.png"/>-->
+								+加入
+							</div>
+						</li>
+					</script>
+				</div>
+				<div class="noData">
+					我是有底线的
+				</div>
+		    </div>
+		
+		</div>
+
+		<div class="null">
+			<div class="nullPic">
+				<img src="images/ic_null.png"/>
+			</div>
+			<div class="nullTips">
+				该小区还没有圈子呢，去别的小区看看吧~
+			</div>
+		</div>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../common/js/dropload.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/all_community.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扫一扫</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta name="format-detection" content="telephone=no" />
+    <script type="text/javascript"	src="../common/js/jquery-2.1.4.js"></script>
+    <script src="../common/interface.js"></script>
+    <script src="../common/interfaceParameters.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    //设置时间戳
+    var time_stamp = new Date().getTime();
+    function GetURLParameter(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    var organizationSeq=GetURLParameter("organizationSeq");
+//    var organizationSeq = sessionStorage.getItem("organizationSeq");
+
+//    var communityId = GetURLParameter("communityId");
+    var token = GetURLParameter("token");
+    var activityId= GetURLParameter("activityId");
+//    var token="201709061411290380844";
+//    var organizationSeq = '4400100143';
+//    var activityId="1504227810124aad16bf0cf141b89f0b";
+//    communityId = "3242310";
+//    var ctmsHost = "http://192.168.51.26:8090";
+    getDate();
+    function getDate(){
+            setTitle("扫一扫");
+           showProgressDialog();
+          var params = {};
+            params.header = {
+                token:token,
+                time_stamp: time_stamp
+            };
+            params.body = {
+                activityId: activityId,
+                organizationSeq:organizationSeq
+            };
+            var param = JSON.stringify(params);
+            $.ajax({
+                type: "post",
+                async: false,
+                url: ctmsHost + "/ctmsApi/activity/getActivityCategory?str=" + param,
+                dataType: "jsonp",
+                jsonp: "jsoncallback",
+                jsonpCallback: "success_jsonpCallback",
+                success: function(data) {
+                    var category = data.category;
+                        activityId = data.activityId;
+                    if(category==1){
+                            console.log(1);
+                        //报团活动
+                        showActivitySpecial(ctmsHost+"/ctmsH5/offlineActivity/offered.htm?activityId="+activityId+"&backHomePage=1", "活动详情", 3, null);
+                        //常规活动
+                    }else if(category==2){
+                            console.log(3);
+                        showActivitySpecial(ctmsHost+"/ctmsH5/offlineActivity/offlineList.htm?activityId="+activityId+"&backHomePage=1", "活动详情", 3, null);
+                        //票选活动
+                    }else if(category==3){
+                        showActivitySpecial(ctmsHost + "/ctmsH5/offlineActivity/voteActivity.htm?activityId=" + activityId+"&backHomePage=1", "活动详情", 3, null);
+
+                    }else if(category==4){
+                        showActivitySpecial(ctmsHost + "/ctmsH5/offlineActivity/voteActivity.htm?activityId=" + activityId+"&backHomePage=1", "活动详情", 3, null);
+
+                    }
+                }
+            });
+
+    }
+
+</script>
+</html>

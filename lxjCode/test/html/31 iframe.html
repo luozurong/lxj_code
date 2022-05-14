@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <style>
+        iframe{
+            border:1px solid #ddd;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="test1">点击1</div>
+    <iframe src="32 iframe-html.html"  name="iframeb" frameborder="0"></iframe>
+    <script>
+        $(function(){
+            $(".test1").click(function(){
+                var textValue = $(".test2",window.frames[name="iframeb"].document).text();
+                console.log(textValue);
+            });
+        });
+
+    </script>
+</body>
+</html>

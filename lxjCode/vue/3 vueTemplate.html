@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../test/js/vue.min.js"></script>
+</head>
+<body>
+    <span id="app">{{name}}</span>
+</body>
+<script>
+    var vueTamplete = new Vue({
+        methods:{
+            status:function(value){
+                if(value == ""){
+                    return "空";
+                }
+                return "非空"
+            }
+        }
+    });
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            name: "",
+        },
+        mounted:function(){
+            this.name = vueTamplete.status(this.name)
+        }
+    });
+</script>
+</html>

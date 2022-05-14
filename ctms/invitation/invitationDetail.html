@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<link rel="stylesheet" href="../common/css/dropload.css">
+		<link rel="stylesheet" href="../common/tip/lxjTip.css">
+		<link rel="stylesheet" href="css/invitationDetail.css" />
+		<script src="../common/tip/lxjTip.js"></script>
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<title>帖子详情</title>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.zoom.js"></script>
+		<script src="../common/js/mui.previewimage.js"></script>
+		<script src="../common/js/dropload.min.js"></script>
+	</head>
+	<style>
+		.demo3 .lxj_content {
+			font-size: 16px;
+		}
+		
+		.demo3 .lxj_tipButtomA0,
+		.demo3 .lxj_tipButtomA1 {
+			font-size: 17px;
+			letter-spacing: 2px;
+		}
+	</style>
+	<style type="text/css">
+		
+		.img-rule1 {
+			width: 100%;
+			box-sizing: border-box;
+		}
+		
+		.container {
+			max-width: 2.64rem;
+			max-height: 3.45rem;
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+		
+		.container img {
+			max-width: 100%;
+		}
+		
+		.img-rule2 {
+			width: 100%;
+			display: -webkit-flex;
+			box-sizing: border-box;
+		}
+		
+		.img-rule2 span {
+			display: inline-block;
+			box-sizing: border-box;
+			width: 100%;
+			height: 1.26rem;
+		}
+		/*.img-rule2 span:nth-child(2){*/
+		/*margin:0 0.06rem;*/
+		/*}*/
+		
+		.img-rule3 {
+			width: 100%;
+			box-sizing: border-box;
+			/*margin-top:0.06rem;*/
+			overflow: hidden;
+		}
+		
+		.img-rule3 span {
+			display: inline-block;
+			box-sizing: border-box;
+			width: 100%;
+			margin-bottom: 0.12rem;
+			/*height: 1.26rem;*/
+			float: left;
+		}
+		/*.img-rule3 span:nth-child(1),.img-rule3 span:nth-child(2){*/
+		/*margin-bottom:0.06rem;*/
+		/*}*/
+		/*.img-rule3 span:nth-child(2n){*/
+		/*/!*margin-right: 0.1rem;*!/*/
+		/*margin-right: 0.7rem;*/
+		/*margin-left: 0.06rem;*/
+		/*}*/
+		.special-comment-count{
+			/*font-family: "SF UI Text Regular"!important;	*/	
+		}
+	</style>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+				isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+				dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+				dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+				scale = 1 / dpr,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>
+
+	<body style="background-color:#f3f4f5;">
+		<div class="topic_content">
+			<div class="lists">
+				<div class="outline">
+					<div class="caption">
+						<input type="hidden" id="userAccount"></input>
+						<input type="hidden" id="tokenUser"></input>
+						<input type="hidden" id="communityId"></input>
+						<input type="hidden" id="communityName"></input>
+						<img class="outline_img" src="images/ic_default_avatar.png" alt="" id="headPicture" />
+						<div class="content">
+							<div class="special">
+								<span class="special-title" id="nick"></span>
+								<!-- <span class="subject" id="createTime"></span> -->
+							</div>
+							<div class="topic" id="topic_community"> <span class="topic" id="createTime"></span></div>
+						</div>
+					</div>
+					<div class="topicContentbox" style="padding-top: 0.2rem;line-height: 0.3rem;font-size:0.173rem;word-wrap: break-word;"><pre id="topicContent"></pre>
+
+					</div>
+					<!--<div class="content_img" style="padding-top:.14rem;padding-bottom:.26rem;overflow: hidden;">-->
+					<!--<div class="background-auto" style="background-image: url(images/476088229224806871.jpg);"> <img style="opacity:0;;height: 1rem;width: 0.873rem;width: 40%;" data-preview-src="" data-preview-group="1" src="images/476088229224806871.jpg" alt=""/></div>-->
+					<!-- -->
+					<!--<img style="height: 1rem;width: 0.873rem;width: 40%;" data-preview-src="" data-preview-group="1" src="images/476088229224806871.jpg" alt=""/>-->
+					<!--</div>-->
+				</div>
+				<!--<div style="text-align: right">一分钟前</div>-->
+				<!--<div >-->
+				<!--<images src="" alt="3k"/>-->
+				<!--</div>-->
+			</div>
+			<div class="content_img"></div>
+			<div class="special-comment">
+				<div class="special-comment-count">
+					<span>全部评论 (<span id="totalSubjectBack">0</span>)</span>
+				</div>
+				<!-- <div class="special-comment-item"></div>-->
+				<div class="special-comment-empty">暂时还没有评论，快点来抢沙发！</div>
+				<div class="comment-over" style="display: none;">我是有底线的</div>
+				<div style="height: 50px;background-color: #F3F4F5;"></div>
+			</div>
+		</div>
+
+		<div class="special-comment-fixed">
+			<div style="width: 50%;float: left;" onclick="praise()">
+				<img class="img_thumbs" src="images/ic_like_nor@3x.png" alt="" />
+				<span class="thumbs">点赞</span>
+			</div>
+			<div style="width: 50%;float: left;" onclick="goCommentList()">
+				<img class="img_estimate" src="images/btn_ic_message.png" alt="" />
+				<span class="estimate">评论</span>
+			</div>
+			<!--<div>-->
+			<!--<img src="images/ic_comment.png" alt="">-->
+			<!--<input type="text" placeholder="说点什么吧..." maxlength="250"  id="back">-->
+			<!--</div>-->
+			<!--<span onclick="send()" id="send">发送</span>-->
+		</div>
+		<div class="top-fixed">
+			<img src="../special/images/top.png" alt="">
+		</div>
+		<script>
+			if (isCondition(sessionStorage.getItem("lxjversionsName"))&&Number(sessionStorage.getItem("lxjversionsName"))>=4008) {
+				
+			}else{
+				 mui.previewImage();
+			}
+		</script>
+		<script src="js/invitationDetail.js"></script>
+	</body>
+
+</html>

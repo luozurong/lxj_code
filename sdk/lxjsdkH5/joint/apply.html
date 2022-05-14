@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../common/js/ieCompatibility.js"></script>
+		<title>联享家开放平台</title>
+		<link rel="stylesheet" href="css/apply.css">
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<link rel="stylesheet" href="../common/layer/skin/layer.css">
+		<script src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/js/url.js"></script>
+		<script src="../common/vue/vue.min.js"></script>
+		<script src="../common/vue/vue-resource.min.js"></script>
+	</head>
+	<body>
+		<div id="apply" v-cloak>
+			<div class="apply-header">
+				<img src="img/AA.png" alt="">
+				<span class="apply-name" v-text="userAccount"></span>
+				<span class="apply-edit" @click="goUser()">编辑账户</span>
+				<a href="../index/index.html" class="apply-index">返回首页</a>
+			</div>
+			<div class="apply-content">
+				<div class="apply-add">
+					<a @click="addApplyUrl()" :class="{'noAddApply':isTrue}">添加应用</a>
+					<a v-if="terraceFlag" @click="inputEstate()">添加平台</a>
+				</div>
+				<div class="apply-nav">
+					<div class="apply-nav-span">
+						<div>
+							<span @click="addApply(1)" :class="{'apply-nav-active':oneStatus}" class="apply-nav-sdk">我的应用</span>
+							<span @click="addApply(2)" :class="{'apply-nav-active':twoStatus}" class="apply-nav-ping">平台</span>
+						</div>
+					</div>
+					<div class="apply-nav-pop">
+						<div class="apply-div-pop">
+							<div class="apply-user" v-if="addApplyNo == 1">
+								<div class="apply-label">
+									<label>
+										<input type="radio" name="status" value="-1" v-model="picked" checked>
+										<span>全部应用</span>
+									</label>
+									<label>
+										<input type="radio" name="status" value="0" v-model="picked">
+										<span>审核中</span>
+									</label>
+									<label>
+										<input type="radio" name="status" value="1" v-model="picked">
+										<span>审核不通过</span>
+									</label>
+									<label>
+										<input type="radio" name="status" value="2" v-model="picked">
+										<span>审核通过</span>
+									</label>
+								</div>
+								<table cellspacing="0">
+									<thead>
+										<tr>
+											<th style="width:200px;">公司名称</th>
+											<th style="width:100px">应用名程</th>
+											<th style="width:100px">App包名</th>
+											<th style="width:300px">AppKey</th>
+											<th style="width:70px">App类型</th>
+											<th style="width:70px">状态</th>
+											<th style="width:90px">审核时间</th>
+											<th style="width:90px">创建时间</th>
+											<th style="width:80px">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(item,index) in sdkItem">
+											<td style="width:200px;">{{item.company}}</td>
+											<td>{{item.appName}}</td>
+											<td>{{item.appPackage}}</td>
+											<td>{{item.appKey}}</td>
+											<td>{{item.appType | appType}}</td>
+											<td>{{item.verifyStatus | status}}</td>
+											<td>{{item.verifyTime | time}}</td>
+											<td>{{item.createTime | time}}</td>
+											<td class="sdkDel" @click="delAjax(index)" v-key="index">删除</td>
+										</tr>
+										<tr v-if="sdkItemNoData">
+											<td colspan="8">没有更多数据</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="apply-ping" v-if="addApplyNo == 2">
+								<table cellspacing="0">
+									<thead>
+										<tr>
+											<th style="width:300px;padding-left: 10px;">公司名称</th>
+											<th style="width:200px">账号</th>
+											<th style="width:200px">密码</th>
+											<th style="width:200px">时间</th>
+											<th style="width:200px">状态</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="item in terraceItem">
+											<td style="width:300px">{{item.company}}</td>
+											<td style="width:300px">{{item.joinAccount}}</td>
+											<td style="width:300px">{{item.joinPassword}}</td>
+											<td style="width:200px">{{item.createTime | time}}</td>
+											<td style="width:200px">{{item.verifyStatus | status}}</td>
+										</tr>
+										<tr>
+											<td colspan="5" v-if="terraceItemFlag">没有更多数据</td>
+										</tr>
+									</tbody>
+								</table>
+								<a v-if="addAreaFlag" class="apply-area-add" @click="addEstate">
+									<img src="img/btn_ic_add@3x.png" alt="">
+									<span>新增接入小区</span>
+								</a>
+								<table v-if="addAreaFlag" cellspacing="0" class="apply-area">
+									<thead>
+										<tr>
+											<th style="width:400px;padding-left: 10px;">小区地址</th>
+											<th style="width:300px;padding-left: 10px;">小区名称</th>
+											<th style="width:200px;padding-left: 10px;">小区编号</th>
+											<th style="width:200px">状态</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="item in terraceAreaItem">
+											<td style="width:400px">{{item.areaAddress}}</td>
+											<td style="width:300px">{{item.areaName}}</td>
+											<td style="width:200px">{{item.areaCode}}</td>
+											<td style="width:200px">{{item.verifyStatus | status}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../common/layer/layer.js"></script>
+		<script src="js/apply.js"></script>
+	</body>
+</html>

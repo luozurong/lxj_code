@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=0.333, maximum-scale=0.333, user-scalable=no" name="viewport">
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script>
+        function resize(){
+            var deviceWidth = document.documentElement.clientWidth;
+            if(deviceWidth > 1242) deviceWidth = 1242;
+            document.documentElement.style.fontSize = deviceWidth / 1.242 + 'px';
+        }
+        window.onresize=resize;
+        resize();
+    </script>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            color: #222;
+        }
+        body{
+            font-size: 42px;
+            background:#f0f0f0;
+        }
+        input::-webkit-input-placeholder{
+            color:#ccc;
+        }
+        .confirm-addr{
+            /* height:0.24rem;*/
+            width:100%;
+            background:#fff;
+            overflow: hidden;
+        }
+        .confirm-left{
+            width:1.1rem;
+            box-sizing: border-box;
+            margin-left:0.03rem;
+            overflow: hidden;
+            padding-top:0.06rem;
+            float:left;
+
+        }
+        .confirm-left img{
+            margin-right:0.03rem;
+            margin-top:0.005rem;
+            float:left;
+        }
+        .confirm-top-name{
+            display: inline-block;
+            width:0.38rem;
+        }
+        .confirm-left-addr{
+            margin-top:0.018rem;
+            padding-bottom:0.05rem;
+            display: inline-block;
+            width:100%;
+        }
+        .confirm-left-addr span{
+            width:1.02rem;
+            display:block;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .confirm-right{
+            float:left;
+            width:0.108rem;
+            overflow: hidden;
+        }
+        .confirm-right img{
+            float:right;
+            margin-top:0.095rem;
+            margin-right:0.035rem;
+        }
+        .confirm-all{
+            margin-top:0.03rem;
+        }
+        .confirm-shop-name{
+            height:0.13rem;
+            line-height: 0.13rem;
+            border-bottom: 0.002rem solid #cecece;
+            background: #fff;
+        }
+        .confirm-shop-item{
+            margin-bottom:0.03rem;
+            background: #fff;
+        }
+        .confirm-shop-name img{
+            float:left;
+            margin-top:0.035rem;
+            margin-left:0.03rem;
+            margin-right:0.045rem;
+        }
+        .confirm-goods{
+            width:100%;
+            height:0.32rem;
+            overflow: hidden;
+        }
+        .confirm-goods-pic{
+            width:0.21rem;
+            height:0.21rem;
+            float:left;
+            margin-left:0.03rem;
+            margin-top:60px;
+            margin-right:0.03rem;
+            box-sizing: border-box;
+        }
+        .confirm-goods-main{
+            float:left;
+            width:0.92rem;
+        }
+        .confirm-goods-name{
+            width:100%;
+            margin-top:0.055rem;
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .confirm-goods-price{
+            color:#ff661b;
+            float:left;
+            margin-top:0.04rem;
+        }
+        .confirm-goods-price span{
+            color:#ff661b;
+        }
+        .confirm-goods-price span:nth-child(1){
+            font-size: 0.048rem;
+        }
+        .confirm-goods-price span:nth-child(2){
+            font-size: 0.036rem;
+            margin-left:-0.012rem;
+        }
+        .confirm-goods-num{
+            float:right;
+            margin-top:0.02rem;
+        }
+        .confirm-goods-num i{
+            display: inline-block;
+            width:0.098rem;
+            height:0.098rem;
+            border-radius: 100%;
+            float:left;
+        }
+
+        .confirm-goods-pre{
+            background: url(../images/ic_cut_-no-active-.png)  no-repeat;
+            background-size: contain;
+        }
+        .confirm-goods-num .confirm-goods-pre-active{
+            background: url(../images/ic_cut_--active_nor.png)  no-repeat;
+            background-size: contain;
+        }
+        .confirm-goods-next{
+            background: url(../images/ic_add_-active-_pre.png)  no-repeat;
+            background-size: contain;
+        }
+        .confirm-goods-num .confirm-goods-next-active{
+            background: url(../images/ic_add_-active_no.png)  no-repeat;
+            background-size: contain;
+        }
+        .confirm-goods-num input{
+            width:0.095rem;
+            height: 0.098rem;
+            border:none;
+            font-size: 0.048rem;
+            line-height: 0.098rem;
+            text-align: center;
+            float:left;
+        }
+        .confirm-goods-name-over{
+            color:#ccc;
+        }
+        .confirm-goods-price-over span{
+            color:#ccc;
+        }
+        .confirm-shop-over{
+            width:100%;
+            margin-top:0.03rem;
+            background:#fff;
+        }
+        .confirm-shop-name-over span{
+            margin-left:0.03rem;
+            color:#ff661b;
+        }
+        .confirm-goods-num-over{
+            margin-top:0.05rem;
+            color:#ccc;
+        }
+        .confirm-remark{
+            background:#fff;
+            margin-top:0.03rem;
+            padding-left:0.03rem;
+        }
+        .confirm-remark>div{
+            height:0.16rem;
+            line-height: 0.16rem;
+            border-bottom: 0.001rem solid #cecece;
+        }
+        .confirm-remark>div:last-child{
+            border-bottom: none;
+        }
+        .confirm-remark-shipping span:nth-child(1){
+            float:left;
+        }
+        .confirm-remark-shipping span:nth-child(2){
+            float:right;
+            margin-right:0.03rem;
+            color:#ff661b;
+        }
+        .confirm-remark-shipping s{
+            float:right;
+            margin-right:0.03rem;
+            font-size: 0.036rem;
+            color:#999;
+        }
+
+        .confirm-remark-counpon span.confirm-counpon-num{
+            float:right;
+            color:#ccc;
+        }
+        .confirm-remark-counpon img{
+            float:right;
+            margin-right:0.03rem;
+            margin-top:0.055rem;
+            margin-left:0.03rem;
+        }
+        .confirm-remark-word input{
+            box-sizing: border-box;
+            padding-left: 0.005rem;
+            width:1.01rem;
+            height:0.14rem;
+            font-size: 36px;
+            line-height:0.15rem;
+            border:none;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .confirm-remark-total>span{
+            float:right;
+        }
+        .confirm-remark-total>span:first-child{
+            margin-right:0.03rem;
+            color:#ff661b;
+        }
+        .confirm-total-price{
+            color:#ff661b;
+            float:left;
+        }
+        .confirm-total-price span{
+            color:#ff661b;
+        }
+        .confirm-total-price span:nth-child(1){
+            font-size: 0.048rem;
+        }
+        .confirm-total-price span:nth-child(2){
+            font-size: 0.036rem;
+            margin-left:-0.012rem;
+        }
+        .confirm-pay{
+            height:0.16rem;
+            width:100%;
+            background: #fff;
+            margin-top:0.03rem;
+            margin-bottom:190px;
+        }
+        .confirm-pay>div:first-child{
+            float:left;
+            line-height:0.16rem;
+            margin-left:0.03rem;
+        }
+        .confirm-pay>div:last-child{
+            float:right;
+            margin-right:0.095rem;
+            text-align: right;
+            margin-top:0.025rem;
+        }
+        .confirm-pay>div>div:last-child{
+            font-size: 0.036rem;
+            color:#ccc;
+        }
+        .confirm-fixed{
+            height:160px;
+            width:100%;
+            background: #fff;
+            border-top:1px solid #cecece;
+            position: fixed;
+            bottom:0;
+            left:0;
+            z-index: 1;
+        }
+        .pay{
+            float:left;
+            line-height: 85px;
+        }
+        .pay span{
+            color:#ff661b;
+        }
+        .pay span:nth-child(1){
+            font-size: 0.048rem;
+        }
+        .pay span:nth-child(2){
+            font-size: 0.036rem;
+            margin-left:-0.012rem;
+        }
+        .pay-sub{
+            clear: both;
+            font-size: 36px;
+        }
+        .pay-sub span{
+            color:#999;
+        }
+        .pay-sub .paytotal{
+            display: inline-block;
+            width: 0.20rem;
+        }
+        .confirm-fixed>div:nth-child(1){
+            float:left;
+            margin-left:0.03rem;
+        }
+        .confirm-fixed>div:nth-child(2){
+            float:right;
+        }
+        .gopay{
+            width:326px;
+            line-height:160px;
+            text-align: center;
+            background: #ff661b;
+            color:#fff;
+            font-size:48px;
+        }
+        .confirm-fixed .gopayover{
+            background:#bbb;
+        }
+    </style>
+</head>
+<body>
+<div class="confirm-addr">
+    <div class="confirm-left">
+        <div class="confirm-top">
+            <img src="../images/name.png" alt="">
+            <span  class="confirm-top-name">李丽玲</span>
+            <span  class="confirm-top-tel">18680986985</span>
+        </div>
+        <div class="confirm-left-addr">
+            <img src="../images/location.png" alt="">
+            <span>海富花园三期汇兴阁608房</span>
+        </div>
+    </div>
+    <div class="confirm-right">
+        <img src="../images/ic_more-@3x.png" alt="">
+    </div>
+</div>
+<div class="confirm-all">
+    <div class="confirm-shop" data-sellerId="0001">
+        <div class="confirm-shop-name">
+            <img src="../images/sellerName_logo.png" alt="">
+            <span>花王婴幼儿用品专卖店</span>
+        </div>
+        <div class="confirm-shop-item" data-id="001">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price" data-value="68.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num">
+                            <i onclick="subNum(this)" class="confirm-goods-pre "></i>
+                            <input class="confirm-goods-input" type="text" data-value="10" value="2" readonly>
+                            <i  onclick="addNum(this)" class="confirm-goods-next "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-shop-item" data-id="002">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price" data-value="70.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num">
+                            <i onclick="subNum(this)" class="confirm-goods-pre "></i>
+                            <input class="confirm-goods-input" type="text" data-value="10" value="5" readonly>
+                            <i  onclick="addNum(this)" class="confirm-goods-next "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-shop-item" data-id="003">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price" data-value="85.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num">
+                            <i onclick="subNum(this)" class="confirm-goods-pre "></i>
+                            <input class="confirm-goods-input" type="text" data-value="10" value="1" readonly>
+                            <i  onclick="addNum(this)" class="confirm-goods-next "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="confirm-shop" data-sellerId="0002">
+        <div class="confirm-shop-name">
+            <img src="../images/sellerName_logo.png" alt="">
+            <span>花王婴幼儿用品专卖店</span>
+        </div>
+        <div class="confirm-shop-item" data-id="004">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price" data-value="68.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num">
+                            <i onclick="subNum(this)" class="confirm-goods-pre "></i>
+                            <input class="confirm-goods-input" type="text" data-value="10" value="2" readonly>
+                            <i  onclick="addNum(this)" class="confirm-goods-next "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-shop-item" data-id="005">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price" data-value="70.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num">
+                            <i onclick="subNum(this)" class="confirm-goods-pre "></i>
+                            <input class="confirm-goods-input" type="text" data-value="10" value="5" readonly>
+                            <i  onclick="addNum(this)" class="confirm-goods-next "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="confirm-shop-over">
+    <div class="confirm-shop">
+        <div class="confirm-shop-name confirm-shop-name-over">
+            <span>失效商品 (不在配送范围)</span>
+        </div>
+        <div class="confirm-shop-item">
+            <div class="confirm-goods">
+                <img class="confirm-goods-pic" src="../images/goods.png" alt="">
+                <div class="confirm-goods-main">
+                    <div class="confirm-goods-name  confirm-goods-name-over">花王三倍透气原装进口纸尿裤L54(你大爷的) 花王三倍透气原装进口纸尿裤L54</div>
+                    <div>
+                        <div class="confirm-goods-price confirm-goods-price-over" data-value="60.00">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="confirm-goods-num confirm-goods-num-over">x2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="confirm-remark">
+    <div class="confirm-remark-shipping">
+        <span>配送费</span>
+        <span>免邮</span>
+        <s>￥8.00</s>
+    </div>
+    <div class="confirm-remark-counpon">
+        <span>优惠券</span>
+        <img src="../images/ic_more-@3x.png" alt="">
+        <span class="confirm-counpon-num">暂无优惠券</span>
+    </div>
+    <div class="confirm-remark-word">
+        <span>留言</span>
+        <input type="text" placeholder="选填给商家留言(45字内)" maxlength="45">
+    </div>
+    <div class="confirm-remark-total">
+            <span class="confirm-total-price" data-value="228.00">
+                <span></span>
+                <span></span>
+            </span>
+        <span>共<span>3</span>商品 小计</span>
+
+    </div>
+</div>
+<div class="confirm-pay">
+    <div>支付方式</div>
+    <div>
+        <div>在线支付</div>
+        <div>此服务仅支持在线支付方式</div>
+    </div>
+</div>
+<div class="confirm-fixed">
+    <div>
+        <div class="pay" data-value="228.00">应付款：
+            <span></span>
+            <span></span>
+        </div>
+        <div class="pay-sub">
+                <span>
+                    总额：￥<span class="paytotal">238.00</span>
+                </span>
+                <span>
+                    满减：￥<span>10.00</span>
+                </span>
+        </div>
+    </div>
+    <div class="gopay">提交订单</div>
+</div>
+<script>
+    //价格小数点后字体较小
+    $(".confirm-goods-price").each(function(){
+        var dataValue = $(this).attr("data-value");
+        var dataValueArray = dataValue.split(".");
+        $(this).find("span").eq(0).text("￥"+dataValueArray[0]);
+        $(this).find("span").eq(1).text("."+dataValueArray[1]);
+    });
+
+    //小计小数点后字体较小
+    $(".confirm-total-price").each(function(){
+        var dataValue = $(this).attr("data-value");
+        var dataValueArray = dataValue.split(".");
+        $(this).find("span").eq(0).text("￥"+dataValueArray[0]);
+        $(this).find("span").eq(1).text("."+dataValueArray[1]);
+    });
+
+    //小计小数点后字体较小
+    $(".pay").each(function(){
+        var dataValue = $(this).attr("data-value");
+        var dataValueArray = dataValue.split(".");
+        $(this).find("span").eq(0).text("￥"+dataValueArray[0]);
+        $(this).find("span").eq(1).text("."+dataValueArray[1]);
+    });
+    //减号的颜色
+    $(".confirm-goods-input").each(function(){
+        var inputNum = $(this).val();
+        if(inputNum>1){
+            $(this).prev().addClass("confirm-goods-pre-active");
+        }else{
+            $(this).prev().removeClass("confirm-goods-pre-active");
+        }
+    });
+    //商品数量减少
+    function subNum(sub){
+        var inputNum = $(sub).next().val();
+        var dataValue = $(sub).next().attr("data-value");
+        inputNum--;
+        if(inputNum>0){
+            $(sub).next().val(inputNum);
+        }
+        if(inputNum <= 1){
+            $(sub).removeClass("confirm-goods-pre-active");
+        }
+        if(inputNum<dataValue){
+            $(sub).next().next().removeClass("confirm-goods-next-active");
+        }
+    }
+    //商品数量增加
+    function addNum(add){
+        var dataValue = $(add).prev().attr("data-value");
+        var inputNum = $(add).prev().val();
+        inputNum++;
+        if(dataValue>=inputNum){
+            $(add).prev().val(inputNum);
+        }
+        if(dataValue ==inputNum){
+            $(add).addClass("confirm-goods-next-active");
+        }
+        if(inputNum>1){
+            $(add).prev().prev().addClass("confirm-goods-pre-active");
+        }
+    }
+
+    //只有失效商品是的结算状态为禁用状态
+    if($(".confirm-all>div").length ==0){
+        $(".confirm-fixed .gopay").addClass("gopayover");
+    }
+
+
+    /***************************************************对接js**********************************************************/
+    var householdSerial,receiverId,categoryType,areaId,areaName,freightList,areaOrgaSeq,couponStr,remark,shoppingCartId,sellerReducedFeeList,totalPrice,sellerList=[],commitPrice,token,time_stamp,commodityList=[];
+
+    // 店铺list
+    $(".confirm-all .confirm-shop").each(function() {
+        var sellerListObj = {};
+        sellerListObj.sellerId = $(this).attr("data-sellerId");
+        var commodityList = [];//商品List
+        $(this).find(".confirm-shop-item").each(function(){
+            var commodityListObj = {};
+            commodityListObj.commodityId = $(this).attr("data-id");
+            commodityListObj.commodityCount = $(this).find(".confirm-goods-input").val();
+            commodityListObj.commitPrice = $(this).find(".confirm-goods-price").attr("data-value");
+            commodityList.push(commodityListObj);
+        });
+        sellerListObj.commodityList = commodityList;
+        sellerList.push(sellerListObj);
+    });
+
+    console.log(sellerList);
+
+
+    var data = {"body":{
+        "householdSerial":householdSerial, //用户编号
+        "receiverId":receiverId ,           //收货地址id
+        "categoryType":categoryType,
+        "areaId": areaId,                    // 小区id
+        "areaName":areaName,                 // 小区名字
+        "freightList":freightList,
+        "areaOrgaSeq": areaOrgaSeq,          //小区机构编号
+        "couponDetailIds": couponStr,        //优惠券明细Id，多个用逗号隔开
+        "remark":remark,                      //订单留言
+        "shoppingCartIds": shoppingCartId ,  //购物车
+        "getInvoice":0,                      //是否开发票，是传1
+        "totalPrice":totalPrice ,            //订单总金额
+        "sellerReducedFeeList":sellerReducedFeeList ,//
+        "sellerList": sellerList,            // 店铺list
+        "commitPrice":commitPrice            // 单个商品价格
+    },"header":{
+        "token":1,
+        "time_stamp":2
+    }};
+    var sellerListString = JSON.stringify(data);
+    console.log(sellerListString);
+
+    var odata = {"body":{
+        "householdSerial": householdSerial,
+        "receiverId": receiverId,
+        "categoryType":categoryType,
+        "areaId": areaId,
+        "areaName":  areaName,
+        "freightList": freightList,
+        "areaOrgaSeq": areaOrgaSeq,
+        "couponDetailIds": couponStr,
+        "remark": remark ,
+        "getInvoice":0,
+        "totalPrice":totalPrice,
+        "commodityList":commodityList,
+        "sellerReducedFeeList": sellerReducedFeeList,
+        "sellerList": sellerList ,
+        "commitPrice":commitPrice},
+        "header":{
+            "token": token ,
+            "time_stamp":time_stamp
+        }};
+</script>
+</body>
+</html>

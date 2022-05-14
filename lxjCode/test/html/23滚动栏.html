@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>滚动条与固定栏</title>
+    <script src="js/jquery-2.1.4.js"></script>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    html,body{
+        height:100%;
+        padding:0;
+        margin:0;
+    }
+    body{
+        overflow-y:hidden;
+        box-sizing: border-box;
+        padding-bottom:50px;
+        font-size: 12px;
+        background: #ffe;
+    }
+    .all{
+        height:100%;
+        width:100%;
+        box-sizing: border-box;
+        overflow: auto;
+        line-height: 30px;
+    }
+    /* .all::-webkit-scrollbar{
+        background: #e1c000;
+    }
+    .all::-webkit-scrollbar-thumb{
+        background: #f00000;
+    } */
+    
+    .fixed{
+        position: fixed;
+        bottom:0;
+        left:0;
+        z-index: 100;
+        width: 100%;
+        height:50px;
+        line-height: 50px;
+        color:#fff;
+        background: green;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="all">
+        <div>
+           对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的对方水电费保好多方便的
+        </div>
+    </div>
+    <div class="fixed">固定栏</div>
+    <script>
+        var testprams = 0;
+        $(".all").scroll(function () {
+            if($(this).scrollTop() + $(".all").height() >= $(".all>div").height()){
+                testprams ++;
+                console.log(testprams);
+            }
+        });
+    </script>
+</body>
+</html>

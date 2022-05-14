@@ -1,0 +1,69 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 0.14rem;
+}
+body{
+	background: #f3f4f5;
+}
+[v-cloak]{
+	display: none !important;
+}
+.collect{
+	width: 100%;
+}
+.collect-item{
+	width:100%;
+	background: #fff;
+	padding:0 0.14rem;
+	box-sizing: border-box;
+	margin-bottom:0.12rem;
+}
+.collect-item:last-child{
+	margin-bottom: 0; 
+}
+.collect-pic{
+	width:100%;
+	margin-top:0.14rem;
+}
+.collect-name{
+	font-size: 0.17rem;
+	color:#333;
+	line-height: 0.3rem;
+	margin-top: 0.08rem;
+}
+.collect-disc{
+	font-size: 0.14rem;
+	color:#888;
+	line-height: 0.24rem;
+	border-bottom:1px solid #eee;
+	padding-bottom: 0.28rem;
+}
+.collect-wrap{
+	overflow: hidden;
+	line-height: 0.54rem;
+	color:#aaa;
+}
+.collect-wrap img{
+	width:0.18rem;
+	vertical-align: middle;
+	padding-bottom: 0.03rem;
+}
+.collect-time{
+	float:left;
+}
+.collect-right{
+	float:right;
+}
+.collect-share,.collect-sure,.collect-up{
+	margin-left:0.26rem;
+}
+.collect-comment{
+	margin-left:0.2rem;
+}
+.collect-wrap .collect-sure{
+	padding-bottom: 0.01rem;
+}
+.collect-up img,.collect-comment{
+	margin-right:0.02rem;
+}

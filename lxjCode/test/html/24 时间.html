@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>ios评论</title>
+        <script src="js/jquery-2.1.4.js"></script>  
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+            }
+            html,body{
+                height: 100%;
+            }
+            .wrap{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .header{
+                flex-grow: 2; 
+            }
+            .footer{
+                flex-shrink: 0;
+                width: 100%;
+                height:60px;
+                background: #ccc;
+                display: none;
+            }
+            .inputs{
+                display: inline-block;
+                width: 80%;
+                height:55px;
+            }
+            .ping{
+                display: block;
+                text-align: center;
+                border:1px solid red;
+                line-height: 40px;
+            }
+            .send{
+                border:1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="header">   
+                <span class="ping" onclick="ping()">点击评论</span>
+                <span class="nums">1</span>
+            </div>
+            <div class="footer">
+                <span class="inputs" contenteditable="true"></span>
+                <span class="send">send</span>
+            </div>
+        </div>
+    <script>
+        function ping(){
+            $(".footer").show(); 
+            $(".inputs").focus();
+            event.cancelBubble = true;
+         }
+         $(".inputs").blur(function(){
+            setTimeout(function(){
+                $(".footer").hide(); 
+            },10);
+             
+         });
+         $(".header").on("touchstart",function(){
+                $(".footer").hide();   
+                $(".inputs").blur();
+
+         });
+         $(".send").click(function(e){
+            $(".nums").text("2");
+            window.event.cancelBubble=true
+         });
+ 
+    </script>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- Constants -->
+	<!-- when set to true, Struts will act much more friendly for developers. -->
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="html,action,do" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.custom.i18n.resources" 
+			  value="com.jlit.mms.resources.i18nResources"/>
+	<constant name="struts.multipart.maxSize" value="209715200" />
+	<constant name="struts.ui.theme" value="css_xhtml" />
+	<constant name="struts.codebehind.pathPrefix" value="/WEB-INF/pages/" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	<!-- Configuration for the default package. -->
+	<package name="defaultPackage" extends="json-default">
+		<interceptors>
+			<!--Copied from struts-default.xml and changed validation exclude methods -->
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="debugging" />
+				<interceptor-ref name="profiling" />
+				<interceptor-ref name="scopedModelDriven" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">
+						delete,edit,list
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">
+						input,back,cancel,browse
+					</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		<!-- 会话及权限拦截器 -->
+		<interceptor name="userRoleAuthorizationInterceptor" class="userRoleAuthorizationInterceptor" />	
+			<interceptor-stack name="mydefault">				
+				<interceptor-ref name="userRoleAuthorizationInterceptor"/>
+				<interceptor-ref name="defaultStack" >
+					<param name="exception.logEnabled">true</param>  
+                    <param name="exception.logLevel">error</param>  
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+		
+		<global-results>
+			<result name="NOTPURVIEW" type="dispatcher">
+				<param name="location">
+					noPurview.jsp
+				</param>
+			</result>
+			<result name="NOTLOGIN" type="dispatcher">
+				<param name="location">
+					logout.jsp
+				</param>
+			</result>
+			<result name="error" type="dispatcher">
+				<param name="location">
+					error.jsp
+				</param>
+			</result>
+			<result name="invalid.token" type="dispatcher">
+				<param name="location">
+					resubmit.jsp
+				</param>
+			</result>
+			
+		</global-results>
+		
+	</package>
+</struts>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        #aside{
+            float: left;
+            margin-right: -200px;
+            width: 200px;
+            background-color: red;
+            height: 200px;
+        }
+        #content{
+            float: right;
+        }
+        #content .inner{
+            margin-left: 200px;
+            background-color: blue;
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="aside"></div>
+    <div id="content">
+        <div class="inner"></div>
+    </div>
+    <script>
+        
+        //console.log(urlToRouter('https://tt.hori-gz.com:8443/mms/html5/supermarket/ProductDetail.htm?commodityId=152542484852d81f267e1f4b41518728'));
+       /* function urlToRouter(url){
+            var startNum = url.lastIndexOf('/') + 1;
+            var endNum = url.lastIndexOf('htm')- 1- startNum;
+            return url.substr(startNum,endNum);
+        }
+
+        console.log(paramrRouter('https://tt.hori-gz.com:8443/ProductDetail.html?commodityId=152542484852d81f267e1f4b41518728','commodityId',1));
+        function paramrRouter(url,name,num){
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var  r = url.substr(url.lastIndexOf('?') + num).match(reg);
+            console.log(r);
+            if(r != null) return decodeURI(r[2]);
+            return null;
+        }*/
+       
+
+
+    </script>
+</body>
+</html>

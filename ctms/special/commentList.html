@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>评论</title>
+	<link rel="stylesheet" href="css/commentList.css">
+    <link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js"></script>
+	<script src="../common/interfaceParameters.js"></script>
+    <script src="../common/vue/vue.min.js"></script>
+    <script src="../common/vue/vue-resource.min.js"></script>
+    <script src="../common/js/underscore.js"></script>
+    <script src="../common/tip/lxjTip.js"></script>
+    <script src="../common/js/mui.min.js"></script>
+    <script src="../common/interface.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+</head>
+<body class="comment-body">
+	<div class="comment">
+    	<div class="comment-num"><p>全部评论(<span></span>)</p></div>
+        <div class="comment-wrap-all"></div>
+    </div>
+    <div class="comment-over">我是有底线的</div>
+    <div class="comment-margins"></div>
+    <div class="comment-fixed" id="comment_fixed_andrio">
+        <div>
+            <div class="comment-fixed-left">
+                <img src="images/ic_comment.png" alt="">
+                <input maxlength="500"  class="commentInput"  type="text" placeholder="说点什么吧...">
+            </div>
+            <div class="comment-fixed-right" onclick="commentSubmit()">发送</div>
+        </div>
+    </div>
+
+   <div class="comment-fixed" id="comment_fixed_ios">
+        <div>   
+            <div class="comment-fixed-left">
+                <img src="images/ic_comment.png" alt="">
+                <div class="commentInput commentInputDiv" onclick="keyPop(this)">说点什么吧...</div>
+            </div>
+            <div class="comment-fixed-right" onclick="commentButtonSend()">发送</div>
+        </div>
+    </div>
+
+    <script type="text/html" id="special_comment_empty">
+        <div class="special-comment-empty">暂时还没有评论，快点来抢沙发！</div>
+    </script>
+    <script type="text/html" id="commentItem">
+        <% _.each(data, function (item) { %>     
+            <div class="comment-item">
+            <!-- 点击头像跳转 -->
+            <%if(item.userHeadPicUrl!=null &&  item.userHeadPicUrl !=''){ %>
+                <img class="comment-pic" useraccount="<%= item.backAccount%>" onclick="goToUser(this)" src="<%= item.userHeadPicUrl%>">
+            <%}else{%>
+               <%if(item.sex == 2){ %>
+                    <img class="special-comment-pic comment-pic" src="../invitation/images/ic_woman@3x.png" alt="" useraccount="<%= item.backAccount%>" onclick="goToUser(this)">
+                <%}else{%>
+                    <img class="special-comment-pic comment-pic" src="../invitation/images/ic_man@3x.png" alt="" useraccount="<%= item.backAccount%>" onclick="goToUser(this)">
+                <%}%>
+            <%}%>
+            <!-- 是否删除评论 -->
+            <%if(item.delBack=='0'){ %>
+                <div class="comment-wrap" id="<%= item.id%>" onclick="deleteComment('<%= item.id%>','<%=item.parentId%>')">
+            <%}else{%>
+                <div class="comment-wrap" onclick="commentClik(this)" data-val="<%=item.id%>" data-ids="<%=item.backNick%>" data-value="<%=item.backAccount%>">
+            <%}%>
+                <div class="comment-main">
+                    <span class="comment-name"><%= item.backNick%></span>
+                    <% if(item.restoredAccount != "" && item.restoredAccount != null){ %>
+                        <span class="comment-span">回复了</span>
+                        <span class="comment-name"><%= item.restoredNick %></span>
+                    <%}%>
+                    <span class="comment-time"><%= item.createTime%></span>
+                </div>
+                <%if(item.delBack=='0'){ %>
+                    <div class="comment-word"><%= item.content%></div>
+                <%}else{%>
+                    <div class="comment-word"><%= item.content%></div>
+                <%}%>
+            </div>
+        </div>
+        <%})%>
+        
+    </script>
+	<script src="js/commentList.js"></script>
+</body>
+</html>

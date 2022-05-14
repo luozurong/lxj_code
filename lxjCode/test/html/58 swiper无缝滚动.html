@@ -1,0 +1,54 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script>
+　　<!-- 覆盖默认切换效果 为匀速 -->
+　　<style>
+        /*插件外层容器 用来定义宽高等其他样式*/
+        .swiper-container{
+            width: 600px;
+            height: 300px;
+        }
+        /*插件的wrapper 这是关键， 覆盖插件默认切换效果为匀速*/
+　　　　 .swiper-wrapper{
+    　　　　 transition-timing-function: linear;
+　　　　 }
+　　</style>
+</head>
+<body>
+    <div class="swiper-container swiper-container-v">    
+       <div class="swiper-wrapper">    
+           <div class="swiper-slide">Vertical Slide 1</div>    
+           <div class="swiper-slide">
+               <div class="swiper-container swiper-container-h">    
+                   <div class="swiper-wrapper">    
+                       <div class="swiper-slide">Horizontal Slide  1</div>    
+                       <div class="swiper-slide">Horizontal Slide  2</div>    
+                       <div class="swiper-slide">Horizontal Slide  3</div>    
+                       <div class="swiper-slide">Horizontal Slide  4</div>    
+                       <div class="swiper-slide">Horizontal Slide  5</div>    
+                   </div>    
+                   <div class="swiper-pagination swiper-pagination-h"></div>    
+               </div>    
+           </div>    
+           <div class="swiper-slide">Vertical Slide 3</div>     
+       </div>    
+       <!-- Add Pagination -->    
+       <div class="swiper-pagination swiper-pagination-v"></div>    
+   </div>
+   <script>    
+   var swiperV = new Swiper('.swiper-container-v', {    
+       pagination: '.swiper-pagination-v',    
+       paginationClickable: true,    
+       direction: 'vertical',    
+       spaceBetween: 50    
+   });  
+   var swiperH = new Swiper('.swiper-container-h', {    
+       pagination: '.swiper-pagination-h',    
+       paginationClickable: true,    
+       spaceBetween: 50    
+   });    
+   
+   </script>
+</body>
+</html>   

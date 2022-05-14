@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no" />
+		<title>新人专享福利</title>
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script type="text/javascript" src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<!--百度统计-->
+		<script type="text/javascript">
+			var clientType = GetURLParameter('clientType');
+			if(clientType != 'android') {
+				clientType = 'ios'
+			};
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAutoPageview', false]);
+			_hmt.push(['_trackPageview', '/client=' + clientType + '-活动-新用户弹窗-活动ID=3013']);
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+		<style type="text/css">
+			img {
+				float: left;
+				display: block;
+			}
+			
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+		</style>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				font-size: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			var clickState=false;
+			setTitle("新人专享福利");
+			function goPage() {
+				window.event.cancelBubble = true;
+				if (clickState) {
+					return false;
+				}
+				clickState=true;
+				setTimeout("clickState=false",1000);
+				console.log("去赚积分");
+				_hmt.push(['_trackEvent', '3013', '1', '去赚积分']); //百度统计 立即抢购点击次数				
+				nativeMethod("goIntegralcentre", null);
+			}
+
+			function goPage2() {
+				window.event.cancelBubble = true;
+				if (clickState) {
+					return false;
+				}
+				clickState=true;
+				setTimeout("clickState=false",1000);
+				console.log("商品超市");
+				showActivitySpecial(mmsHost + "/mms/html5/supermarket/productClassify.htm", "商品超市", 4, null);
+			}
+
+			function goPage3() {
+				window.event.cancelBubble = true;
+				if (clickState) {
+					return false;
+				}
+				clickState=true;
+				setTimeout("clickState=false",1000);
+				console.log("服务到家");
+				showActivitySpecial(mmsHost + "/mms/html5/mall/serviceCategory.htm", "服务到家", 4, null);
+			}
+
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+
+			function isCondition(param) { // (!typeof(a) === undefined)
+				if(param != null && param != "" && param != undefined) {
+					return true;
+				}
+				return false;
+			}
+
+			function refreshData() {
+				setTimeout(function() {
+					clickState=false;
+				}, 0);
+				return 1;
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="mainbox" style="position: relative;display: inline-block;width: 100%;">
+			<img style="max-width:100%;min-width: 100%;" src="images/20180419.jpg" title="活动" alt="活动.jpg" />
+			<div class="" onclick="goPage()" style="width: 25%;height: 4%;position: absolute;top: 43%;left: 8%;">
+			</div>
+			<div class="" onclick="goPage2()" style="width: 93%;height: 12%;position: absolute;top: 66%;left: 3%;">
+			</div>
+			<div class="" onclick="goPage3()" style="width: 93%;height: 12%;position: absolute;top: 80.5%;left: 3%;">
+			</div>
+		</div>
+
+	</body>
+
+</html>

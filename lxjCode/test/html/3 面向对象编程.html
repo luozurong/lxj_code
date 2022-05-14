@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div>
+    <button class="sub" onclick="sub(this)">-</button>
+    <input type="text" class="num" value="1">
+    <button class="add"  onclick="add(this)">+</button>
+</div>
+<div>
+    <button class="sub" onclick="sub(this)">-</button>
+    <input type="text" class="num" value="1">
+    <button class="add"  onclick="add(this)">+</button>
+</div>
+<script>
+    function Cart(){
+        this.subData = subData;
+        this.addData = addData;
+    }
+    function subData(id){
+        var $num = $(id).parent().find(".num");
+        var num = parseInt($num.val())-1;
+        $num.val(num);
+    }
+    function addData(id){
+        var $num = $(id).parent().find(".num");
+        var num = parseInt($num.val())+1;
+        $num.val(num);
+    }
+    var cart = new Cart();//创建一个实例对象
+
+    function sub(id){
+        cart.subData(id);
+    }
+    function add(id){
+        cart.addData(id);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>普通活动</title>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<!-- <link rel="stylesheet" href="../common/css/mui.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css" />
+		<link rel="stylesheet" href="css/offlineList.css">
+		<script type="text/javascript" src="../common/js/jquery-2.1.4.js"></script>
+		<script src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js"></script>
+		<script src="../common/js/fontSize.js"></script>
+		<script src="../common/js/underscore.js"></script>
+		<script src="js/common.js"></script>
+		<script src="../common/tip/lxjTip.js"></script>
+		<link rel="stylesheet" href="../common/tip/lxjTip.css" />
+		<style type="text/css">
+			body,
+			html {
+				background-color: #f4f5f6;
+				line-height: normal;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			a {
+				display: inline-block;
+				text-decoration: underline;
+			}
+		</style>
+		<script type="text/javascript">
+		var xianzhiID = '152237854246fd0c5f338f7b4bfb8d71';//闲置页活动id
+		var hualiID = '152455279910ee9ef37daae44f1ea119';//华丽上班族发帖id
+		var hualiID2 = '15253183432696e312510d834f9196f5';//华丽上班族发帖id2
+		var hualiID3 = '153982918295b203398eda454ce6b54e';//联享家业主福利
+		var hualiID4 = '152705517432acbb0a42af0c43efa07a';//华丽上班族发帖id4
+		var hualiID5 = '152773337036328b432ca1c84e338c49';//华丽上班族发帖id5
+		var dainhuaID = '153802818521517df216b2ce495ba22d';//便民电话id5
+		//	百度统计代码
+		var activityId = GetURLParameter('activityId');
+		var clientType = GetURLParameter('clientType');
+		var pagefrom = GetURLParameter('from');
+		if(clientType!='android'){clientType='ios'};
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAutoPageview',false]);
+		if(activityId){
+//			闲置我要发帖 按钮埋点
+			var activityType = '普通活动';
+			if(activityId == xianzhiID){//只针对闲置发帖活动
+				activityType = '闲置交易圈发帖活动';
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7001']);
+			}else if(activityId===hualiID){//只针对华丽上班族发帖id
+				activityType = '华丽上班族圈发帖活动';
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7002']);
+			}else if(activityId===hualiID2){//只针对华丽上班族发帖id2
+				activityType = '华丽上班族圈发帖活动';
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7003']);
+			}else if(activityId===hualiID3){//只针对华丽上班族发帖id3
+				activityType = '联享家业主福利';
+				if (pagefrom&&pagefrom==='push') {
+					_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7004']);
+				} else{
+					_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7005']);
+				}
+				
+			}else if(activityId===hualiID4){//只针对华丽上班族发帖id3
+				activityType = '华丽上班族圈发帖活动';
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7005']);
+			}else if(activityId===hualiID5){//只针对华丽上班族发帖id3
+				activityType = '华丽上班族圈发帖活动';
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7006']);
+			}else if(activityId===dainhuaID){//只针对便民服务活动
+				activityType = '查看便民电话活动';
+				if (pagefrom&&pagefrom==='push') {
+					_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7003']);
+				} else{
+					_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID=7002']);
+				}								
+			}else{
+				_hmt.push(['_trackPageview', '/client='+clientType+'-活动-'+activityType+'-活动ID='+activityId]);
+			}
+
+		}
+		(function() {
+		  var hm = document.createElement("script");
+//		  hm.src = "https://hm.baidu.com/hm.js?5abffc86ad56dcb448e458cac84b67dc";//tt
+		  hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";//正式
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		$(function(){//DOM加载完成才能监听到事件
+			if(activityId == xianzhiID){//只针对闲置发帖活动
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7001', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}else if(activityId == hualiID){
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7002', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}else if(activityId == hualiID2){
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7003', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}else if(activityId == hualiID3){
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7004', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}else if(activityId == hualiID4){
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7005', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}else if(activityId == hualiID5){
+				$('#getVoteActivity').on('click','.electDisc p a',function(){
+					_hmt.push(['_trackEvent', '7006', '1','发帖按钮']);//百度统计 点击次数	
+				})
+			}
+		})
+		</script>
+	</head>
+
+	<body>
+		<div id="getVoteActivity" style="background:#fff;"></div>
+		<script id="getVoteActivityTemplate" type="text/template">
+			<div class="electTopic">
+				<%=title%>
+			</div>
+			<div class="electTime">联享家<span style="color:#808080;padding-left: 0.12rem;"><%=startTime%></span></div>
+			<div class="electDisc">
+				<%=content%>
+			</div>
+		</script>
+		<div class="detailBox">
+			<div class="detailTopic">为你优选</div>
+			<div id="commodityList"></div>
+		</div>
+		<script id="commodityListTemplate" type="text/template">
+			<div class="detailLeft" id="<%=commodityId%>" commodityType="<%=commodityType%>">
+				<div class="detailImg">
+					<img src="<%=pictureUrl%>" width="100%" alt="" />
+				</div>
+				<div class="detailTalk">
+					<%=name%>
+				</div>
+				<div class="value">
+					<% var item1 = parseFloat(commodityPrice).toFixed(2).split(".")[0] %>
+					<% var item2 = parseFloat(commodityPrice).toFixed(2).split(".")[1] %>
+					<% var item3 = parseFloat(originalPrice).toFixed(2) %>
+					<span style="font-size:0.16rem;">¥<span style="font-size:0.16rem;"><%=item1%></span>.<span style="font-size:0.12rem;"><%=item2%></span></span>
+					<%if(originalPrice&&originalPrice>0){%>
+					<s style="color:#ccc;padding-left:0.1rem;font-size: 0.12rem;">¥<%=item3%></s>
+					<%}else{%>
+					<%}%>
+				</div>
+				<div style="margin-bottom: 10px;color:#aaa">
+					<span class="volume">
+               <%=salesVolume%>人已购
+             </span>
+				</div>
+			</div>
+		</script>
+		<div class="reminder">我是有底线的</div>
+	</body>
+	<!--<script src="../common/js/mui.min.js"></script>
+	<script src="../common/js/mui.previewimage.js"></script>
+	<script src="../common/js/mui.zoom.js"></script>
+	<script>
+		mui('body').on('tap', 'a', function() {
+			window.top.location.href = this.href;
+		});
+		
+		mui.previewImage();
+	</script>-->
+	<script src="js/offlineList.js">
+	</script>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css"/>
+		<link rel="stylesheet" type="text/css" href="css/allAuthor.css"/>
+		<style type="text/css">
+			[v-cloak] {
+				display: none !important;
+			}
+		</style>
+		<title>全部</title>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="notNull">
+				<ul class="lists">
+					<li class="list" v-for='list in lists' @click='authorDetail(list.id)'>
+						<img :src="list.picturePath" onerror='this.src="images/ic_man@3x.png"' class="listPic"/>
+						<div class="listName">{{list.name}}</div>
+						<div class="listDes">{{list.content}}</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/allAuthor.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

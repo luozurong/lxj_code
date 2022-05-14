@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/conveniencePhone.css">
+	<script src="../common/vue/vue.min.js"></script>
+ 	<script src="../common/vue/vue-resource.min.js"></script>
+ 	<script src="../common/interface.js"></script>
+  	<script src="../common/interfaceParameters.js"></script>
+ 	<script type="text/javascript">
+	    (function(doc, win) {
+	      var docEl = doc.documentElement,
+	        isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+	        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+	        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+	        scale = 1 / dpr,
+	        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+	      docEl.dataset.dpr = dpr;
+	      var recalc = function() {
+	        var width = docEl.clientWidth;
+	        if(width / dpr > 768) {
+	          width = 768 * dpr;
+	        }
+	        docEl.style.fontSize = 100 * (width / 414) + 'px';
+	      };
+	      recalc();
+	      if(!doc.addEventListener) return;
+	      win.addEventListener(resizeEvt, recalc, false);
+	    })(document, window);
+  </script>
+</head>
+<body> 
+	<div class="phone" v-cloak>
+		<div class="phone-nav">
+			<div @click="clickNav(2)" v-bind:class="{active: clickFlag == 2 }"><span>小区服务电话</span></div>
+			<div @click="clickNav(1)" v-bind:class="{active: clickFlag == 1 }"><span>街区服务电话</span></div>
+			<div @click="clickNav(0)" v-bind:class="{active: clickFlag == 0 }"><span>全国服务电话</span></div>
+		</div>
+		<div class="phone-page">
+			<div class="phone-page-nav" v-if="clickFlag == 0">
+				<div class="phone-page-item" v-for="item in resultList">
+					<span class="phone-page-name" v-text="item.phoneName"></span>
+					<span class="phone-page-phone">
+						<!--只调用客户端方法打电话-->
+						<span v-if="lxjversionsName<5009||lxjversionsName>5108"><a  v-text="item.phoneNum" @click="callTel(clickFlag,item.phoneNum)"></a></span>
+						<!--5.1版本-->
+						<span v-if="lxjversionsName>=5009&&lxjversionsName<=5108"><a v-bind:href="'tel:'+item.phoneNum" v-text="item.phoneNum" ></a></span>
+						<!--<span><a v-bind:href="'tel:'+item.phoneNum" v-text="item.phoneNum" @click="callTel(clickFlag,item.phoneNum)"></a></span>-->
+						<img src="images/ic_more_grey@3x.png">
+					</span>
+					<div class="phone-page-line"></div>
+				</div>
+				<div class="phone-empty" v-if="resultList.length == 0">
+					<img src="images/phone-empty.png">
+					<span>暂无全国服务电话</span>
+				</div>
+			</div>
+			<div class="phone-page-nav" v-if="clickFlag == 1">
+				<div class="phone-page-item" v-for="item in resultList">
+					<span class="phone-page-name" v-text="item.phoneName"></span>
+					<span class="phone-page-phone">
+						<span v-if="lxjversionsName<5009||lxjversionsName>5108"><a  v-text="item.phoneNum" @click="callTel(clickFlag,item.phoneNum)"></a></span>
+						<span v-if="lxjversionsName>=5009&&lxjversionsName<=5108"><a v-bind:href="'tel:'+item.phoneNum" v-text="item.phoneNum" ></a></span>
+						<img src="images/ic_more_grey@3x.png">
+					</span>
+					<div class="phone-page-line"></div>
+				</div>
+				<div class="phone-empty" v-if="resultList.length == 0">
+					<img src="images/phone-empty.png">
+					<span>暂无街区服务电话</span>
+				</div>
+			</div>
+			<div class="phone-page-nav" v-if="clickFlag == 2">
+				<div class="phone-page-item" v-for="item in resultList">
+					<span class="phone-page-name" v-text="item.phoneName"></span>
+					<span class="phone-page-phone">
+						<span v-if="lxjversionsName<5009||lxjversionsName>5108"><a  v-text="item.phoneNum" @click="callTel(clickFlag,item.phoneNum)"></a></span>
+						<span v-if="lxjversionsName>=5009&&lxjversionsName<=5108"><a v-bind:href="'tel:'+item.phoneNum" v-text="item.phoneNum" ></a></span>
+						<img src="images/ic_more_grey@3x.png">
+					</span>
+					<div class="phone-page-line"></div>
+				</div>
+
+				<div class="phone-empty" v-if="resultList.length == 0 && rootFlag">
+					<img src="images/phone-empty.png">
+					<span>暂无小区服务电话</span>
+				</div>
+				<div class="phone-empty" v-if="!rootFlag">
+					<img src="images/phone-empty.png">
+					<span>需先绑定该小区的住房方可查看</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/conveniencePhone.js"></script>
+</body>
+</html>

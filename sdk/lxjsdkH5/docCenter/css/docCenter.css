@@ -1,0 +1,134 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "MILT_RG,arial,Microsoft YaHei";
+	font-size: 14px;
+	list-style: none;
+}
+body{
+	background: #f7f8f9;
+}
+a{
+	text-decoration: none;
+	color:#333;
+}
+.apply-header{
+	overflow: hidden;
+	width: 1100px;
+	margin:0 auto;
+	padding: 20px 0;
+	border-bottom:1px solid #f0f0f0;
+	background: #fff;
+	margin-top: 40px;
+}
+.apply-header img{
+	width: 60px;
+	height:60px;
+	float:left;
+	margin-left:10px;
+}
+.apply-header span{
+	float:left;
+}
+.apply-name{
+	font-size: 20px;
+	color:#333;
+	line-height: 60px;
+	margin-left: 10px; 
+}
+.apply-edit{
+	font-size: 12px;
+	color:#fc9153;
+	line-height: 60px;
+	margin-left: 10px; 
+}
+.apply-index{
+	float:right;
+	line-height: 60px;
+	margin-right:10px;
+}
+.apply-content{
+	width:1100px;
+	margin:30px auto;
+	padding: 40px 10px 40px 10px;
+	background: #fff;
+	box-sizing: border-box;
+}
+.apply-content{
+	overflow: hidden;
+}
+.apply-content>div{
+	display: inline-block;
+	box-sizing: border-box;
+}
+.docCenter-aside{
+	float:left;
+	width:200px;
+	background: #f7f8f9;
+	box-sizing: border-box;
+	padding: 20px 0 20px 10px; 
+}
+.docCenter-content{
+	float:left;
+	width: 880px;
+	color:#666;
+	border-left:1px solid #eee;
+}
+.applay-title{
+	font-size: 22px;
+	line-height: 45px;
+	text-align: center;
+}
+.docCenter-icon{
+	display:inline-block;
+	border:4px solid #b1b1b1;
+	border-right-color:transparent;
+	border-top-color:transparent;
+	border-bottom-color:transparent;
+	margin-right:5px;
+	float:left;
+	margin-top:13px;
+	margin-right:9px;
+}
+.docCenter-icon-active{
+	border-top: 4px dashed #b1b1b1;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    vertical-align: -2px;
+    margin-top: 14px;
+}
+.docCenter-item a,.docCenter-item span{
+	line-height: 35px;
+}
+.docCenter-item a{
+	cursor:default;
+	margin-left:17px;
+	display:block;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	cursor: pointer;
+	color:#777;
+}
+.docCenter-item ul{
+	/* display: none; */
+}
+.docCenter-item>div{
+	cursor: pointer;
+}
+.docCenter-one{
+	margin-left:18px;
+}
+.docCenter-one a{
+	line-height: 35px;
+}
+#iframeId{
+	width:100%;
+}
+.table_gauge{
+	margin-top:20px;
+	margin-bottom: 20px;
+}
+
+
+

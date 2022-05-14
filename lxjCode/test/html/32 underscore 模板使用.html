@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<title>underscore模板的使用</title>
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="js/underscore.js"></script>	
+	</head>
+	<body>
+	<div id="content"></div>
+	<script type="text/template" id="tpl">
+		<% _.each(data, function (item) { %>
+		  <div class="outer">
+		  	<div><%= item.title %></div>
+		  	<div><%= item.url %></div>
+		  	<div><%= item.film %></div>
+		  	<% _.each(item.fruit,function(list){%>
+				<div>
+					<span><%= list.name%></span>
+					<span><%= list.sex%></span>
+				</div>
+		  	<%});%>
+		  </div>
+		<% }); %>
+	</script>
+		<script>
+			var datas = [
+			  {
+			    title: "标题1",
+			    url: "http://www.baidu.com",
+			    film: "电影名称1",
+			    fruit:[{
+			    	name:"ti1",
+			    	sex:"man"	
+			    }]
+			  },
+			  {
+			    title: "标题2",
+			    url: "http://www.baidu.com",
+			    film: "电影名称2",
+			    fruit:[{
+			    	name:"ti2",
+			    	sex:"man"
+			    }]
+			  },
+			  {
+			    title: "标题3",
+			    url: "http://www.baidu.com",
+			    film: "电影名称3",
+			    fruit:[{
+			    	name:"ti3",
+			    	sex:"man"
+			    }]
+			  },
+			  {
+			    title: "标题4",
+			    url: "http://www.baidu.com",
+			    film: "电影名称4",
+			    fruit:[{
+			    	name:"ti4",
+			    	sex:"man"
+			    }]
+			  },
+			  {
+			    title: "标题5",
+			    url: "http://www.baidu.com",
+			    film: "电影名称5",
+			    fruit:[{
+			    	name: "ti5",
+			    	sex: "man"
+			    }]
+			  }
+			  ,
+			  {
+			    title: "标题6666",
+			    url: "http://www.baidu.com",
+			    film: "电影名称5",
+			    fruit:[{
+			    	name:"ti6",
+			    	sex:"man"
+			    }]
+			  }
+			];
+
+			var t=_.template($("#tpl").html());
+			$('#content').html(t({"data":datas}));
+		</script>
+	</body>
+</html>

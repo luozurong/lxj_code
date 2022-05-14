@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="css/docCenter.css">
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <script src="../common/js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="apply-header">
+    <img src="../common/img/logo.png" alt="">
+    <span class="apply-name">联享家开放平台--文档中心</span>
+    <a href="../index/index.html" class="apply-index">返回首页</a>
+</div>
+<div class="apply-content">
+    <div class="docCenter-aside">
+        <div class="applay-title">文档中心</div>
+        <div class="docCenter-doc">
+            <!-- <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>关于我们</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter5.html">我的平台概况</a></li>
+                    <li><a href="docCenter6.html">我的平台详情</a></li>
+                    <li><a href="docCenter7.html">联系我们</a></li>
+                </ul>
+            </div> -->
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>平台文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter0.html">1.平台应用添加指引</a></li>
+                    <li><a href="docCenter.html">2.第三方系统接入鉴权流程</a></li>
+                    <li><a href="docCenter1.html">3.第三方系统接入鉴权接口</a></li>
+                    <li><a href="docCenter2.html">4.第三方系统同步数据流程</a></li>
+                    <li><a href="docCenter3.html">5.第三方系统同步数据接口</a></li>
+                    <li><a href="docCenter4.html">6.联享家平台错误码定义</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>Android sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter9.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter10.html">2.工程配置</a></li>
+                    <li><a href="docCenter11.html">3.SDK使用</a></li>
+                    <li><a href="docCenter12.html">4.注意事项</a></li>
+                </ul>
+            </div>
+            <div class="docCenter-item">
+                <div>
+                    <i class="docCenter-icon"></i>
+                    <span>IOS sdk文档</span>
+                </div>
+                <ul>
+                    <li><a href="docCenter13.html">1.注册和获取秘钥</a></li>
+                    <li><a href="docCenter14.html">2.ObjectC环境配置</a></li>
+                    <li><a href="docCenter15.html">3.UI定制功能</a></li>
+                    <!--<li><a href="docCenter12.html">4.注意事项</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="docCenter-content">
+        <div class="profile">
+            <h4 class="headline_h2">接口描述：</h4>
+            <div class="normal_index text_index">第三方平台携带令牌、小区编号、用户ID、房屋地址(小区、区域、楼栋、单元、楼层、房号)、用户姓名、手机号码、操作类型参数，请求联享家平台；联享家平台判别操作类型，实现新增、修改、删除用户信息逻辑。<div style="color:#e4393a" class="text_index">注：第三方平台用户信息发生变化时，需要实时同步数据至联享家平台；若同一个住房地址有多个用户对应，平台将按照记录顺序保存用户信息，首个用户为该住房业主，其他用户均登记为家属。家庭成员第一个启动APP，并成功激活门禁功能的作为主号，其他均为分号。另外，同步数据为异步执行操作，平台先响应第三方结果（包含匹配不成功的数据），而实际数据同步生效耗时较长，但不会超过一小时（看数据量）。</div>
+            </div>
+            <p class="normal_index text_index">接口访问地址：<a href="https://sdk.hori-gz.com:8443/lxjsdkApi/syncData">https://sdk.hori-gz.com:8443/lxjsdkApi/syncData</a>
+            </p>
+            <h4 class="normal_index text_index profile_h2">请求参数说明：</h4>
+            <table class="table_gauge"  style="font-size: 16px;width:100%;" width="600" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="width:80px">名称</td>
+                    <td style="width: 60px">类型</td>
+                    <td style="width: 60px">是否必填</td>
+                    <td style="width: 60px">说明</td>
+                </tr>
+                <tr>
+                    <td>token</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>访问令牌</td>
+                </tr>
+                <tr>
+                    <td>areaCode</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>小区编号</td>
+                </tr>
+                <tr>
+                    <td>userId</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>用户ID</td>
+                </tr>
+                <tr>
+                    <td>userName</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>用户姓名</td>
+                </tr>
+                <tr>
+                    <td>mobile</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>用户手机号码</td>
+                </tr>
+                <tr>
+                    <td>areaName</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>小区名称，长度不超过20个字符</td>
+                </tr>
+                <tr>
+                    <td>regionName</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>区域名称，长度不超过20个字符；不存在区域时，该值为空字符串</td>
+                </tr>
+                <tr>
+                    <td>buildingName</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>楼栋名称，长度不超过20个字符；不存在楼栋时，该值为空字符串；<span style="font-weight: 600;color:#e4393a">注意：别墅该属性必须传递。</span></td>
+                </tr>
+                <tr>
+                    <td>unitName</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>单元名称，长度不超过20个字符；不存在单元时，该值为空字符串；<span style="font-weight: 600;color:#e4393a">注意：别墅该属性必须传空字符串。</span></td>
+                </tr>
+                <tr>
+                    <td>floor</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>楼层号，由不超过三位长度的数字字符串组成；例如：”1”或”01”或”001”，均表示1楼；<span style="font-weight: 600;color:#e4393a">注意：别墅该属性必须传空字符串</span></td>
+                </tr>
+                <tr>
+                    <td>room</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>房间号（不包含楼层信息），由不超过3位长度的数字或数字加字母字符串组成；例如：
+                        ”01”表示1号房；
+                        “02”表示2号房；
+                        特例：A，B房命名
+                        “01A”表示1A房;
+                        “01B”表示1B房;
+                        ……字母编号最大到I房；<span style="font-weight: 600;color:#e4393a">注意：别墅该属性必须传空字符串。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>operateType</td>
+                    <td>string</td>
+                    <td>是</td>
+                    <td>操作类型：
+                        1、	新增
+                        2、	修改
+                        3、	删除
+                    </td>
+                </tr>
+                <tr>
+                    <td>sex</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>性别（选填），0：表示男 1：表示女 2：未知</td>
+                </tr>
+                <tr>
+                    <td>nation</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>民族（选填），系统默认“汉族”</td>
+                </tr>
+                <tr>
+                    <td>nationCode</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>民族代号（选填），系统默认“01”</td>
+                </tr>
+                <tr>
+                    <td>idCard</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>民族代号（选填），系统默认“01”</td>
+                </tr>
+                <tr>
+                    <td>registerAddress</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>户籍地址（选填），不超过200个字符</td>
+                </tr>
+                <tr>
+                    <td>infoEnteringType</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>信息录入方式（选填），1：读卡录入，2：手工录入</td>
+                </tr>
+                <tr>
+                    <td>sex</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>性别（选填），0：表示男 1：表示女 2：未知</td>
+                </tr>
+                <tr>
+                    <td>liveDate</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>入住日期（选填），格式“yyyy-MM-dd”</td>
+                </tr>
+                <tr>
+                    <td>liveWay</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>居住方式（选填），0:不详,1:单身居住,2:合伙居住,3:家庭居住,4:集体居住,5:其它</td>
+                </tr>
+                <tr>
+                    <td>liveStatus</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>入住状态（选填），1:入住，0：注销</td>
+                </tr>
+                <tr>
+                    <td>updateTime</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>更新日期（选填），格式“yyyy-MM-dd HH:mm:ss”</td>
+                </tr>
+                <tr>
+                    <td>logoutTime</td>
+                    <td>string</td>
+                    <td>否</td>
+                    <td>注销日期（选填），格式“yyyy-MM-dd HH:mm:ss”</td>
+                </tr>
+            </table>
+            <h4 class="text_index profile_h2">请求示例:</h4>
+
+    <pre class="normal_index">
+        {
+            header:{
+                token: "14434225639955790b2d03a44ecfa4d7",
+                time_stamp: "201305144142724"
+            },
+            body:{
+                areaCode: "4400100001",
+                operateType: "1",
+                list:[{
+                    userId: "123",
+                    userName: "张三",
+                    mobile: "18719345678",
+                    areaName: "东方小区",
+                    regionName: "A区",
+                    buildingName: "1号楼",
+                    unitName: "1单元",
+                    floor: "01",
+                    room: "01",
+                    sex: "1",
+                    nation: "汉族",
+                    nationCode: "01",
+                    idCard: "xxxxxxxxxxxxxxxxx",
+                    registerAddress: "xxxxxxxxxxx",
+                    infoEnteringType: "2",
+                    liveDate: "2017-11-01",
+                    liveWay: "0",
+                    liveStatus: "1",
+                    updateTime: "2017-11-01 17:33:26",
+                    logoutTime: "2018-11-01 17:33:26"
+                },{
+                    userId: "456",
+                    userName: "李四",
+                    mobile: "18819345678",
+                    areaName: "东方小区",
+                    regionName: "A区",
+                    buildingName: "1号楼",
+                    unitName: "1单元",
+                    floor: "01",
+                    room: "02" ，
+                    sex: "1",
+                    nation: "汉族",
+                    nationCode: "01",
+                    idCard: "xxxxxxxxxxxxxxxxx",
+                    registerAddress: "xxxxxxxxxxx",
+                    infoEnteringType: "2",
+                    liveDate: "2017-11-01",
+                    liveWay: "0",
+                    liveStatus: "1",
+                    updateTime: "2017-11-01 17:33:26",
+                    logoutTime: "2018-11-01 17:33:26"
+                }]
+            }
+        }
+    </pre>
+            <table class="table_gauge"  style="font-size: 16px;width:100%;" width="600" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="width:80px">名称</td>
+                    <td style="width: 60px">类型</td>
+                    <td style="width: 60px">是否必填</td>
+                    <td style="width: 60px">说明</td>
+                </tr>
+                <tr>
+                    <td style="width:80px">result</td>
+                    <td style="width: 60px">string</td>
+                    <td style="width: 60px">是</td>
+                    <td style="width: 60px">请求处理结果当结果为“0”时为正确其它详见错误码定义表</td>
+                </tr>
+                <tr>
+                    <td style="width:80px">reason</td>
+                    <td style="width: 60px">string</td>
+                    <td style="width: 60px">否</td>
+                    <td style="width: 60px">错误描述</td>
+                </tr>
+                <tr>
+                    <td style="width:80px">errorList</td>
+                    <td style="width: 60px">string</td>
+                    <td style="width: 60px">否</td>
+                    <td style="width: 60px">错误列表，该列表数据不受result值影响</td>
+                </tr>
+                <tr>
+                    <td style="width:80px">userId</td>
+                    <td style="width: 60px">string</td>
+                    <td style="width: 60px">否</td>
+                    <td style="width: 60px">同步失败的用户ID</td>
+                </tr>
+                <tr>
+                    <td style="width:80px">errorMsg</td>
+                    <td style="width: 60px">string</td>
+                    <td style="width: 60px">否</td>
+                    <td style="width: 60px">错误描述</td>
+                </tr>
+                </table>
+            <div class="text_index profile_h2">响应示例</div>
+            <pre class="normal_index">
+                {
+                    "result":"0",
+                    "reason":"",
+                    ”errorList”:[
+                    {
+                    ”userId”:”123”
+                      “errorMsg”:”地址不匹配”
+                    },
+                    {
+                    ”userId”:”456”
+                      “errorMsg”:”地址不匹配”
+                    }
+                    ]
+                }
+
+            </pre>
+        </div>
+    </div>
+</div>
+<script src="js/initIframeHeight.js"></script>
+<script src="../common/js/jquery-2.1.4.js"></script>
+<script src="js/docCenter.js"></script>
+</body>
+</html>

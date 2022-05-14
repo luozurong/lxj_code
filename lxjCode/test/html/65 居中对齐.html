@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>选择开始时间和结束时间</title>
+    <style type="text/css">
+        .center1, .center2,.middle1,.middle2{
+            border: 1px solid red;
+            width: 650px;
+            height: 500px;
+        }
+        .center1>div, .center2>div, .middle1>div, .middle2>div{
+            border: 1px solid green;
+            width: 200px;
+            height: 100px;
+        }
+        .d{
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+        }
+        .center1{
+            text-align: center;
+        }
+        .center1>div{
+            display: inline-block;
+        }
+        .center2{
+            display: flex;
+            justify-content: center;
+        }
+        .center2>div{
+            display: inline-block;
+        }
+
+        .middle1{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .middle2{
+          display: flex;
+          flex-direction: row;
+          /*flex-wrap: wrap;
+          align-items: center;
+          justify-content:  center;*/
+          align-content: flex-start;
+        }
+        .flexs{
+            display: flex;
+            width: 500px;
+            height: 200px;
+
+        }
+        .flexs .flexs1{
+            flex-grow: 1;
+            background: #cc5;
+            height:200px;
+        }
+        .flexs .flexs2{
+            flex-grow: 5;
+             background: #c25;
+             height:200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center1">
+        <div><div class="d"></div></div>
+        <div><div class="d"></div></div>
+    </div>
+     <div class="center2">
+        <div><div class="d"></div></div>
+        <div><div class="d"></div></div>
+    </div>
+    <div class="middle1">
+        <div><div class="d"></div></div>
+        <div><div class="d"></div></div>
+    </div>
+    <div class="middle2">
+        <div><div class="d"></div></div>
+        <div><div class="d"></div></div>
+    </div>
+    <div class="flexs">
+     <!--    <div class="flexs1"></div> -->
+        <div class="flexs2"></div>
+      <!--   <div class="flexs1"></div> -->
+    </div>
+</body>
+</html>

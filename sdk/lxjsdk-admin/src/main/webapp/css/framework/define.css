@@ -1,0 +1,13 @@
+
+/*为了去掉最小宽度1160样式   */
+div.position,div.box_tool_mid,div.box_tool_min,div._page_sty {
+	min-width: 10px;
+	width: 99%;
+}
+
+div#scrollContent {
+	min-width: 10px;
+	min-height:420px;
+	width: 99%;
+}
+

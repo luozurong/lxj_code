@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>公司资质</title>
+    <link rel="stylesheet" href="css/mui.min.css">
+	<link rel="stylesheet" href="css/aptitude.css">
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/aptitude.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/mui.zoom.js"></script>
+	<script src="../common/js/mui.previewimage.js"></script>
+	<script type="text/javascript">
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+			isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+			dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+			dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+			scale = 1 / dpr,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			docEl.dataset.dpr = dpr;
+			var recalc = function() {
+				var width = docEl.clientWidth;
+				if(width / dpr > 768) {
+					width = 768 * dpr;
+				}
+				docEl.style.fontSize = 100 * (width / 414) + 'px';
+			};
+			recalc();
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>	
+</head>
+<body>
+	<div class="aptitude">
+		<p>食品经营许可证 (正本)</p>
+		<img src="images/aptitude.png" data-preview-src="" data-preview-group="1" alt="">
+		<p>食品经营许可证 (副本)</p>
+		<img src="images/aptitude1.png" data-preview-src="" data-preview-group="1" alt="">
+		<p>食品经营许可备案凭证</p>
+		<img src="images/xukezheng.jpg" data-preview-src="" data-preview-group="1" alt="">
+	</div>
+	<script>
+	    mui.previewImage();
+	</script>
+</body>
+</html>

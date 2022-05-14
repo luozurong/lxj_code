@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+            if(GetURLParameter("id")==1){
+                window.location.replace('https://www.baidu.com');
+            }
+            if(GetURLParameter("id")== 2){
+                 window.location.replace('https://www.taobao.com');
+            }
+        
+        function GetURLParameter(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    </script>
+</head>
+<body></body>
+</html>

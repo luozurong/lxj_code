@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请售后</title>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=0.333, maximum-scale=0.333, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/mui.zoom.js"></script>
+    <script src="../js/mui.previewimage.js"></script>
+    <script>
+        function resize(){
+            var deviceWidth = document.documentElement.clientWidth;
+            if(deviceWidth > 1242) deviceWidth = 1242;
+            document.documentElement.style.fontSize = deviceWidth / 1.242 + 'px';
+        }
+        window.onresize=resize;
+        resize();
+    </script>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            font-size:42px;
+            color:#222;
+            background:#f0f0f0;
+            font-family: "Microsoft YaHei";
+        }
+        textarea::-webkit-input-placeholder{
+            color:#ccc;
+            font-size: 36px;
+        }
+        .aftermarket-top,.aftermarket-data{
+            width:100%;
+            padding:0 0.03rem;
+            box-sizing: border-box;
+            background: #fff;
+            margin-bottom:0.03rem;
+        }
+        .aftermarket-word{
+            height:0.13rem;
+            line-height:0.13rem;
+        }
+        .aftermarket-textarea>textarea{
+            width:100%;
+            height:0.54rem;
+            border:1px solid #ccc;
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+            padding:0.045rem;
+            font-family: "Microsoft YaHei";
+            margin-bottom:0.02rem;
+            font-size: 42px;
+        }
+        .aftermarket-pic{
+            overflow: hidden;
+            padding-top:0.026rem;
+        }
+        .aftermarket-div{
+            position: relative;
+            width:0.21rem;
+            height:0.21rem;
+            display: inline-block;
+            float:left;
+            margin-right:0.04rem;
+        }
+        .aftermarket-div img{
+            width:0.21rem;
+            height:0.21rem;
+        }
+        .aftermarket-div i{
+            display: block;
+            height:51px;
+            width:51px;
+            position: absolute;
+            top:-19px;
+            right:-19px;
+            z-index: 1;
+            background-image: url(../images/aftermarketdel.png);
+        }
+        .aftermarket-data-word{
+            height:0.13rem;
+            line-height:0.13rem;
+            font-size: 42px;
+        }
+        .aftermarket-disc{
+            color:#ccc;
+            font-size: 0.042rem;
+            margin-left:0.024rem;
+            line-height:0.13rem;
+            margin-top:0.02rem;
+        }
+        .aftermarket-input{
+            position: relative;
+            width:0.21rem;
+            height:0.21rem;
+            float:left;
+            margin-right:0.04rem;
+
+        }
+        .aftermarket-input input{
+            position: absolute;
+            top:0;
+            left:0;
+            z-index:1;
+            width:0.21rem;
+            height:0.21rem;
+            opacity: 0;
+        }
+        .aftermarket-fixed{
+            position: fixed;
+            bottom:0;
+            left:0;
+            z-index:2;
+            width:100%;
+            height:145px;
+            line-height:145px;
+            background:#ff661b;
+            color:#fff;
+            text-align: center;
+            font-size: 48px;
+            letter-spacing: 0.005rem;
+        }
+    </style>
+    <style type="text/css">
+        .mui-preview-image.mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-preview-header,
+        .mui-preview-footer {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            z-index: 10;
+        }
+        .mui-preview-header {
+            height: 44px;
+            top: 0;
+        }
+        .mui-preview-footer {
+            height: 50px;
+            bottom: 0px;
+        }
+        .mui-preview-header .mui-preview-indicator {
+            display: block;
+            line-height: 25px;
+            color: #fff;
+            text-align: center;
+            margin: 15px auto 4px;
+            width: 70px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        .mui-preview-image {
+            display: none;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .mui-preview-image.mui-preview-in {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+        .mui-preview-image.mui-preview-out {
+            background: none;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+        .mui-zoom-scroller {
+            position: absolute;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            -webkit-backface-visibility: hidden;
+        }
+        .mui-zoom {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .mui-slider .mui-slider-group .mui-slider-item img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+            width: 100%;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+            display: inline-table;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .mui-preview-loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .mui-preview-loading.mui-active {
+            display: block;
+        }
+        .mui-preview-loading .mui-spinner-white {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+            height: 50px;
+            width: 50px;
+        }
+        .mui-preview-image img.mui-transitioning {
+            -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        p img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="aftermarket-top">
+        <div class="aftermarket-word">留言：</div>
+        <div class="aftermarket-textarea">
+            <textarea placeholder="选填 限制300字 请在此描述详细问题"></textarea>
+        </div>
+    </div>
+    <div class="aftermarket-data">
+        <p class="aftermarket-data-word">上传图片</p>
+        <div class="aftermarket-pic">
+            <div class="aftermarket-pic-only"></div>
+            <div class="aftermarket-pic-add">
+                <div class="aftermarket-div aftermarket-input">
+                    <img src="../images/picture_add.png" alt="">
+                    <input type="file" size="3" multiple  onchange="showPicture(this.files)" accept="image/jpeg/,image/png,image/bmp">
+                </div>
+            </div>
+        </div>
+        <div class="aftermarket-disc">最多只上传3张，每张不超过5M,仅支持JPG、PNG、BMP</div>
+    </div>
+    <div class="aftermarket-fixed">提交申请</div>
+    <script>
+        //图片放大预览初始化
+        mui.previewImage();
+
+        var picIndex = [];
+        var myform;
+        function showPicture(files){
+           //图片路径
+           var imgArray = [];
+           for(var k = 0;k<files.length;k++){
+               var filesURL = window.URL.createObjectURL(files[k]);//获取图片地址
+               imgArray.push(filesURL);
+               //限制上传文件大小
+               if(files[k].size > 5*1024*1024){
+                   console.log("文件太大了");
+                   return;
+               }
+           }
+           //显示图片
+           var _html = "";
+           for(var i = 0;i < 3;i ++) {
+               _html +='<div class="aftermarket-div">';
+               _html +='    <img src="'+imgArray[i]+'" alt=""  data-preview-src="" data-preview-group="1">';
+               _html +='    <i onclick="delPic(this)"></i>';
+               _html +='</div>';
+           }
+           $(".aftermarket-pic-only").append(_html);
+           hideAddPic();
+
+            //获取上传图片的下标
+           $(".aftermarket-pic-only>div").each(function(){
+               picIndex.push($(this).index());
+           });
+            myForm(picIndex);
+        }
+       //隐藏添加图片图标
+       function hideAddPic(){
+           var picLength = $(".aftermarket-pic-only>div").length;
+           if(picLength >= 3){
+               $(".aftermarket-pic-add").hide();
+           }else{
+               $(".aftermarket-pic-add").show();
+           }
+       }
+
+
+        function delPic(event){
+            var picIndexs = $(event).parent().index();
+            picIndex[picIndexs] = -1;
+            $(event).parent().remove();
+            console.log(picIndex);
+            myForm(picIndex);
+            hideAddPic();
+        }
+        function myForm(picIndexs){
+            myform = new FormData();//多图片上传
+            for(var i = 0, k = 0;i<$(".aftermarket-input input")[0].files.length,k < picIndexs.length;i++,k++){
+                if(i == picIndexs[k]){
+                    myform.append("file",$(".aftermarket-input input")[0].files[i]);
+                    console.log($(".aftermarket-input input")[0].files[i]);
+                    console.log(myform);
+                }
+            }
+            console.log(myform.length);
+        }
+
+       $(".aftermarket-fixed").click(function(){
+           myForm(picIndex);
+           console.log(myform);
+       });
+    </script>
+</body>
+</html>

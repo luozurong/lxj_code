@@ -1,0 +1,279 @@
+ html,body {
+	position:relative;
+	height:100%;
+}
+html {
+	overflow:hidden;
+}
+* {
+	padding:0;
+	margin:0;
+	-webkit-tap-highlight-color:rgba(0,0,0,0) 
+}
+li {
+	list-style:none;
+}
+body {
+	background:#fff;
+	font-family:Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-size:12px;
+}
+[v-cloak]{
+	display: none !important;
+}
+.img img {
+	width:100%;
+	display:block;
+}
+#top {
+	position:absolute;
+	top:0;
+	z-index:5;
+	width:100%;
+	background:#fff;
+}
+#top .addr {
+	height:36px;
+	margin:0 auto;
+	display:block;
+}
+#top .search {
+	position:absolute;
+	top:0;
+	right:0;
+	height:36px;
+	display:block;
+}
+#nav {
+	border-bottom:1px solid #ebebeb;
+}
+#nav .swiper-slide span {
+	/*margin:0 5px;*/
+	text-align:center;
+	display:block;
+	line-height:3.3;
+	font-size: 0.17rem;
+	color:#aaa;
+}
+#nav .bar {
+	width:50px;
+	height:3px;
+	position:absolute;
+	bottom:0px;
+	display: none;
+}
+#nav .bar .color {
+
+	margin:0 0.14rem;
+	height:3px;
+	background:#fc9153;
+}
+.banner img {
+	width:100%;
+	display:block;
+}
+.banner	.swiper-pagination {
+	left:auto;
+	right:7px;
+	bottom:7px;
+	width:auto;
+	padding:2px 7px;
+	border-radius:10px;
+	color:#fff;
+	background:rgba(0,0,0,.3);
+}
+/*.swiper-wrapper{
+	margin-top: 0.56rem;
+}*/
+#page {
+	/*margin-bottom:50px;*/
+	height:100%;
+}
+#page .slidepage {
+	height:100%;
+}
+.scroll {
+	height:100%;
+}
+.slidescroll {
+	height:auto;
+}
+#footer {
+	position:fixed;
+	bottom:0;
+	z-index:5;
+}
+.swiper-wrapper1 .swiper-slide{
+	display: inline-block !important;
+	width: auto!important;
+}
+.swiper-slide span{
+	margin: 0 0.14rem;
+}
+
+.info-margin{
+	margin-top: 0.56rem;
+}
+.info-floor1-name{
+	padding: 0.14rem 0.14rem 0;
+	font-size: 0.18rem;
+}
+.info-floor1-pic{
+	display: flex;
+	display: -webkit-flex;
+	padding: 0 0.115rem;
+	margin-top: 0.1rem;
+	overflow: hidden;
+}
+.info-floor1-pic div{
+	width: 33.333%;
+	height: 0.77rem;
+	margin: 0 0.025rem;
+	background-position: center;
+	background-size: cover;
+	background-repeat: none; 
+}
+.info-floor1-msg{
+	margin: 0 0.14rem;
+}
+.info-floor1-msg span{
+	margin: 0;
+	margin-right: 0.07rem;
+	color: #aaa;
+	display: inline-block;
+	line-height: 0.4rem;
+}
+.info-floor1-msg span:last-child{
+	float: right;
+	margin-right: 0;
+}
+.info-floor-line{
+	border-bottom: 1px solid #eee;
+	margin: 0 0.14rem;
+}
+
+
+.info-floor2-name{
+	padding: 0.14rem 0.14rem 0;
+	font-size: 0.18rem;
+}
+.info-floor2-pic{
+	display: block;
+	margin-top: 0.1rem;
+}
+.info-floor2-pic div{
+	display: block;
+	height: 1.9rem;
+	margin: 0 0.14rem;
+	background-position: center;
+	background-size: cover;
+	background-repeat: none; 
+}
+.info-floor2-msg{
+	margin: 0 0.14rem;
+}
+.info-floor2-msg span{
+	margin: 0;
+	margin-left: 0.12rem;
+	margin: 0.11rem 0.05rem 0.11rem 0;
+	color: #aaa;
+}
+.info-floor2-msg .info-floor2-icon{
+	display: inline-block;
+	width: 0.33rem;
+	height: 0.16rem;
+	font-size: 0.11rem;
+	border: 1px solid #fc9153;
+	color: #fc9153;
+	line-height: 0.16rem;
+	text-align: center;
+	border-radius: 0.03rem;
+
+}
+.info-floor-line{
+	border-bottom: 1px solid #eee;
+	margin: 0 0.14rem;
+}
+.info-floor1-right{
+	float: right;
+	margin: 0;
+}
+.info-floor3-main{
+	display: flex;
+	display: -webkit-flex;
+	padding: 0.14rem 0.14rem 0;
+}
+.info-floor3-name{
+	flex-grow: 2;
+	-webkit-flex-grow: 2;
+	font-size: 0.18rem;
+	margin-right: 0.27rem;
+}
+.info-floor3-pic{
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
+	width: 1.28rem;
+	height: 0.77rem;
+	background-position: center;
+	background-size: cover;
+	background-repeat: none; 
+}
+.info-data-wrap{
+	width: 100%;
+	height: 0.6rem;
+	color: #ccc;
+	box-sizing: border-box;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	-webkit-justify-content: center;
+}
+.info-data-wrap div.word{
+	text-align: center;
+	line-height: 0.6rem;
+}
+.info-data-wrap .pic{
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	width: 0.3rem;
+	height: 0.3rem;
+}
+.info-empty img{
+	display: block;
+	width: 1.8rem;
+	height: 1.8rem;
+	margin: 1.13rem auto 0;
+}
+.info-empty div.word{
+	font-size: 0.17rem;
+	color: #ccc;
+	text-align: center;
+	margin-top: 0.14rem;
+}
+.info-empty div.info-pic-empty{
+	display: block;
+	width: 1.8rem;
+	height: 1.8rem;
+	margin: 1.13rem auto 0;
+	background-size: contain;
+}
+.click-active div{
+	color: #aaa !important;
+}
+.swiper-wrapper1 .swiper-slide{
+	position: relative;
+}
+.swiper-div{
+	position: absolute;
+	width: 100%;
+	bottom: -1px;
+	left:  0;
+	z-index: 1000;
+	height: 3px;
+	margin: 0 0.14rem;
+	background: #fc9153;
+	display: none;
+}

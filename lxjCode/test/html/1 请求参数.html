@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery-2.1.4.js"></script>
+</head>
+<body>
+<div class="product-list">
+    <div data-value="001">
+        <span>木瓜</span>
+        <span>120</span>
+    </div>
+    <div data-value="002">
+        <span>西瓜</span>
+        <span>130</span>
+    </div>
+    <div data-value="003">
+        <span>哈密瓜</span>
+        <span>140</span>
+    </div>
+    <a onclick="go(this)" data-href="http://www.baidu.com">sdfsd</a>
+</div>
+<script>
+    var listValue = [];
+    var dataValue = {};
+    $(".product-list>div").each(function(){
+        var dataObject = {};
+        dataObject.id = $(this).attr("data-value");
+        dataObject.name = $(this).find("span").eq(0).text();
+        dataObject.price = $(this).find("span").eq(1).text();
+        listValue.push(dataObject);
+    });
+    dataValue.body = {
+        name:"水果分类",
+        categoryId:"1461131713349903125d90934523b27a",
+        areaCode:"c",
+        pageSize:10,
+        pageNum:1,
+        list:listValue
+    };
+    dataValue.header = {
+        token:"test",
+        time_stamp:201406174155355
+    };
+    console.log(dataValue);
+
+
+    var param={
+        body:{
+            pageSize: 1,
+            pageNum: 10,
+            organizationSeq:"4400100248",
+        },
+        header:{
+            token: "1519439413062037b195b0e74a9485c9",
+            time_stamp: new Date().getTime()
+        }
+    }
+    console.log(param);
+    var paramString = JSON.stringify(param);
+    var url = 'https://tt.hori-gz.com:8443/ctmsApi/specialColumn/specialColumnDetailsList?str='+paramString;
+    $.ajax({
+        url:url,
+        dataType: "jsonp",
+        jsonp: "jsoncallback",
+        jsonpCallback: "success_jsonpCallback",
+        success: function(data){
+            console.log(data);
+        }
+    })
+    function go(id){
+        var url = $(id).attr("data-href");
+        window.location.href=url;
+    }
+</script>
+</body>
+</html>

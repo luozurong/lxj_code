@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no" />
+		<title>新版升级</title>
+		<link rel="stylesheet" href="../common/css/reset.css">
+		<script type="text/javascript" src="../common/interface.js"></script>
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<!--百度统计-->
+		<script type="text/javascript">
+			var clientType = GetURLParameter('clientType');
+			if(clientType != 'android') {
+				clientType = 'ios'
+			};
+			var fromText = GetURLParameter('from');
+			var pagebaiduId = 5012;
+			if(fromText == "kaimen") {
+				pagebaiduId = 5013;
+			}else if(fromText == "shengh") {
+				pagebaiduId = 5014;
+			}else if(fromText == "zixun") {
+				pagebaiduId = 5015;
+			}else if(fromText == "tanc") {
+				pagebaiduId = 5016;
+			}else if(fromText == "push") {
+				pagebaiduId = 5017;
+			}else if(fromText == "huod") {
+				pagebaiduId = 5018;
+			}
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAutoPageview', false]);
+			_hmt.push(['_trackPageview', '/client=' + clientType + '-活动-H5页面-活动ID='+pagebaiduId]);
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?245cd6becb25900dbb7f9f62761431d7";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+		<style type="text/css">
+			img {
+				float: left;
+				display: block;
+			}
+			
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+		</style>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				font-size: 0;
+			}
+			
+			#sjbt a {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			
+			#five_box {
+				width: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				background-color: rgba(0, 0, 0, 0.8);
+				z-index: 99;
+				display: -webkit-flex;
+				-webkit-align-items: center;
+				display: none;
+			}
+			
+			#rule_box {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				display: -webkit-flex;
+				-webkit-align-items: center;
+			}
+			
+			.flew_grow2 {
+				-webkit-flex-grow: 2;
+			}
+			
+			.flew_grow3 {
+				-webkit-flex-grow: 3;
+			}
+			
+			.flew_grow4 {
+				-webkit-flex-grow: 4;
+			}
+			
+			.flew_grow5 {
+				-webkit-flex-grow: 5;
+			}
+			
+			.rule_box1 {
+				width: 100%;
+				position: relative;
+				-webkit-flex-shrink: 0;
+				z-index: 999;
+				overflow: auto;
+				box-sizing: border-box;
+				padding: 0 9% 0 9%;
+			}
+			
+			.rule_img {
+				width: 100%;
+				height: auto;
+				-webkit-flex-shrink: 0;
+				display: block;
+			}
+			.lxj_content{
+				font-size: 16px;
+			}
+			.lxj_tipButtomA0{
+				font-size: 16px;
+			}
+			
+			#jfzx,
+			#jfzxa,
+			#jfzx2,
+			#jfzxa2 {
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+			function goPage(ele) {
+				_hmt.push(['_trackEvent', "5012", "1", "立即更新"]);
+				if(sessionStorage.getItem("lxjversionsName") >= 4200) {
+					
+					if(sessionStorage.getItem("lxjversionsName") < 5205) {
+						nativeMethod("checkAppUpdate", null);
+					} else {
+						
+						//lxjTip.msg("您已经是最新版啦！快去体验吧")
+					}
+				} else {
+					//lxjTip.alert("亲！软件市场已发布联享家5.3版本APP了，更多惊喜在等着你哦！");
+					window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hori.smartcommunity";
+				}			
+			}
+			function goPage2(ele) {
+				_hmt.push(['_trackEvent', "5012", "2", "立即更新"]);
+				if(sessionStorage.getItem("lxjversionsName") >= 4200) {
+					if(sessionStorage.getItem("lxjversionsName") < 5205) {
+						nativeMethod("checkAppUpdate", null);
+					} else {
+												
+						//lxjTip.msg("您已经是最新版啦！快去体验吧")
+					}
+				} else {
+					//lxjTip.alert("亲！软件市场已发布联享家5.3版本APP了，更多惊喜在等着你哦！");
+					window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hori.smartcommunity";
+				}			
+			}
+			var u = navigator.userAgent;
+			var clientType = GetURLParameter('clientType');
+			var baiduId = "";
+			if(!clientType) { //App拿不到clientType才进入
+				if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+					clientType = "ios";
+				} else {
+					clientType = "android";
+				}
+			}
+
+			var isVisitor = false;
+			var token = GetURLParameter("token");
+			if(token && token.indexOf("_") == 0) {
+				isVisitor = true;
+			}
+			/*$(function() {
+				setTitle("新版升级，轻松赚积分");
+			})*/
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+
+			function isCondition(param) { // (!typeof(a) === undefined)
+				if(param != null && param != "" && param != undefined) {
+					return true;
+				}
+				return false;
+			}
+
+			function refreshData() {
+				setTimeout(function() {}, 0);
+				return 1;
+			}
+
+			function closeTip() {
+				//$("#five_box").css("display", "none");
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="mainbox" style="position: relative;display: inline-block;width: 100%;">
+			<img style="max-width:100%;min-width: 100%;" src="images/5300bj.jpg" title="" alt="" />
+			<a id="jfzx"  href="https://h5.youzan.com/v2/feature/ytCfCN9d2B?dc_ps=2220982325947261955.200001">
+				<div style="width: 75%;height: 4%;position: absolute;top: 36.5%;left: 12%;">
+				</div>
+			</a>
+			<a id="jfzxa"  href="https://h5.youzan.com/v2/feature/ytCfCN9d2B?dc_ps=2220982325947261955.200001">
+				<div style="width: 53%;height: 4%;position: absolute;top: 85%;left: 24%;">
+				</div>
+			</a>
+			<div id="jfzx2" onclick="goPage(this)" style="width: 75%;height: 4%;position: absolute;top: 36.5%;left: 12%;">
+			</div>
+			<div id="jfzxa2" onclick="goPage2(this)" style="width: 53%;height: 4%;position: absolute;top: 85%;left: 24%;">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			setTitle("新版升级");
+			if(sessionStorage.getItem("lxjversionsName") >= 5205) {
+					document.getElementById("jfzx").style.display = 'block';
+					document.getElementById("jfzxa").style.display = 'block';
+				/*if(sessionStorage.getItem("lxjversionsName") < 5002) {
+					document.getElementById("jfzx").style.display = 'block';
+					document.getElementById("jfzxa").style.display = 'block';
+				} else {
+					//lxjTip.msg("您已经是最新版啦！快去体验吧")
+					document.getElementById("jfzx2").style.display = 'block';
+					document.getElementById("jfzxa2").style.display = 'block';
+				}*/
+			} else {
+				//lxjTip.alert("亲！软件市场已发布联享家5.0版本APP了，更多惊喜在等着你哦！")
+				document.getElementById("jfzx2").style.display = 'block';
+				document.getElementById("jfzxa2").style.display = 'block';
+			}
+
+		}
+	</script>
+
+</html>

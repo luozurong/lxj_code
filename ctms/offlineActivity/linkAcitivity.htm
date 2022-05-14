@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interface.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>活动详情</title>
+		<style type="text/css">
+			body,
+			html {
+				background-color: #fff;
+				line-height: normal;
+				font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+			}
+			
+			[v-cloak] {
+				display: none!important;
+			}
+			
+			* {
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+			
+			.line_01 {
+				width: 100%;
+				height: 1px;
+				background-color: #999;
+				transform: scaleY(0.5);
+				-webkit-transform: scaleY(0.5)
+			}
+			
+			.main_box {
+				padding: 0.14rem;
+				box-sizing: border-box;
+				width: 100%;
+			}
+			.main_box *{
+				max-width:100%!important;
+				height: auto;
+			}
+			.main_box img{
+				max-width:100%!important;
+				height: auto;
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+		</script>
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<!--<div class="header_box">
+				<img src="images/apply@3x.png" style="" />
+			</div>-->
+			<div class="main_box" v-html="contentHtml">
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			var clientType = GetURLParameter("clientType");
+
+			var token = GetURLParameter("token");
+			var activityId = GetURLParameter("activityId");
+
+			/*var token = "15160697479164fe05ce7fab496191bb";
+			activityId = "151599883274f34b73f5ec3d4f3ba8c5";*/
+			//ctmsHost="http://192.168.51.26:8090";
+			var timestamp = new Date().getTime();
+
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					jsondate: {},
+					contentHtml: '',
+					apiurl: ctmsHost + "/ctmsApi/activity/getUrlActivity", //报名活动
+				},
+				filters: {
+					//状态过滤
+				},
+				mounted: function() {
+					this.$nextTick(function() {
+						//console.log(99999999);
+						this.getDatejson();
+					});
+
+				},
+				methods: {
+					getDatejson: function() {
+						var params = {};
+						params.header = {
+							token: token,
+							time_stamp: timestamp
+						};
+						params.body = {
+							activityId: activityId,
+						};
+
+						var paramData = JSON.stringify(params);
+						this.$http.jsonp(this.apiurl + "?str=" + encodeURI(paramData), {
+							emulateJSON: true,
+							method: "get",
+							dataType: "jsonp",
+							jsonp: "jsoncallback",
+							jsonpCallback: "success_jsonpCallback"
+						}).then(function(response) {
+							// 响应成功回调
+							console.log(JSON.stringify(response.body))
+							//this.message = JSON.stringify(response.body);
+							if(response.body.result == "0") {
+								this.contentHtml = response.body.content;
+							} else {
+								lxjTip.alert("活动信息异常");
+							}
+						}, function(response2) {
+							// 响应错误回调
+							console.log(JSON.stringify(response2.body))
+							//	console.log(JSON.stringify(response))
+						});
+					},
+				}
+			});
+
+			//获取URL参数
+			function GetURLParameter(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+
+			function refreshData() {
+				setTimeout(function() {}, 0);
+				return 1;
+			}
+		</script>
+	</body>
+
+</html>

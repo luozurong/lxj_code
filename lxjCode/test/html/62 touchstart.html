@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <style>
+        .test-item{
+            height: 80px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class='test-wrap'>
+        <div class='test-item' style="transform: translate(0px 0px);">移动1</div>
+        <div class='test-item'>移动2</div>
+        <div class='test-item'>移动3</div>
+        <div class='test-item'>移动4</div>
+    </div>
+    <script>
+        var moveX;
+        var moveXTemp;
+        var touchstart;
+        var item = document.getElementsByClassName("test-item"); 
+        for(var i = 0; i < item.length; i++) {             
+            (function(i) {
+                item[i].addEventListener('touchstart', function(){
+                    console.log('第'+i+'个');
+                   
+
+                });      
+                item[i].ontouchstart =function(event) {              
+                    touchstart = event.touches[0].clientX;       
+                };   
+                item[i].ontouchmove =function(event) {              
+                    moveX = event.changedTouches[0].clientX - touchstart;
+                    if(moveX < -50) moveX = -50;
+                    item[i].style.webkitTransform="translate("+moveX+"px, 0px)";      
+                    transformOther();  
+                };       
+                item[i].ontouchend =function(event) {     
+                    moveX = event.changedTouches[0].clientX - touchstart;
+                    if(moveX <= -50){
+                        moveXTemp = -50;
+                        transformOther();
+                    }else if(moveX > 50){
+                        moveXTemp = 0;
+                    }
+                    item[i].style.webkitTransform="translate("+moveXTemp+"px, 0px)";           
+                };  
+            })(i);
+            
+        }
+        function transformOther(){
+            for(var j = 0; j < item.length; j++) {
+                item[j].style.webkitTransform="translate("+0+"px, 0px)";
+            }
+        }
+    </script>
+</body>
+</html>

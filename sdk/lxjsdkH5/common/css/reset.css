@@ -1,0 +1,88 @@
+/*重置样式*/
+html,body,div,p,ul,li,h1,h2,h3,h4,form,input{
+	border: none;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+/*强制换行*/
+div,span{
+    word-break: break-all;
+}
+body{
+	font-family: "microsoft yahei";
+	font-size: .16rem;
+	color: #333333;
+}
+li{list-style: none;}
+input{
+	/* outline: none; */
+	/*去ios内阴影、圆角*/
+	/* -webkit-appearance: none;  */
+	border-radius: 0;
+}
+a{text-decoration: none;color:#000;}
+.clearfix:before,.clearfix:after{
+	display:table;
+	content:"";
+}
+input, textarea, a {
+    -webkit-tap-highlight-color: transparent;
+}
+textarea {
+  -webkit-appearance: none;
+}
+.clearfix:after{
+	clear:both;
+}
+.clearfix{
+	*zoom:1;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.text_index{
+	text-indent: 25px;
+}
+.normal_index{
+	text-align: justify;
+	padding-bottom: 30px;
+	font-size: 16px;
+	line-height:30px;
+}
+.profile{
+	box-sizing: border-box;
+	padding: 0 20px;
+}
+.table_gauge tbody tr td{
+	padding:10px 20px;
+}
+.table_gauge{
+	border-collapse: collapse;
+}
+.headline_h2{
+	border-bottom:1px solid #d0dfed;
+	font-weight: 600;
+	padding: 5px 0;
+	font-size:18px;
+}
+.profile_h2{
+	border: 1px solid #becfdd;
+	font-size: 18px;
+	padding: 5px 0;
+	font-weight: 600;
+	background-color: #f6faff;
+}
+
+/*禁止选中*/
+/**:not(input,textarea) {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}*/

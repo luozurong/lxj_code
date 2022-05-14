@@ -1,0 +1,66 @@
+html,body{
+    height:100%;
+    width:100%;
+    background:#fff;
+    font-size:14px;
+}
+.offlineTopic{
+    margin-top:4px;
+    padding-left:8px;
+
+}
+.offlineTime{
+    margin:8px 0;
+    padding-left:8px;
+    color:#b6b0b7;
+}
+.offlineImg{
+    height:200px;
+    background-size:cover;
+    overflow: hidden;
+    margin:0 8px;
+}
+
+.offlineDisc{
+    padding-left:8px;
+    padding-right:8px;
+    margin-top:4px;
+}
+.productBigbox{
+    width:100%;
+    margin-top:20px;
+    padding:0 10px;
+}
+.productBigbox>div{
+    width: 44%;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+}
+.productDisc{
+    margin-top: -20px;
+    text-align: center;
+    width: 170px;
+    color: #fff;
+}
+.productValue{
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    margin-left: -4px;
+}
+.nowbuy{
+    border: 1px solid #ccc;
+    width: 90px;
+    border-radius: 0.06rem;
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    margin-top: 4px;
+    margin-left: 44px;
+}
+.productImg{
+    width: 170px;
+    height: 200px;
+    overflow: hidden;
+}

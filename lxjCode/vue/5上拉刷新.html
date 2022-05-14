@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <script src="js/vue.min.js"></script>
+  <script src="plugin/vue-scroller/vue-scroller.min.js"></script>
+  <title>Vue Scroller</title>
+  <style>
+    html, body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .row {
+      width: 100%;
+      height: 50px;
+      padding: 10px 0;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+      color: #444;
+      background-color: #fff;
+    }
+
+    .grey-bg {
+      background-color: #eee;
+    }
+    .vue-load{
+      height: 1px;
+      margin-top:-1px;
+    }
+    .spinner {
+        fill: rgb(113, 21, 21) !important;
+        stroke: rgb(230, 121, 121) !important;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <scroller :on-infinite="infinite" ref="my_scroller">
+      <div class="vue-load"></div>
+      <div v-for="(item, index) in items"
+          class="row" :class="{'grey-bg': index % 2 == 0}">
+        {{ item }}
+      </div>
+    </scroller>
+</div>
+<script>
+ var vue = new Vue({
+    el: '#app',
+    data: {
+      items: [],
+      itemsNum: 1,
+      doneFlag: false
+    },
+    mounted: function(){
+     this.infinite(function(){});
+    },
+    methods: {
+      infinite(done) {
+        if (this.itemsNum >= 4) {
+          setTimeout(function(){
+            done(true);
+          }, 500)
+          return;
+        }
+        setTimeout(()=>{
+          this.ajaxData(function(){
+           done();
+          });  
+        },1000);
+      },
+      ajaxData: function(func){
+        setTimeout(function(){
+          vue.itemsNum ++;
+          for (let i = 1; i <= 20; i++) {
+            vue.items.push(i + ' - keep walking, be 2 with you.')
+          }
+          
+            func();
+          
+        },100);
+
+      },
+    }
+  });
+/*vue.infinite(function(){});*/
+</script>
+</body>
+</html>

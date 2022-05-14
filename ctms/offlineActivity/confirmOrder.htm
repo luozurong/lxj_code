@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提交订单</title>
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../common/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../common/tip/lxjTip.css" />
+		<!--<link rel="stylesheet" href="css/confirmOrder.css">-->
+		<script type="text/javascript" src="../common/interface.js"></script>
+		<script src="../common/interfaceParameters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../common/vue/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body,html{
+				font-size: 0.14rem;
+				background-color: #f3f4f5;
+			}
+			
+			.nothing0 {
+				-webkit-order: 0;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing1 {
+				-webkit-order: 1;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing2 {
+				-webkit-order: 2;
+				-webkit-flex-grow: 5;
+			}
+			
+			.nothing3 {
+				-webkit-order: 3;
+				-webkit-flex-grow: 5;
+			}
+			
+			.line_01 {
+				width: 100%;
+				height: 1px;
+				background-color: #F0F0F0;
+				transform: scaleY(0.5);
+				-webkit-transform: scaleY(0.5)
+			}
+			
+			textarea {
+				font-size: 0.14rem;
+				border: none;
+				resize: none;
+				outline: none;
+				overflow-x: hidden;
+				overflow-y: hidden;
+				padding: 0;
+				padding-right: 012.9375px;
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+				word-break: break-all;
+				text-align: justify;
+			}
+			
+			#address_box {
+				background-color: #fff;
+				width: 100%;
+				display: -webkit-flex;
+				-webkit-align-items: center;
+				min-height: 0.8rem;
+				padding: 0.2rem 0.13rem;
+				box-sizing: border-box;
+			}
+			
+			#address_box .addressLogo {
+				width: 0.18rem;
+				height: 0.18rem;
+				-webkit-flex-shrink: 0;
+				display: block;
+				-webkit-order: 0;
+				-webkit-flex-grow: 0;
+			}
+			
+			#address_box #address_main {
+				padding-left: 0.13rem;
+				-webkit-order: 1;
+				-webkit-flex-grow: 1;
+				display: -webkit-flex;
+				-webkit-flex-direction: column;
+				justify-content: space-between;
+			}
+			
+			#address_box #address_main .name {
+				-webkit-order: 0;
+				width: 100%;
+				display: -webkit-flex;
+				-webkit-flex-direction: row;
+				-webkit-align-items: flex-start;
+			}
+			
+			#address_box #address_main .name span:nth-child(1) {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+			}
+			
+			#address_box #address_main .name span:nth-child(2) {
+				padding-left: 0.2rem;
+				-webkit-flex-flow: 2;
+			}
+			
+			#address_box #address_main .address {
+				-webkit-order: 1;
+				-webkit-flex-grow: 0;
+				width: 100%;
+				padding-top: 0.12rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			
+			#address_box .moreLogo {
+				width: 0.08rem;
+				-webkit-flex-shrink: 0;
+				display: block;
+				-webkit-order: 2;
+				-webkit-flex-grow: 0;
+				padding-left: 0.13rem;
+			}
+			
+			#shop_product {
+				width: 100%;
+				background-color: #fff;
+				box-sizing: border-box;
+				margin-top: 0.12rem;
+			}
+			
+			#shop_product .shop {
+				width: 100%;
+				display: -webkit-flex;
+				-webkit-flex-direction: row;
+				align-items: center;
+				padding-bottom: 0.1rem;
+				padding: 0.1rem 0.13rem;
+				box-sizing: border-box;
+			}
+			
+			#shop_product .shop img {
+				-webkit-order: 0;
+				-webkit-flex-grow: 0;
+				width: 0.23rem;
+				height: 0.23rem;
+				/*border-radius: 0.125rem;*/
+				/*background-image: url(images/sellerName_logo.png);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 100%;*/
+			}
+			
+			#shop_product .shop .shopName {
+				-webkit-order: 2;
+				-webkit-flex-grow: 1;
+				font-size: 0.14rem;
+				padding-left: 0.13rem;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 1;
+				padding-left: 0.15rem;
+			}
+			
+			#shop_product .product {
+				width: 100%;
+				display: -webkit-flex;
+				-webkit-flex-direction: row;
+				align-items: center;
+				padding-bottom: 0.1rem;
+				padding: 0.1rem 0.13rem;
+				box-sizing: border-box;
+				background-color: #f8f8f8;
+			}
+			
+			#shop_product .product img {
+				-webkit-order: 0;
+				-webkit-flex-grow: 0;
+				-webkit-flex-shrink: 0;
+				width: 0.23rem;
+				height: 0.23rem;
+			}
+			
+			#shop_product .product .product_img {
+				-webkit-order: 1;
+				-webkit-flex-grow: 0;
+				width: 0.77rem;
+				height: 0.77rem;
+				background-image: url('images/c_s_error.png');
+				background-size: 100%;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			/*	padding-left: 0.15rem;*/
+			}
+			
+			#shop_product .product .product_img img {
+				width: 0.77rem;
+				height: 0.77rem;
+				display: block;
+			}
+			
+			#shop_product .product .product_arguments {
+				-webkit-order: 2;
+				-webkit-flex-grow: 1;
+				min-height: 0.77rem;
+				padding-left: 0.15rem;
+				display: -webkit-flex;
+				-webkit-flex-direction: column;
+			}
+			
+			#shop_product .product .product_arguments .commodityName {
+				-webkit-order: 0;
+				-webkit-flex-grow: 0;
+				font-size: 0.16rem;
+				line-height: 0.2rem;
+				color: #222;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-box-orient: vertical;
+			}
+			
+			#shop_product .product .product_arguments .productSize {
+				-webkit-order: 2;
+				-webkit-flex-grow: 0;
+				font-size: 0.13rem;
+				line-height: 0.2rem;
+				-webkit-line-clamp: 2;
+				color: #aaabab;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-box-orient: vertical;
+			}
+			
+			#shop_product .product .product_arguments .productprice_box {
+				order: 4;
+				-webkit-flex-grow: 0;
+				display: -webkit-flex;
+				-webkit-flex-direction: row;
+				-webkit-align-items: flex-end;
+			}
+			
+			#shop_product .product .product_arguments .productprice_box .product_price {
+				-webkit-order: 0;
+				-webkit-flex-grow: 2;
+			}
+			
+			.product .product_arguments .productprice_box .product_price {
+				-webkit-order: 0;
+				-webkit-flex-grow: 1;
+				font-size: 0.17rem;
+				/*font-weight: 500;*/
+				color: #fc9153;
+			}
+			
+			.product .product_arguments .productprice_box .product_price span:nth-child(2) {
+				font-size: 0.12rem;
+				/*font-weight: 100;*/
+			}
+			
+			#shop_product .product .product_arguments .productprice_box .product_number {
+				-webkit-order: 1;
+				-webkit-flex-grow: 0;
+			}
+			
+			.product_number .number {
+				width: 0.4rem;
+				height: 0.27rem;
+				line-height: 0.27rem;
+				font-size: 0.16rem;
+				text-align: center;
+				display: inline-block;
+				background-color: #F8f8f8;
+				float: left;
+				border: none;
+				outline: none;
+			}
+			
+			.reduce,
+			.number,
+			.add {
+				width: 0.27rem;
+				height: 0.27rem;
+				line-height: 0.27rem;
+				text-align: center;
+				display: inline-block;
+				float: left;
+			}
+			
+			.number {
+				width: 0.4rem;
+			}
+			
+			.reduce {
+				background-image: url('images/list_btn_ic_subtract@3x.png');
+				background-size: 95%;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.add {
+				background-image: url('images/list_btn_ic_add@3x.png');
+				background-size: 95%;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.reduceFalse {
+				background-image: url("images/ic_cut_-no-active-.png");
+			}
+			
+			.addFalse {
+				background-image: url("images/ic_add_-active_no.png");
+			}
+			
+			#remarkprice_box {
+				width: 100%;
+				box-sizing: border-box;
+				padding: 0.18rem 0.13rem 0;
+			}
+			
+			#remarkprice_box #remark_box {
+				width: 100%;
+				display: -webkit-flex;
+				-webkit-align-items: flex-start;
+				padding-bottom: 0.13rem;
+				border-bottom: 1px solid rgba(204, 204, 204, 0.51);
+			}
+			
+			#remarkprice_box #remark_box span {
+				-webkit-order: 0;
+				-webkit-flex-shrink: 0;
+				line-height: 0.2rem;
+			}
+			
+			#remarkprice_box #remark_box .wid_max {
+				line-height: 0.2rem;
+				min-height: 0.5rem;
+				-webkit-order: 1;
+				-webkit-flex-grow: 2;
+			}
+			
+			#remarkprice_box #remark_box .wid_max textarea {
+				line-height: 0.2rem;
+				height: 100%;
+				width: 100%;
+			}
+			
+			#remarkprice_box #price {
+				width: 100%;
+				padding: 0.13rem 0;
+				text-align: right;
+				color: #222;
+				font-size: 0.14rem;
+			}
+			
+			#remarkprice_box #price span:nth-child(2) {
+				color: #FC9153;
+				font-size: 0.17rem;
+				/*font-weight: 500;*/
+			}
+			
+			#remarkprice_box #price span:nth-child(3) {
+				color: #FC9153;
+				font-size: 0.17rem;
+				/*font-weight: 500;*/
+			}
+			
+			#remarkprice_box #price span:nth-child(4) {
+				color: #FC9153;
+				font-size: 0.17rem;
+				/*font-weight: 500;*/
+			}
+			
+			#remarkprice_box #price span:nth-child(5) {
+				color: #FC9153;
+				font-size: 0.12rem;
+				/*font-weight: 100;*/
+			}
+			
+			#footer {
+				width: 100%;
+				height: 51px;
+				background-color: #fff;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			
+			#footer #valid_activity {
+				display: -webkit-flex;
+				-webkit-align-items: center;
+				border-top: 1px solid #F0F0F0;
+			}
+			
+			#footer #valid_activity #activity_price_box {
+				width: 72%;
+				padding-left: 0.13rem;
+				box-sizing: border-box;
+				color: #FC9153;
+				font-size: 0.17rem;
+				/*font-weight: 500;*/
+			}
+			
+			#footer #valid_activity #activity_price_box span:nth-child(1) {
+				color: #222;
+				font-size: 0.16rem;
+				
+			}
+			
+			#footer #valid_activity #activity_price_box span:nth-child(3) {
+				font-size: 0.12rem;
+				/*font-weight: 100;*/
+			}
+			
+			#footer #valid_activity #buttom_box {
+				width: 28%;
+				height: 100%;
+				line-height: 51px;
+				text-align: center;
+				background-color: #FC9153;
+				color: #fff;
+				font-size: 0.17rem;
+			}
+			[v-cloak] {
+				display: none!important;
+			}
+		</style>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+					dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+					dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+					scale = 1 / dpr,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				docEl.dataset.dpr = dpr;
+				var recalc = function() {
+					var width = docEl.clientWidth;
+					if(width / dpr > 768) {
+						width = 768 * dpr;
+					}
+					docEl.style.fontSize = 100 * (width / 414) + 'px';
+				};
+				recalc();
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+			})(document, window);
+			var autoTextarea = function(elem, extra, maxHeight) {
+				extra = extra || 0;
+				var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+					isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+					addEvent = function(type, callback) {
+						elem.addEventListener ?
+							elem.addEventListener(type, callback, false) :
+							elem.attachEvent('on' + type, callback);
+					},
+					getStyle = elem.currentStyle ? function(name) {
+						var val = elem.currentStyle[name];
+
+						if(name === 'height' && val.search(/px/i) !== 1) {
+							var rect = elem.getBoundingClientRect();
+							return rect.bottom - rect.top -
+								parseFloat(getStyle('paddingTop')) -
+								parseFloat(getStyle('paddingBottom')) + 'px';
+						};
+
+						return val;
+					} : function(name) {
+						return getComputedStyle(elem, null)[name];
+					},
+					minHeight = parseFloat(getStyle('height'));
+
+				elem.style.resize = 'none';
+
+				var change = function() {
+					var scrollTop, height,
+						padding = 0,
+						style = elem.style;
+
+					if(elem._length === elem.value.length) return;
+					elem._length = elem.value.length;
+
+					if(!isFirefox && !isOpera) {
+						padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+					};
+					scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+					elem.style.height = minHeight + 'px';
+					if(elem.scrollHeight > minHeight) {
+						if(maxHeight && elem.scrollHeight > maxHeight) {
+							height = maxHeight - padding;
+							style.overflowY = 'auto';
+						} else {
+							height = elem.scrollHeight - padding;
+							style.overflowY = 'hidden';
+						};
+						style.height = height + extra + 'px';
+						scrollTop += parseInt(style.height) - elem.currHeight;
+						document.body.scrollTop = scrollTop;
+						document.documentElement.scrollTop = scrollTop;
+						elem.currHeight = parseInt(style.height);
+					};
+				};
+
+				addEvent('propertychange', change);
+				addEvent('input', change);
+				addEvent('focus', change);
+				change();
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<div id="address_box" v-on:click="goAddressPage()">
+				<img class="addressLogo"  src="images/ic_-Location-@3x.png" />
+				<div id="address_main" v-if="addressData.receiverFlag==1">
+					<div class="name" v-if="addressData.receiver">
+						<span>{{addressData.receiver.username}}</span><span>{{addressData.receiver.mobile}}</span>
+					</div>
+					<div class="address" v-if="addressData.receiver">
+						{{addressData.receiver.provinceName+addressData.receiver.cityName+addressData.receiver.areaName+addressData.receiver.townName+addressData.receiver.detailAddress}}
+					</div>
+					<div class="name" v-if="addressData.defaultReceiver">
+						<span>{{addressData.defaultReceiver.username}}</span><span>{{addressData.defaultReceiver.mobile}}</span>
+					</div>
+					<div class="address" v-if="addressData.defaultReceiver">
+						{{addressData.defaultReceiver.address}}
+					</div>
+				</div>
+				<img class="moreLogo" src="images/ic_more-@3x.png" />
+				<div v-if="addressData.receiverFlag!=1" style="-webkit-flex-grow: 2;padding-left: 0.13rem;">
+					请选择收货地址
+				</div>
+			</div>
+			<div id="shop_product">
+				<div class="shop">
+					<img src="images/ic_order@3x.png" />
+					<div class="shopName">
+						订单信息
+					</div>
+				</div>
+				<!--data_orderNo='' v-bind:data_orderNo='jsondate.orderNo'-->
+
+				<div class="product">
+					<div class="product_img" v-bind:style="{ backgroundImage: 'url('+commodityData.activityImg+')' }">
+<!--						<img v-bind:src="commodityData.activityImg" onerror="javascript:this.src='images/c_s_error.png'" />
+-->					</div>
+					<div class="product_arguments">
+						<div class="commodityName">
+							{{commodityData.activityName}}
+						</div>
+						<div class="nothing1">
+						</div>
+						<div class="productSize">
+						</div>
+						<div class="nothing3">
+						</div>
+						<div class="productprice_box">
+							<div class="product_price">
+								¥ <span v-text="String(commodityData.activityPrice).split('.')[0]">0</span>.<span v-text="String(parseFloat(commodityData.activityPrice).toFixed(2)).split('.')[1]">00</span> </div>
+							<div class="product_number">
+								<div class="reduce" v-bind:class="{reduceFalse:count==1}" v-on:click="reduceData(count)">
+								</div>
+								<div class="number">
+									{{count}}
+								</div>
+<!--								<input type="tel" class="number" name="" id="" v-bind:value="count" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" v-on:input="" />
+-->								<div class="add" v-bind:class="{addFalse:count>=100||count>=commodityData.leftCount}" v-on:click="addData(count,commodityData.leftCount)">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="remarkprice_box">
+					<div id="remark_box">
+						<span>买家留言：</span>
+						<div class="wid_max" onclick="focusOndetails()">
+							<textarea id="details_address" v-model="textContent" maxlength="45" class="details_address" placeholder="选填给商家留言（45字内）"></textarea>
+						</div>
+					</div>
+
+					<div id="price">
+						共计<span>{{count}}</span>件商品 小计： <span>¥</span><span v-text="String(commodityData.activityPrice*count).split('.')[0]">0</span><span>.</span><span v-text="String(parseFloat(commodityData.activityPrice*count).toFixed(2)).split('.')[1]">00</span> </div>
+				</div>
+				<div id="footer" v-if="commodityData">
+					<div id="valid_activity">
+						<div id="activity_price_box">
+							<span>应付款：</span>¥<span v-text="String(commodityData.activityPrice*count).split('.')[0]">0</span>.<span v-text="String(parseFloat(commodityData.activityPrice*count).toFixed(2)).split('.')[1]">00</span> </div>
+						<div id="buttom_box"  v-on:click="goApply()">
+							<div id="gopay_box" >
+								提交订单
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-----修改收货人名字开始------>
+		<div class="bgblack" onclick="closeChangewindowC()" style="display: none;width: 100%;height: 100%;background-color:#000;opacity:0.3;position: absolute;top: 0;z-index: 99;">
+
+		</div>
+		<div id="changeusername" style="display: none;width: 80%;height:0.595rem;position: fixed;top: 0;left: 0;bottom: 0;right: 0;margin: auto;z-index: 999;background-color: #fff;border-radius: 5px;">
+			<div style="width: 100%;height: 0.22rem;text-align: center;line-height:0.22rem;font-size: 0.048rem;color: #222;">
+				修改收货人姓名
+			</div>
+			<input type="text" name="changename" id="changename" value="" maxlength="11" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')" oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')" placeholder="请输入真实的收货人姓名" style="outline:none;-webkit-appearance: none;box-sizing: border-box;text-align: left;padding-left:0.06rem;width: 80%;height: 26%;z-index: 999;margin-left: 10%;border: 1px solid #ff661b;color: #222;border-radius: 5px;font-size: 0.042rem;" />
+			<div onclick="closeChangewindow()" style="width: 100%;height: 0.154rem;position: absolute;bottom: 0;border-top:1px solid #e8e8e8 ;text-align: center;color: #FF661B;box-sizing: border-box;line-height: 0.154rem;font-size:0.048rem ;">
+				确定
+			</div>
+		</div>
+		<!-----修改收货人名字结束------>
+
+		<script src="js/comfirmOrder.js"></script>
+		<script src="../common/tip/lxjTip.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

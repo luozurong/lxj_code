@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/underscore.js"></script>
+</head>
+<body>
+    <!-- dome1-->
+   <!-- <div class="people"></div>
+    <script type="text/html" id="peopleTemplate">
+        <% _.each(data, function(n){ %>
+        <div>
+            <span><%= n.name%> 最喜欢吃 <%= n.fruit.fruit%>:</span>
+            <span><%= n.sex%></span>
+            <span><%= n.age%></span>
+        </div>
+        <% }); %>
+    </script>
+    <script>
+        var data=[
+            {name:"Mary",sex:"man",age:17,fruit:{fruit:"apple",No:1}},
+            {name:"Tom",sex:"man",age:16,fruit:{fruit:"orange",No:2}},
+            {name:"Marry",sex:"woman",age:16,fruit:{fruit:"bannaner",No:1}}];
+        $(".people").append(_.template($('#peopleTemplate').html(), data));
+    </script>-->
+
+
+
+
+    <!-- dome2-->
+     <div class="people1"></div>
+    <script type="text/html" id="peopleTemplate1">
+        <div>
+            <span><%=name%> 最喜欢吃 <%=fruit.fruit%>排在第<%=fruit.No%>位,每年花<%=price%>在吃这水果上</span>
+            <div>
+                <span><%=sex%></span>
+                <span><%=age%></span>
+            </div>
+        </div>
+    </script>
+    <script>
+        var data1=[
+            {name:"Mary",sex:"man",age:17,fruit:{fruit:"apple",No:1,price:1000}},
+            {name:"Tom",sex:"man",age:16,fruit:{fruit:"orange",No:2,price:1500}},
+            {name:"Marry",sex:"woman",age:16,fruit:{fruit:"bannaner",No:3,price:1300}}];
+    
+        for(var i = 0;i < data1.length; i ++){
+            var price = data1[i].fruit.price.toFixed(2);
+            var dataList = _.template($("#peopleTemplate1").html());
+            $(".people1").append(dataList(data1[i]));
+        }
+    </script>
+
+
+   <!--  <div class="people2"></div>
+   <script type="text/html" id="peopleTemplate2">
+       <% _.each(data,function(item,idx){%>
+       <div>
+           <% _.each(item.fruit,funtion(list,n){%>
+           <div>
+               <p><%= list.name%></p>
+               <p><%= list.price%></p>
+           </div>
+           <%});%>
+           <div>
+               <span><%=item.name%></span>
+               <span><%=item.sex%></span>
+           </div>
+       </div>
+       <%});%>
+   </script>
+   <script>
+       var data2=[
+           {name:"Mary",sex:"man",age:17,fruit:[{name:"苹果",price:"12.00"},{name:"香梨",price:"10.00"}]},
+           {name:"Tom",sex:"man",age:16,fruit:[{name:"苹果",price:"12.00"},{name:"香梨",price:"10.00"}]},
+           {name:"Marry",sex:"woman",age:16,fruit:[{name:"苹果",price:"12.00"},{name:"香梨",price:"10.00"}]}];
+   
+       /*var peopleTemplate2 = _.template($('#peopleTemplate2').html());*/
+       var peopleTemplate2 = _.template($('#peopleTemplate2').html());
+       $('body').append(peopleTemplate2({"data":data2.fruit}));
+   </script> -->
+</body>
+</html>

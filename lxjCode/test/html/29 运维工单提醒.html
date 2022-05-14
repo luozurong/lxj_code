@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/easyui.css">
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/jquery.easyui.min.js"></script>
+    <style>
+        .window-shadow{
+            background: transparent !important;
+            box-shadow:none;
+        }
+        .messager-window{
+            left:calc(100% - 320px) !important;
+            top:calc(100% - 200px) !important;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="msg"></p>
+        <button>点击</button>
+    </div>
+    <script>
+        var data  = {
+            "allNum":19,
+            "applyAccreditNum":0,
+            "applyChangeNum":2,
+            "applyDelayNum":1,
+            "dealingNum":0,
+            "endNum":1,
+            "overTimeAllotNum":6,
+            "overTimeComplete":1,
+            "overTimeDealNum":9,
+            "waitAllotNum":0,
+            "waitDealNum":0,
+            "waitEndNum":0};
+        $("button").click(function(){
+            setTimeout(msgPop,3000);
+        });
+        msgPop();
+        function msgPop(){
+            for(var key in data){
+                if(data[key]>0){  //判断各个类型有提示的情况
+                    if(key == "allNum"){
+                        console.log("allNum");
+                        msgFn("allNum")
+                    }else if(key == "applyAccreditNum"){
+                        console.log("applyAccreditNum");
+                        msgFn("applyAccreditNum")
+                    }else if(key == "applyChangeNum"){
+                        console.log("applyChangeNum");
+                        msgFn("applyChangeNum")
+                    } else if(key == "applyDelayNum"){
+                        console.log("applyDelayNum");
+                        msgFn("applyDelayNum")
+                    } else if(key == "dealingNum"){
+                        console.log("dealingNum");
+                        msgFn("dealingNum")
+                    } else if(key == "endNum"){
+                        console.log("endNum");
+                        msgFn("endNum")
+                    } else if(key == "overTimeAllotNum"){
+                        console.log("overTimeAllotNum");
+                        msgFn("overTimeAllotNum")
+                    } else if(key == "overTimeComplete"){
+                        console.log("overTimeComplete");
+                        msgFn("overTimeComplete")
+                    } else if(key == "overTimeDealNum"){
+                        console.log("overTimeDealNum");
+                        msgFn("overTimeDealNum")
+                    } else if(key == "waitAllotNum"){
+                        console.log("waitAllotNum");
+                        msgFn("waitAllotNum")
+                    } else if(key == "waitDealNum"){
+                        console.log("waitDealNum");
+                        msgFn("waitDealNum")
+                    } else if(key == "waitEndNum"){
+                        console.log("waitEndNum");
+                        msgFn("waitEndNum")
+                    }
+                    console.log(data[key]);
+                    delete data[key];
+                    break;
+                }
+            }
+        }
+        function msgFn(msg){
+            $(".msg").text(msg);
+        }
+    </script>
+   <!-- <script>
+       var data  = {
+           "allNum":19,
+           "applyAccreditNum":0,
+           "applyChangeNum":2,
+           "applyDelayNum":1,
+           "dealingNum":0,
+           "endNum":1,
+           "overTimeAllotNum":6,
+           "overTimeComplete":1,
+           "overTimeDealNum":9,
+           "waitAllotNum":0,
+           "waitDealNum":0,
+           "waitEndNum":0};
+
+
+       for(var i = 0;i<Object.getOwnPropertyNames(data).length;i++){
+           msgPop();
+       }
+       function msgPop(){
+           for(var key in data){
+               if(data[key]>0){  //判断各个类型有提示的情况
+                   if(key == "allNum"){
+                       console.log("allNum");
+                       $.messager.alert('确认1','您确认想要删除记录吗1？');
+                   }else if(key == "applyAccreditNum"){
+                       console.log("applyAccreditNum");
+                       $.messager.alert('确认2','您确认想要删除记录吗2？');
+
+                   }else if(key == "applyChangeNum"){
+                       console.log("applyChangeNum");
+                       $.messager.alert('确认3','您确认想要删除记录吗3？');
+
+                   } else if(key == "applyDelayNum"){
+                       console.log("applyDelayNum");
+                       $.messager.alert('确认4','您确认想要删除记录吗4？');
+
+                   } else if(key == "dealingNum"){
+                       console.log("dealingNum");
+                       $.messager.alert('确认5','您确认想要删除记录吗5？');
+
+                   } else if(key == "endNum"){
+                       console.log("endNum");
+                       $.messager.alert('确认6','您确认想要删除记录吗6？');
+
+                   } else if(key == "overTimeAllotNum"){
+                       console.log("overTimeAllotNum");
+                       $.messager.alert('确认7','您确认想要删除记录吗7？');
+
+                   } else if(key == "overTimeComplete"){
+                       console.log("overTimeComplete");
+                       $.messager.alert('确认8','您确认想要删除记录吗8？');
+
+                   } else if(key == "overTimeDealNum"){
+                       console.log("overTimeDealNum");
+                       //$.messager.alert('确认9','您确认想要删除记录吗9？');
+
+                   } else if(key == "waitAllotNum"){
+                       console.log("waitAllotNum");
+                       //$.messager.alert('确认10','您确认想要删除记录吗10？');
+
+                   } else if(key == "waitDealNum"){
+                       console.log("waitDealNum");
+                       //$.messager.alert('确认11','您确认想要删除记录吗11？');
+
+                   } else if(key == "waitEndNum"){
+                       console.log("waitEndNum");
+                       //$.messager.alert('确认12','您确认想要删除记录吗12？');
+
+                   }
+                   delete data[key];
+                   break;
+               }
+           }
+       }
+    </script>-->
+</body>
+</html>

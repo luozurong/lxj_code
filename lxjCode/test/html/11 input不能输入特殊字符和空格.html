@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" onkeydown="this.value=this.value.replace(/\s+/g,'')">
+<input onkeydown="this.value=value.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g,'')" onkeydown="this.value=value.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g,'')" onblur="this.value=value.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g,'')" onfocus="this.value=value.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g,'')">
+<input onchange="this.value=value.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g,'')">
+</body>
+</html>
